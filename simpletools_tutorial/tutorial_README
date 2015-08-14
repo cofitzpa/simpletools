@@ -1,0 +1,53 @@
+simpletools example using preselected sWeighted D+,Ds -> phi(KK)pi input data from the first 1.8/nb analysis
+This example finds the most powerful variables in the ntuple provided, plots the sWeighted signal and 
+background distributions as well as the correlations, plots the efficiencies of a simple cut applied to 
+the datasets, and finally runs the cut recursive optimiser to find the best selection cuts. 
+
+To run this example, download and compile the simpletools package: 
+
+1. Get the latest simpletools release from 
+/afs/cern.ch.user/c/cofitzpa/public/simpletools/simpletools_XXX.tar.gz
+
+2. extract and compile
+tar -xvf simpletools_XXX.tar.gz
+cd simpletools_XXX/build
+cmake ../
+make && make install
+
+If you get an error like ./include/cropFoMs.h:95: error: ‘class TH1D’ has no member named ‘IntegralAndError’ 
+then you are using an older version of ROOT. On an LXPlus machine do:
+
+SetupProject Gaudi ROOT
+
+run make again and it should work. 
+
+3. Next you need to add the following to your .bashrc 
+
+SIMPLETOOLS=$HOME/simpletools_XXX  
+export LD_LIBRARY_PATH=$SIMPLETOOLS/lib:$LD_LIBRARY_PATH
+export PATH=$SIMPLETOOLS/bin:$PATH
+
+4. Then come back to the example directory and at the bash prompt execute: 
+
+sh tutorial.sh
+
+Inside this shell script is a description of what is happening at each step. 
+Feel free to modify the script or input files to see what happens. 
+
+
+
+If you find these tools useful either in whole or in part, please cite the documentation:
+
+simpletools: Handy command line tools for ntuple manipulation and analysis
+LHCb Internal Note 2009-029
+Conor Fitzpatrick, University of Edinburgh
+
+Any problems with compiling/running simpletools code, send me an email. 
+Bug reports, feature requests, comments and patches are always welcome.
+If you modify simpletools in order to work better in your analysis, 
+I'd love to hear what you did and why- patches to the code that improve functionality will be credited. 
+
+conor.fitzpatrick@cern.ch
+
+
+

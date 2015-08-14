@@ -1,0 +1,1183 @@
+INFO: Parsing weightfile...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+INFO: ==========================================================================
+INFO: ds is a dataset of type Signal 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NDs_sw
+INFO:	Total Weighted Entries: 162.88+/-15.768
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: dplus is a dataset of type Signal 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NDplus_sw
+INFO:	Total Weighted Entries: 81.7686+/-13.272
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: bkg is a dataset of type Background 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NBkg_sw
+INFO:	Total Weighted Entries: 982.327+/-34.3329
+INFO: ==========================================================================
+Type	Total Entries	Total Proc. Entries	Proc. Cut Eff.	Total Weighted Entries	Total Proc. Weighted Entries	Proc Weight ratio	Name
+-------------------------------------------------------------------
+S	1.23e+03	1.23e+03	   1+/-   0	 163+/-15.8	 163+/-15.8	   1+/-   0	ds
+S	1.23e+03	1.23e+03	   1+/-   0	81.8+/-13.3	81.8+/-13.3	   1+/-   0	dplus
+S	2.45e+03	2.45e+03	   1+/-   0	 245+/-20.6	 245+/-20.6	   1+/-   0	TOTAL
+B	1.23e+03	1.23e+03	   1+/-   0	 982+/-34.3	 982+/-34.3	   1+/-   0	bkg
+B	1.23e+03	1.23e+03	   1+/-   0	 982+/-34.3	 982+/-34.3	   1+/-   0	TOTAL
+WARNING: RMS of PVX is zero!
+WARNING: RMS of PVY is zero!
+WARNING: RMS of PVZ is zero!
+WARNING: RMS of kaonminus_PP_PX is zero!
+WARNING: RMS of kaonminus_PP_PY is zero!
+WARNING: RMS of kaonminus_PP_PZ is zero!
+WARNING: RMS of kaonplus_ORIVX_NDOF is zero!
+WARNING: RMS of D_s_MC_GD_GD_MOTHER_KEY is zero!
+WARNING: RMS of kaonminus_TRUEID is zero!
+WARNING: RMS of PVCHI2 is zero!
+WARNING: RMS of kaonplus_MC_MOTHER_KEY is zero!
+WARNING: RMS of D_s_MC_GD_MOTHER_ID is zero!
+WARNING: RMS of phi_TRUEID is zero!
+WARNING: RMS of phi_TRUEPT is zero!
+WARNING: RMS of phi_TRUETAU is zero!
+WARNING: RMS of phi_TRUEP_Y is zero!
+WARNING: RMS of phi_TRUEP_X is zero!
+WARNING: RMS of phi_TRUEP_Z is zero!
+WARNING: RMS of phi_TRUEP_E is zero!
+WARNING: RMS of kaonplus_OSCIL is zero!
+WARNING: RMS of phi_ProtoParticles is zero!
+WARNING: RMS of kaonminus_TRUEPT is zero!
+WARNING: RMS of pion_TRUEID is zero!
+WARNING: RMS of pion_TRUEPT is zero!
+WARNING: RMS of pion_PP_Weight is zero!
+WARNING: RMS of phi_MC_MOTHER_ID is zero!
+WARNING: RMS of kaonplus_MC_GD_MOTHER_ID is zero!
+WARNING: RMS of pion_PP_DLLp is zero!
+WARNING: RMS of kaonplus_PP_Weight is zero!
+WARNING: RMS of phi_MC_GD_MOTHER_KEY is zero!
+WARNING: RMS of pion_MC_GD_GD_MOTHER_ID is zero!
+WARNING: RMS of phi_MC_GD_GD_MOTHER_ID is zero!
+WARNING: RMS of phi_PP_DLLp is zero!
+WARNING: RMS of phi_PP_DLLe is zero!
+WARNING: RMS of phi_PP_DLLk is zero!
+WARNING: RMS of phi_TRUEISSTABLE is zero!
+WARNING: RMS of pion_MC_MOTHER_KEY is zero!
+WARNING: RMS of kaonplus_MC_GD_GD_MOTHER_ID is zero!
+WARNING: RMS of pion_PP_DLLe is zero!
+WARNING: RMS of D_s_PP_DLLmu is zero!
+WARNING: RMS of D_s_TRUEISSTABLE is zero!
+WARNING: RMS of pion_PP_DLLk is zero!
+WARNING: RMS of L0Decision is zero!
+WARNING: RMS of D_s_MC_MOTHER_ID is zero!
+WARNING: RMS of pion_TRUETAU is zero!
+WARNING: RMS of D_s_MC_GD_GD_MOTHER_ID is zero!
+WARNING: RMS of kaonminus_MC_GD_GD_MOTHER_ID is zero!
+WARNING: RMS of D_s_PP_DLLp is zero!
+WARNING: RMS of D_s_PP_DLLe is zero!
+WARNING: RMS of D_s_PP_DLLk is zero!
+WARNING: RMS of pion_TRUEP_Z is zero!
+WARNING: RMS of pion_TRUEP_Y is zero!
+WARNING: RMS of pion_TRUEP_X is zero!
+WARNING: RMS of kaonminus_hasMuon is zero!
+WARNING: RMS of PVNTRACKS is zero!
+WARNING: RMS of pion_TRUEP_E is zero!
+WARNING: RMS of pion_PP_PZ is zero!
+WARNING: RMS of pion_PP_PX is zero!
+WARNING: RMS of pion_PP_PY is zero!
+WARNING: RMS of D_s_MC_GD_MOTHER_KEY is zero!
+WARNING: RMS of kaonminus_LOKI_PIDpi is zero!
+WARNING: RMS of pion_TRUEISSTABLE is zero!
+WARNING: RMS of phi_PP_DLLmu is zero!
+WARNING: RMS of pion_PP_DLLmu is zero!
+WARNING: RMS of phi_ENDVERTEX_NDOF is zero!
+WARNING: RMS of pion_MC_GD_MOTHER_KEY is zero!
+WARNING: RMS of D_s_ProtoParticles is zero!
+WARNING: RMS of kaonminus_OSCIL is zero!
+WARNING: RMS of kaonplus_hasRich is zero!
+WARNING: RMS of kaonminus_LOKI_VFASPF_VCHI2VDOF is zero!
+WARNING: RMS of kaonplus_hasMuon is zero!
+WARNING: RMS of D_s_TRUEP_Y is zero!
+WARNING: RMS of D_s_TRUEP_X is zero!
+WARNING: RMS of D_s_TRUEP_Z is zero!
+WARNING: RMS of D_s_TRUEP_E is zero!
+WARNING: RMS of D_s_TRUETAU is zero!
+WARNING: RMS of D_s_TRUEPT is zero!
+WARNING: RMS of D_s_TRUEID is zero!
+WARNING: RMS of kaonplus_MC_GD_GD_MOTHER_KEY is zero!
+WARNING: RMS of pion_MC_MOTHER_ID is zero!
+WARNING: RMS of kaonminus_PP_Weight is zero!
+WARNING: RMS of kaonplus_PP_DLLmu is zero!
+WARNING: RMS of phi_MC_GD_GD_MOTHER_KEY is zero!
+WARNING: RMS of kaonminus_TRUETAU is zero!
+WARNING: RMS of pion_TRUEENDVERTEX_Z is zero!
+WARNING: RMS of phi_MC_GD_MOTHER_ID is zero!
+WARNING: RMS of pion_TRUEENDVERTEX_X is zero!
+WARNING: RMS of pion_TRUEENDVERTEX_Y is zero!
+WARNING: RMS of kaonminus_TRUEISSTABLE is zero!
+WARNING: RMS of PVNDOF is zero!
+WARNING: RMS of pion_MC_GD_MOTHER_ID is zero!
+WARNING: RMS of kaonplus_TRUEP_E is zero!
+WARNING: RMS of kaonplus_LOKI_VFASPF_VCHI2VDOF is zero!
+WARNING: RMS of phi_MC_MOTHER_KEY is zero!
+WARNING: RMS of kaonplus_MC_MOTHER_ID is zero!
+WARNING: RMS of phi_OSCIL is zero!
+WARNING: RMS of kaonminus_ProtoParticles is zero!
+WARNING: RMS of kaonplus_PP_PY is zero!
+WARNING: RMS of kaonplus_PP_PX is zero!
+WARNING: RMS of kaonplus_PP_PZ is zero!
+WARNING: RMS of kaonplus_LOKI_PIDpi is zero!
+WARNING: RMS of kaonplus_TRUEP_Z is zero!
+WARNING: RMS of kaonplus_TRUEP_X is zero!
+WARNING: RMS of kaonplus_TRUEP_Y is zero!
+WARNING: RMS of kaonminus_MC_GD_GD_MOTHER_KEY is zero!
+WARNING: RMS of kaonminus_ORIVX_NDOF is zero!
+WARNING: RMS of kaonplus_TRUETAU is zero!
+WARNING: RMS of Hlt1Global is zero!
+WARNING: RMS of Hlt2Global is zero!
+WARNING: RMS of kaonminus_TRUEORIGINVERTEX_Z is zero!
+WARNING: RMS of kaonminus_TRUEORIGINVERTEX_Y is zero!
+WARNING: RMS of pion_LOKI_PIDpi is zero!
+WARNING: RMS of kaonminus_TRUEORIGINVERTEX_X is zero!
+WARNING: RMS of phi_PP_tr_pchi2 is zero!
+WARNING: RMS of kaonminus_TRUEENDVERTEX_Y is zero!
+WARNING: RMS of kaonminus_TRUEENDVERTEX_X is zero!
+WARNING: RMS of kaonminus_TRUEENDVERTEX_Z is zero!
+WARNING: RMS of PVXERR is zero!
+WARNING: RMS of PVYERR is zero!
+WARNING: RMS of PVZERR is zero!
+WARNING: RMS of phi_PP_PZ is zero!
+WARNING: RMS of phi_PP_PY is zero!
+WARNING: RMS of phi_PP_PX is zero!
+WARNING: RMS of kaonminus_MC_GD_MOTHER_ID is zero!
+WARNING: RMS of pion_MC_GD_GD_MOTHER_KEY is zero!
+WARNING: RMS of phi_TRUEENDVERTEX_Y is zero!
+WARNING: RMS of phi_TRUEENDVERTEX_X is zero!
+WARNING: RMS of phi_TRUEENDVERTEX_Z is zero!
+WARNING: RMS of pion_ProtoParticles is zero!
+WARNING: RMS of kaonminus_MC_MOTHER_ID is zero!
+WARNING: RMS of kaonminus_TRUEP_E is zero!
+WARNING: RMS of kaonminus_TRUEP_Z is zero!
+WARNING: RMS of kaonminus_TRUEP_Y is zero!
+WARNING: RMS of kaonminus_TRUEP_X is zero!
+WARNING: RMS of D_s_PP_tr_pchi2 is zero!
+WARNING: RMS of phi_TRUEORIGINVERTEX_Z is zero!
+WARNING: RMS of phi_TRUEORIGINVERTEX_X is zero!
+WARNING: RMS of phi_TRUEORIGINVERTEX_Y is zero!
+WARNING: RMS of kaonplus_TRUEISSTABLE is zero!
+WARNING: RMS of phi_LOKI_VFASPF_VDOF is zero!
+WARNING: RMS of pion_hasMuon is zero!
+WARNING: RMS of D_s_TRUEENDVERTEX_Z is zero!
+WARNING: RMS of D_s_TRUEENDVERTEX_X is zero!
+WARNING: RMS of D_s_TRUEENDVERTEX_Y is zero!
+WARNING: RMS of kaonplus_MC_GD_MOTHER_KEY is zero!
+WARNING: RMS of phi_PP_Weight is zero!
+WARNING: RMS of D_s_PP_PZ is zero!
+WARNING: RMS of D_s_PP_PY is zero!
+WARNING: RMS of D_s_PP_PX is zero!
+WARNING: RMS of kaonminus_PP_DLLk is zero!
+WARNING: RMS of kaonminus_PP_DLLe is zero!
+WARNING: RMS of kaonminus_PP_DLLp is zero!
+WARNING: RMS of kaonplus_TRUEORIGINVERTEX_Z is zero!
+WARNING: RMS of kaonplus_TRUEORIGINVERTEX_Y is zero!
+WARNING: RMS of kaonplus_TRUEORIGINVERTEX_X is zero!
+WARNING: RMS of kaonminus_PP_tr_pchi2 is zero!
+WARNING: RMS of kaonminus_hasRich is zero!
+WARNING: RMS of pion_PP_tr_pchi2 is zero!
+WARNING: RMS of kaonminus_PP_DLLmu is zero!
+WARNING: RMS of kaonplus_TRUEPT is zero!
+WARNING: RMS of kaonplus_TRUEID is zero!
+WARNING: RMS of kaonplus_TRUEENDVERTEX_X is zero!
+WARNING: RMS of pion_TRUEORIGINVERTEX_Z is zero!
+WARNING: RMS of pion_TRUEORIGINVERTEX_X is zero!
+WARNING: RMS of pion_TRUEORIGINVERTEX_Y is zero!
+WARNING: RMS of kaonplus_TRUEENDVERTEX_Y is zero!
+WARNING: RMS of kaonplus_TRUEENDVERTEX_Z is zero!
+WARNING: RMS of kaonplus_ProtoParticles is zero!
+WARNING: RMS of D_s_TRUEORIGINVERTEX_X is zero!
+WARNING: RMS of D_s_TRUEORIGINVERTEX_Y is zero!
+WARNING: RMS of D_s_TRUEORIGINVERTEX_Z is zero!
+WARNING: RMS of pion_OSCIL is zero!
+WARNING: RMS of D_s_PP_Weight is zero!
+WARNING: RMS of D_s_OSCIL is zero!
+WARNING: RMS of kaonplus_PP_DLLk is zero!
+WARNING: RMS of kaonplus_PP_DLLe is zero!
+WARNING: RMS of kaonminus_MC_GD_MOTHER_KEY is zero!
+WARNING: RMS of kaonplus_PP_tr_pchi2 is zero!
+WARNING: RMS of kaonminus_MC_MOTHER_KEY is zero!
+WARNING: RMS of kaonplus_PP_DLLp is zero!
+WARNING: RMS of pion_LOKI_VFASPF_VCHI2VDOF is zero!
+WARNING: RMS of D_s_MC_MOTHER_KEY is zero!
+INFO: Parsing weightfile...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+INFO: ==========================================================================
+INFO: ds is a dataset of type Signal 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NDs_sw
+INFO:	Total Weighted Entries: 162.88+/-15.768
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: dplus is a dataset of type Signal 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NDplus_sw
+INFO:	Total Weighted Entries: 81.7686+/-13.272
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: bkg is a dataset of type Background 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NBkg_sw
+INFO:	Total Weighted Entries: 982.327+/-34.3329
+INFO: ==========================================================================
+Type	Total Entries	Total Proc. Entries	Proc. Cut Eff.	Total Weighted Entries	Total Proc. Weighted Entries	Proc Weight ratio	Name
+-------------------------------------------------------------------
+S	1.23e+03	1.23e+03	   1+/-   0	 163+/-15.8	 163+/-15.8	   1+/-   0	ds
+S	1.23e+03	1.23e+03	   1+/-   0	81.8+/-13.3	81.8+/-13.3	   1+/-   0	dplus
+S	2.45e+03	2.45e+03	   1+/-   0	 245+/-20.6	 245+/-20.6	   1+/-   0	TOTAL
+B	1.23e+03	1.23e+03	   1+/-   0	 982+/-34.3	 982+/-34.3	   1+/-   0	bkg
+B	1.23e+03	1.23e+03	   1+/-   0	 982+/-34.3	 982+/-34.3	   1+/-   0	TOTAL
+WARNING: RMS of log10(PVX) is zero!
+WARNING: RMS of log10(PVY) is zero!
+WARNING: RMS of log10(PVZ) is zero!
+WARNING: RMS of log10(kaonminus_PP_PX) is zero!
+WARNING: RMS of log10(kaonminus_PP_PY) is zero!
+WARNING: RMS of log10(kaonminus_PP_PZ) is zero!
+WARNING: RMS of log10(kaonplus_ORIVX_NDOF) is zero!
+WARNING: RMS of log10(D_s_MC_GD_GD_MOTHER_KEY) is zero!
+WARNING: RMS of log10(kaonminus_TRUEID) is zero!
+WARNING: RMS of log10(phi_LOKI_MINVDDV) is zero!
+WARNING: RMS of log10(PVCHI2) is zero!
+WARNING: RMS of log10(kaonminus_isMuon) is zero!
+WARNING: RMS of log10(kaonplus_MC_MOTHER_KEY) is zero!
+WARNING: RMS of log10(D_s_MC_GD_MOTHER_ID) is zero!
+WARNING: RMS of log10(phi_TRUEID) is zero!
+WARNING: RMS of log10(phi_TRUEPT) is zero!
+WARNING: RMS of log10(phi_TRUETAU) is zero!
+WARNING: RMS of log10(phi_TRUEP_Y) is zero!
+WARNING: RMS of log10(phi_TRUEP_X) is zero!
+WARNING: RMS of log10(phi_TRUEP_Z) is zero!
+WARNING: RMS of log10(phi_TRUEP_E) is zero!
+WARNING: RMS of log10(kaonplus_OSCIL) is zero!
+WARNING: RMS of log10(phi_ProtoParticles) is zero!
+WARNING: RMS of log10(pion_isMuon) is zero!
+WARNING: RMS of log10(kaonplus_LOKI_BPVVDCHI2) is zero!
+WARNING: RMS of log10(kaonminus_TRUEPT) is zero!
+WARNING: RMS of log10(pion_TRUEID) is zero!
+WARNING: RMS of log10(pion_TRUEPT) is zero!
+WARNING: RMS of log10(pion_PP_Weight) is zero!
+WARNING: RMS of log10(D_s_Reconstructed) is zero!
+WARNING: RMS of log10(D_s_LOKI_MINVDDV) is zero!
+WARNING: RMS of log10(phi_MC_MOTHER_ID) is zero!
+WARNING: RMS of log10(kaonplus_MC_GD_MOTHER_ID) is zero!
+WARNING: RMS of log10(kaonminus_LOKI_VFASPF_VPCHI2) is zero!
+WARNING: RMS of log10(pion_PP_DLLp) is zero!
+WARNING: RMS of log10(kaonplus_PP_Weight) is zero!
+WARNING: RMS of log10(phi_MC_GD_MOTHER_KEY) is zero!
+WARNING: RMS of log10(pion_MC_GD_GD_MOTHER_ID) is zero!
+WARNING: RMS of log10(pion_LOKI_DOCAMAX) is zero!
+WARNING: RMS of log10(phi_MC_GD_GD_MOTHER_ID) is zero!
+WARNING: RMS of log10(kaonminus_hasCalo) is zero!
+WARNING: RMS of log10(phi_PP_DLLp) is zero!
+WARNING: RMS of log10(phi_PP_DLLe) is zero!
+WARNING: RMS of log10(phi_PP_DLLk) is zero!
+WARNING: RMS of log10(phi_TRUEISSTABLE) is zero!
+WARNING: RMS of log10(pion_MC_MOTHER_KEY) is zero!
+WARNING: RMS of log10(kaonplus_MC_GD_GD_MOTHER_ID) is zero!
+WARNING: RMS of log10(pion_Reconstructible) is zero!
+WARNING: RMS of log10(pion_PP_DLLe) is zero!
+WARNING: RMS of log10(D_s_PP_DLLmu) is zero!
+WARNING: RMS of log10(D_s_TRUEISSTABLE) is zero!
+WARNING: RMS of log10(kaonminus_LOKI_DOCAMAX) is zero!
+WARNING: RMS of log10(pion_PP_DLLk) is zero!
+WARNING: RMS of log10(L0Decision) is zero!
+WARNING: RMS of log10(D_s_MC_MOTHER_ID) is zero!
+WARNING: RMS of log10(pion_TRUETAU) is zero!
+WARNING: RMS of log10(D_s_MC_GD_GD_MOTHER_ID) is zero!
+WARNING: RMS of log10(kaonminus_MC_GD_GD_MOTHER_ID) is zero!
+WARNING: RMS of log10(D_s_PP_DLLp) is zero!
+WARNING: RMS of log10(D_s_PP_DLLe) is zero!
+WARNING: RMS of log10(D_s_PP_DLLk) is zero!
+WARNING: RMS of log10(pion_TRUEP_Z) is zero!
+WARNING: RMS of log10(pion_TRUEP_Y) is zero!
+WARNING: RMS of log10(pion_TRUEP_X) is zero!
+WARNING: RMS of log10(kaonminus_hasMuon) is zero!
+WARNING: RMS of log10(PVNTRACKS) is zero!
+WARNING: RMS of log10(pion_TRUEP_E) is zero!
+WARNING: RMS of log10(pion_LOKI_BPVDIRA) is zero!
+WARNING: RMS of log10(pion_LOKI_BPVVDRHO) is zero!
+WARNING: RMS of log10(pion_PP_PZ) is zero!
+WARNING: RMS of log10(pion_PP_PX) is zero!
+WARNING: RMS of log10(pion_PP_PY) is zero!
+WARNING: RMS of log10(kaonminus_LOKI_BPVVDRHO) is zero!
+WARNING: RMS of log10(D_s_MC_GD_MOTHER_KEY) is zero!
+WARNING: RMS of log10(kaonminus_LOKI_PIDpi) is zero!
+WARNING: RMS of log10(pion_TRUEISSTABLE) is zero!
+WARNING: RMS of log10(phi_PP_DLLmu) is zero!
+WARNING: RMS of log10(pion_Reconstructed) is zero!
+WARNING: RMS of log10(pion_PP_DLLmu) is zero!
+WARNING: RMS of log10(phi_ENDVERTEX_NDOF) is zero!
+WARNING: RMS of log10(pion_MC_GD_MOTHER_KEY) is zero!
+WARNING: RMS of log10(D_s_ProtoParticles) is zero!
+WARNING: RMS of log10(kaonminus_OSCIL) is zero!
+WARNING: RMS of log10(kaonplus_hasRich) is zero!
+WARNING: RMS of log10(kaonminus_LOKI_VFASPF_VCHI2VDOF) is zero!
+WARNING: RMS of log10(kaonplus_hasMuon) is zero!
+WARNING: RMS of log10(kaonplus_hasCalo) is zero!
+WARNING: RMS of log10(D_s_TRUEP_Y) is zero!
+WARNING: RMS of log10(D_s_TRUEP_X) is zero!
+WARNING: RMS of log10(D_s_TRUEP_Z) is zero!
+WARNING: RMS of log10(D_s_TRUEP_E) is zero!
+WARNING: RMS of log10(D_s_TRUETAU) is zero!
+WARNING: RMS of log10(D_s_TRUEPT) is zero!
+WARNING: RMS of log10(D_s_TRUEID) is zero!
+WARNING: RMS of log10(kaonplus_MC_GD_GD_MOTHER_KEY) is zero!
+WARNING: RMS of log10(phi_Reconstructed) is zero!
+WARNING: RMS of log10(pion_MC_MOTHER_ID) is zero!
+WARNING: RMS of log10(kaonminus_PP_Weight) is zero!
+WARNING: RMS of log10(kaonplus_PP_DLLmu) is zero!
+WARNING: RMS of log10(phi_MC_GD_GD_MOTHER_KEY) is zero!
+WARNING: RMS of log10(pion_LOKI_DOCACHI2MAX) is zero!
+WARNING: RMS of log10(kaonminus_LOKI_VFASPF_VCHI2) is zero!
+WARNING: RMS of log10(kaonplus_LOKI_BPVVDRHO) is zero!
+WARNING: RMS of log10(pion_LOKI_BPVVDCHI2) is zero!
+WARNING: RMS of log10(kaonminus_Reconstructed) is zero!
+WARNING: RMS of log10(kaonplus_LOKI_VFASPF_VDOF) is zero!
+WARNING: RMS of log10(kaonplus_Reconstructed) is zero!
+WARNING: RMS of log10(kaonminus_TRUETAU) is zero!
+WARNING: RMS of log10(pion_TRUEENDVERTEX_Z) is zero!
+WARNING: RMS of log10(phi_MC_GD_MOTHER_ID) is zero!
+WARNING: RMS of log10(pion_TRUEENDVERTEX_X) is zero!
+WARNING: RMS of log10(pion_TRUEENDVERTEX_Y) is zero!
+WARNING: RMS of log10(kaonminus_TRUEISSTABLE) is zero!
+WARNING: RMS of log10(PVNDOF) is zero!
+WARNING: RMS of log10(pion_MC_GD_MOTHER_ID) is zero!
+WARNING: RMS of log10(kaonplus_TRUEP_E) is zero!
+WARNING: RMS of log10(kaonplus_LOKI_VFASPF_VCHI2VDOF) is zero!
+WARNING: RMS of log10(phi_MC_MOTHER_KEY) is zero!
+WARNING: RMS of log10(kaonplus_MC_MOTHER_ID) is zero!
+WARNING: RMS of log10(phi_OSCIL) is zero!
+WARNING: RMS of log10(kaonminus_ProtoParticles) is zero!
+WARNING: RMS of log10(kaonplus_PP_PY) is zero!
+WARNING: RMS of log10(kaonplus_PP_PX) is zero!
+WARNING: RMS of log10(kaonplus_PP_PZ) is zero!
+WARNING: RMS of log10(kaonplus_LOKI_PIDpi) is zero!
+WARNING: RMS of log10(kaonplus_TRUEP_Z) is zero!
+WARNING: RMS of log10(kaonminus_LOKI_VFASPF_VDOF) is zero!
+WARNING: RMS of log10(kaonplus_TRUEP_X) is zero!
+WARNING: RMS of log10(kaonplus_TRUEP_Y) is zero!
+WARNING: RMS of log10(kaonminus_MC_GD_GD_MOTHER_KEY) is zero!
+WARNING: RMS of log10(kaonplus_LOKI_VFASPF_VCHI2) is zero!
+WARNING: RMS of log10(kaonminus_Reconstructible) is zero!
+WARNING: RMS of log10(kaonminus_ORIVX_NDOF) is zero!
+WARNING: RMS of log10(kaonplus_TRUETAU) is zero!
+WARNING: RMS of log10(kaonplus_Reconstructible) is zero!
+WARNING: RMS of log10(Hlt1Global) is zero!
+WARNING: RMS of log10(Hlt2Global) is zero!
+WARNING: RMS of log10(D_s_Reconstructible) is zero!
+WARNING: RMS of log10(phi_LOKI_TRPCHI2) is zero!
+WARNING: RMS of log10(kaonminus_TRUEORIGINVERTEX_Z) is zero!
+WARNING: RMS of log10(kaonminus_TRUEORIGINVERTEX_Y) is zero!
+WARNING: RMS of log10(pion_LOKI_PIDpi) is zero!
+WARNING: RMS of log10(kaonminus_TRUEORIGINVERTEX_X) is zero!
+WARNING: RMS of log10(phi_PP_tr_pchi2) is zero!
+WARNING: RMS of log10(kaonminus_LOKI_BPVVDCHI2) is zero!
+WARNING: RMS of log10(kaonminus_TRUEENDVERTEX_Y) is zero!
+WARNING: RMS of log10(kaonminus_TRUEENDVERTEX_X) is zero!
+WARNING: RMS of log10(kaonminus_TRUEENDVERTEX_Z) is zero!
+WARNING: RMS of log10(PVXERR) is zero!
+WARNING: RMS of log10(PVYERR) is zero!
+WARNING: RMS of log10(PVZERR) is zero!
+WARNING: RMS of log10(phi_PP_PZ) is zero!
+WARNING: RMS of log10(phi_PP_PY) is zero!
+WARNING: RMS of log10(phi_PP_PX) is zero!
+WARNING: RMS of log10(kaonminus_MC_GD_MOTHER_ID) is zero!
+WARNING: RMS of log10(pion_MC_GD_GD_MOTHER_KEY) is zero!
+WARNING: RMS of log10(phi_TRUEENDVERTEX_Y) is zero!
+WARNING: RMS of log10(phi_TRUEENDVERTEX_X) is zero!
+WARNING: RMS of log10(phi_TRUEENDVERTEX_Z) is zero!
+WARNING: RMS of log10(pion_ProtoParticles) is zero!
+WARNING: RMS of log10(kaonplus_LOKI_BPVDIRA) is zero!
+WARNING: RMS of log10(kaonminus_MC_MOTHER_ID) is zero!
+WARNING: RMS of log10(D_s_LOKI_TRCHI2DOF) is zero!
+WARNING: RMS of log10(pion_hasRich) is zero!
+WARNING: RMS of log10(kaonminus_LOKI_BPVDIRA) is zero!
+WARNING: RMS of log10(kaonminus_TRUEP_E) is zero!
+WARNING: RMS of log10(kaonminus_TRUEP_Z) is zero!
+WARNING: RMS of log10(kaonminus_TRUEP_Y) is zero!
+WARNING: RMS of log10(kaonminus_TRUEP_X) is zero!
+WARNING: RMS of log10(D_s_LOKI_TRPCHI2) is zero!
+WARNING: RMS of log10(D_s_PP_tr_pchi2) is zero!
+WARNING: RMS of log10(phi_TRUEORIGINVERTEX_Z) is zero!
+WARNING: RMS of log10(phi_TRUEORIGINVERTEX_X) is zero!
+WARNING: RMS of log10(phi_TRUEORIGINVERTEX_Y) is zero!
+WARNING: RMS of log10(kaonplus_TRUEISSTABLE) is zero!
+WARNING: RMS of log10(pion_hasCalo) is zero!
+WARNING: RMS of log10(phi_LOKI_VFASPF_VDOF) is zero!
+WARNING: RMS of log10(pion_hasMuon) is zero!
+WARNING: RMS of log10(D_s_TRUEENDVERTEX_Z) is zero!
+WARNING: RMS of log10(D_s_TRUEENDVERTEX_X) is zero!
+WARNING: RMS of log10(D_s_TRUEENDVERTEX_Y) is zero!
+WARNING: RMS of log10(pion_LOKI_VFASPF_VCHI2) is zero!
+WARNING: RMS of log10(kaonplus_MC_GD_MOTHER_KEY) is zero!
+WARNING: RMS of log10(phi_PP_Weight) is zero!
+WARNING: RMS of log10(D_s_PP_PZ) is zero!
+WARNING: RMS of log10(D_s_PP_PY) is zero!
+WARNING: RMS of log10(D_s_PP_PX) is zero!
+WARNING: RMS of log10(kaonminus_PP_DLLk) is zero!
+WARNING: RMS of log10(kaonminus_PP_DLLe) is zero!
+WARNING: RMS of log10(kaonminus_PP_DLLp) is zero!
+WARNING: RMS of log10(kaonplus_TRUEORIGINVERTEX_Z) is zero!
+WARNING: RMS of log10(kaonplus_TRUEORIGINVERTEX_Y) is zero!
+WARNING: RMS of log10(kaonplus_TRUEORIGINVERTEX_X) is zero!
+WARNING: RMS of log10(kaonminus_PP_tr_pchi2) is zero!
+WARNING: RMS of log10(phi_LOKI_TRCHI2DOF) is zero!
+WARNING: RMS of log10(kaonplus_isMuon) is zero!
+WARNING: RMS of log10(kaonminus_hasRich) is zero!
+WARNING: RMS of log10(pion_PP_tr_pchi2) is zero!
+WARNING: RMS of log10(kaonminus_PP_DLLmu) is zero!
+WARNING: RMS of log10(kaonplus_LOKI_DOCAMAX) is zero!
+WARNING: RMS of log10(kaonplus_TRUEPT) is zero!
+WARNING: RMS of log10(kaonplus_TRUEID) is zero!
+WARNING: RMS of log10(kaonplus_TRUEENDVERTEX_X) is zero!
+WARNING: RMS of log10(pion_TRUEORIGINVERTEX_Z) is zero!
+WARNING: RMS of log10(pion_TRUEORIGINVERTEX_X) is zero!
+WARNING: RMS of log10(pion_TRUEORIGINVERTEX_Y) is zero!
+WARNING: RMS of log10(kaonplus_TRUEENDVERTEX_Y) is zero!
+WARNING: RMS of log10(pion_LOKI_BPVVDR) is zero!
+WARNING: RMS of log10(kaonplus_TRUEENDVERTEX_Z) is zero!
+WARNING: RMS of log10(kaonplus_ProtoParticles) is zero!
+WARNING: RMS of log10(D_s_TRUEORIGINVERTEX_X) is zero!
+WARNING: RMS of log10(D_s_TRUEORIGINVERTEX_Y) is zero!
+WARNING: RMS of log10(D_s_TRUEORIGINVERTEX_Z) is zero!
+WARNING: RMS of log10(pion_OSCIL) is zero!
+WARNING: RMS of log10(kaonminus_LOKI_BPVVDR) is zero!
+WARNING: RMS of log10(kaonminus_LOKI_BPVVDZ) is zero!
+WARNING: RMS of log10(pion_LOKI_BPVVDZ) is zero!
+WARNING: RMS of log10(D_s_PP_Weight) is zero!
+WARNING: RMS of log10(pion_LOKI_VFASPF_VPCHI2) is zero!
+WARNING: RMS of log10(pion_LOKI_VFASPF_VDOF) is zero!
+WARNING: RMS of log10(D_s_OSCIL) is zero!
+WARNING: RMS of log10(kaonplus_PP_DLLk) is zero!
+WARNING: RMS of log10(kaonplus_LOKI_BPVVDZ) is zero!
+WARNING: RMS of log10(D_s_LOKI_TRCHI2) is zero!
+WARNING: RMS of log10(kaonplus_PP_DLLe) is zero!
+WARNING: RMS of log10(phi_Reconstructible) is zero!
+WARNING: RMS of log10(kaonminus_MC_GD_MOTHER_KEY) is zero!
+WARNING: RMS of log10(kaonplus_LOKI_BPVVDR) is zero!
+WARNING: RMS of log10(kaonplus_PP_tr_pchi2) is zero!
+WARNING: RMS of log10(kaonminus_LOKI_DOCACHI2MAX) is zero!
+WARNING: RMS of log10(phi_LOKI_TRCHI2) is zero!
+WARNING: RMS of log10(kaonplus_LOKI_DOCACHI2MAX) is zero!
+WARNING: RMS of log10(kaonminus_MC_MOTHER_KEY) is zero!
+WARNING: RMS of log10(kaonplus_LOKI_VFASPF_VPCHI2) is zero!
+WARNING: RMS of log10(kaonplus_PP_DLLp) is zero!
+WARNING: RMS of log10(pion_LOKI_VFASPF_VCHI2VDOF) is zero!
+WARNING: RMS of log10(D_s_MC_MOTHER_KEY) is zero!
+INFO: Parsing varfile...
+INFO: Parsing weightfile...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+INFO: ==========================================================================
+INFO: ds is a dataset of type Signal 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NDs_sw
+INFO:	Total Weighted Entries: 162.88+/-15.768
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: dplus is a dataset of type Signal 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NDplus_sw
+INFO:	Total Weighted Entries: 81.7686+/-13.272
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: bkg is a dataset of type Background 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NBkg_sw
+INFO:	Total Weighted Entries: 982.327+/-34.3329
+INFO: ==========================================================================
+Type	Total Entries	Total Proc. Entries	Proc. Cut Eff.	Total Weighted Entries	Total Proc. Weighted Entries	Proc Weight ratio	Name
+-------------------------------------------------------------------
+S	1.23e+03	1.23e+03	   1+/-   0	 163+/-15.8	 163+/-15.8	   1+/-   0	ds
+S	1.23e+03	1.23e+03	   1+/-   0	81.8+/-13.3	81.8+/-13.3	   1+/-   0	dplus
+S	2.45e+03	2.45e+03	   1+/-   0	 245+/-20.6	 245+/-20.6	   1+/-   0	TOTAL
+B	1.23e+03	1.23e+03	   1+/-   0	 982+/-34.3	 982+/-34.3	   1+/-   0	bkg
+B	1.23e+03	1.23e+03	   1+/-   0	 982+/-34.3	 982+/-34.3	   1+/-   0	TOTAL
+WARNING: Separation power is zero for log10(phi_LOKI_ID)
+WARNING: Separation power is zero for log10(pion_LOKI_MINVDDV)
+WARNING: Separation power is zero for log10(pion_LOKI_ABSID)
+WARNING: Separation power is zero for log10(pion_LOKI_VMINVDDV)
+WARNING: Separation power is zero for log10(D_s_LOKI_VFASPF_VDOF)
+WARNING: Separation power is zero for log10(D_s_LOKI_ABSID)
+WARNING: Separation power is zero for log10(phi_LOKI_ABSID)
+WARNING: Separation power is zero for pion_LOKI_DOCAMAX
+WARNING: Separation power is zero for pion_LOKI_BPVDIRA
+WARNING: Separation power is zero for pion_LOKI_BPVVDRHO
+WARNING: Separation power is zero for pion_LOKI_DOCACHI2MAX
+WARNING: Separation power is zero for pion_LOKI_BPVVDCHI2
+WARNING: Separation power is zero for phi_LOKI_ID
+WARNING: Separation power is zero for pion_LOKI_MM
+WARNING: Separation power is zero for phi_LOKI_TRPCHI2
+WARNING: Separation power is zero for pion_LOKI_MINVDDV
+WARNING: Separation power is zero for D_s_LOKI_TRCHI2DOF
+WARNING: Separation power is zero for D_s_LOKI_TRPCHI2
+WARNING: Separation power is zero for pion_LOKI_ABSID
+WARNING: Separation power is zero for pion_LOKI_VFASPF_VCHI2
+WARNING: Separation power is zero for pion_LOKI_VMINVDDV
+WARNING: Separation power is zero for phi_LOKI_TRCHI2DOF
+WARNING: Separation power is zero for D_s_LOKI_VFASPF_VDOF
+WARNING: Separation power is zero for pion_LOKI_BPVVDR
+WARNING: Separation power is zero for pion_LOKI_M
+WARNING: Separation power is zero for pion_LOKI_BPVVDZ
+WARNING: Separation power is zero for pion_LOKI_VFASPF_VPCHI2
+WARNING: Separation power is zero for pion_LOKI_VFASPF_VDOF
+WARNING: Separation power is zero for D_s_LOKI_TRCHI2
+WARNING: Separation power is zero for D_s_LOKI_ABSID
+WARNING: Separation power is zero for phi_LOKI_ABSID
+WARNING: Separation power is zero for phi_LOKI_TRCHI2
+WARNING: Separation power is zero for max((log10(kaonplus_LOKI_ID)),(log10(kaonminus_LOKI_ID)))
+WARNING: Separation power is zero for min((log10(kaonplus_LOKI_ID)),(log10(kaonminus_LOKI_ID)))
+WARNING: Separation power is zero for max((log10(kaonplus_LOKI_MINVDDV)),(log10(kaonminus_LOKI_MINVDDV)))
+WARNING: Separation power is zero for min((log10(kaonplus_LOKI_MINVDDV)),(log10(kaonminus_LOKI_MINVDDV)))
+WARNING: Separation power is zero for max((log10(kaonplus_LOKI_VMINVDDV)),(log10(kaonminus_LOKI_VMINVDDV)))
+WARNING: Separation power is zero for min((log10(kaonplus_LOKI_VMINVDDV)),(log10(kaonminus_LOKI_VMINVDDV)))
+WARNING: Separation power is zero for max((log10(kaonplus_LOKI_ABSID)),(log10(kaonminus_LOKI_ABSID)))
+WARNING: Separation power is zero for min((log10(kaonplus_LOKI_ABSID)),(log10(kaonminus_LOKI_ABSID)))
+WARNING: Separation power is zero for max((kaonplus_LOKI_BPVVDCHI2),(kaonminus_LOKI_BPVVDCHI2))
+WARNING: Separation power is zero for min((kaonplus_LOKI_BPVVDCHI2),(kaonminus_LOKI_BPVVDCHI2))
+WARNING: Separation power is zero for max((kaonplus_LOKI_MINVDDV),(kaonminus_LOKI_MINVDDV))
+WARNING: Separation power is zero for min((kaonplus_LOKI_MINVDDV),(kaonminus_LOKI_MINVDDV))
+WARNING: Separation power is zero for max((kaonplus_LOKI_BPVVDRHO),(kaonminus_LOKI_BPVVDRHO))
+WARNING: Separation power is zero for min((kaonplus_LOKI_BPVVDRHO),(kaonminus_LOKI_BPVVDRHO))
+WARNING: Separation power is zero for max((kaonplus_LOKI_VFASPF_VDOF),(kaonminus_LOKI_VFASPF_VDOF))
+WARNING: Separation power is zero for min((kaonplus_LOKI_VFASPF_VDOF),(kaonminus_LOKI_VFASPF_VDOF))
+WARNING: Separation power is zero for max((kaonplus_LOKI_VFASPF_VCHI2),(kaonminus_LOKI_VFASPF_VCHI2))
+WARNING: Separation power is zero for min((kaonplus_LOKI_VFASPF_VCHI2),(kaonminus_LOKI_VFASPF_VCHI2))
+WARNING: Separation power is zero for max((kaonplus_LOKI_BPVDIRA),(kaonminus_LOKI_BPVDIRA))
+WARNING: Separation power is zero for min((kaonplus_LOKI_BPVDIRA),(kaonminus_LOKI_BPVDIRA))
+WARNING: Separation power is zero for max((kaonplus_LOKI_DOCAMAX),(kaonminus_LOKI_DOCAMAX))
+WARNING: Separation power is zero for min((kaonplus_LOKI_DOCAMAX),(kaonminus_LOKI_DOCAMAX))
+WARNING: Separation power is zero for max((kaonplus_LOKI_VMINVDDV),(kaonminus_LOKI_VMINVDDV))
+WARNING: Separation power is zero for min((kaonplus_LOKI_VMINVDDV),(kaonminus_LOKI_VMINVDDV))
+WARNING: Separation power is zero for max((kaonplus_LOKI_BPVVDZ),(kaonminus_LOKI_BPVVDZ))
+WARNING: Separation power is zero for min((kaonplus_LOKI_BPVVDZ),(kaonminus_LOKI_BPVVDZ))
+WARNING: Separation power is zero for max((kaonplus_LOKI_BPVVDR),(kaonminus_LOKI_BPVVDR))
+WARNING: Separation power is zero for min((kaonplus_LOKI_BPVVDR),(kaonminus_LOKI_BPVVDR))
+WARNING: Separation power is zero for max((kaonplus_LOKI_ABSID),(kaonminus_LOKI_ABSID))
+WARNING: Separation power is zero for min((kaonplus_LOKI_ABSID),(kaonminus_LOKI_ABSID))
+WARNING: Separation power is zero for max((kaonplus_LOKI_DOCACHI2MAX),(kaonminus_LOKI_DOCACHI2MAX))
+WARNING: Separation power is zero for min((kaonplus_LOKI_DOCACHI2MAX),(kaonminus_LOKI_DOCACHI2MAX))
+WARNING: Separation power is zero for max((kaonplus_LOKI_VFASPF_VPCHI2),(kaonminus_LOKI_VFASPF_VPCHI2))
+WARNING: Separation power is zero for min((kaonplus_LOKI_VFASPF_VPCHI2),(kaonminus_LOKI_VFASPF_VPCHI2))
+var	separation
+------------------------------------
+log10(phi_LOKI_BPVIPCHI2)	0.37
+min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))	0.337
+min((log10(kaonplus_LOKI_MIPCHI2DV_PRIMARY)),(log10(kaonminus_LOKI_MIPCHI2DV_PRIMARY)))	0.337
+log10(pion_LOKI_MIPCHI2DV_PRIMARY)	0.331
+log10(pion_LOKI_BPVIPCHI2)	0.331
+max((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))	0.312
+max((log10(kaonplus_LOKI_MIPCHI2DV_PRIMARY)),(log10(kaonminus_LOKI_MIPCHI2DV_PRIMARY)))	0.312
+log10(phi_LOKI_BPVVDCHI2)	0.292
+log10(D_s_LOKI_BPVVDCHI2)	0.277
+D_s_LOKI_BPVDIRA	0.266
+log10(D_s_LOKI_BPVDIRA)	0.258
+D_s_LOKI_DOCACHI2MAX	0.257
+D_s_LOKI_DOCAMAX	0.257
+log10(D_s_LOKI_BPVVDR)	0.255
+log10(D_s_LOKI_BPVVDRHO)	0.255
+pion_LOKI_PIDK	0.228
+pion_LOKI_PIDpi_PIDK	0.224
+log10(pion_LOKI_PT)	0.209
+pion_LOKI_PIDp	0.206
+pion_LOKI_PIDpi_PIDp	0.206
+pion_LOKI_TRCHI2DOF	0.203
+pion_LOKI_TRCHI2	 0.2
+log10(pion_LOKI_TRCHI2DOF)	0.198
+log10(D_s_LOKI_DOCAMAX)	0.194
+log10(D_s_LOKI_DOCACHI2MAX)	0.194
+log10(phi_LOKI_BPVVDR)	0.191
+log10(phi_LOKI_BPVVDRHO)	0.191
+log10(D_s_LOKI_PT)	0.183
+log10(pion_LOKI_TRCHI2)	0.183
+min((log10(kaonplus_LOKI_MIPDV_PRIMARY)),(log10(kaonminus_LOKI_MIPDV_PRIMARY)))	0.17
+log10(phi_LOKI_BPVVDZ)	0.163
+min((kaonplus_LOKI_PIDK_PIDe),(kaonminus_LOKI_PIDK_PIDe))	0.158
+min((kaonplus_LOKI_PIDK),(kaonminus_LOKI_PIDK))	0.152
+min((kaonplus_LOKI_PIDK_PIDpi),(kaonminus_LOKI_PIDK_PIDpi))	0.152
+log10(D_s_LOKI_VMINVDDV)	0.15
+min((log10(kaonplus_LOKI_TRPCHI2)),(log10(kaonminus_LOKI_TRPCHI2)))	0.14
+max((log10(kaonplus_LOKI_MIPDV_PRIMARY)),(log10(kaonminus_LOKI_MIPDV_PRIMARY)))	0.138
+phi_LOKI_BPVVDZ	0.138
+min((log10(kaonplus_LOKI_PT)),(log10(kaonminus_LOKI_PT)))	0.135
+log10(phi_LOKI_VMINVDDV)	0.135
+min((kaonplus_LOKI_PIDK_PIDmu),(kaonminus_LOKI_PIDK_PIDmu))	0.133
+pion_LOKI_PIDe	0.132
+pion_LOKI_PIDpi_PIDe	0.132
+D_s_LOKI_VFASPF_VCHI2	0.13
+D_s_LOKI_VFASPF_VCHI2VDOF	0.13
+max((kaonplus_LOKI_PIDK_PIDe),(kaonminus_LOKI_PIDK_PIDe))	0.13
+max((log10(kaonplus_LOKI_TRPCHI2)),(log10(kaonminus_LOKI_TRPCHI2)))	0.127
+max((kaonplus_LOKI_PIDK_PIDmu),(kaonminus_LOKI_PIDK_PIDmu))	0.124
+log10(phi_LOKI_PT)	0.122
+min((kaonplus_LOKI_TRCHI2DOF),(kaonminus_LOKI_TRCHI2DOF))	0.122
+phi_LOKI_P	0.122
+phi_LOKI_VMINVDDV	0.12
+log10(D_s_LOKI_BPVIPCHI2)	0.114
+log10(pion_LOKI_TRPCHI2)	0.114
+log10(D_s_LOKI_VFASPF_VPCHI2)	0.112
+phi_LOKI_DOCACHI2MAX	0.111
+phi_LOKI_DOCAMAX	0.111
+log10(D_s_LOKI_VFASPF_VCHI2VDOF)	0.111
+min((kaonplus_LOKI_TRCHI2),(kaonminus_LOKI_TRCHI2))	0.11
+min((log10(kaonplus_LOKI_TRCHI2DOF)),(log10(kaonminus_LOKI_TRCHI2DOF)))	0.109
+log10(pion_LOKI_MIPDV_PRIMARY)	0.109
+log10(phi_LOKI_DOCAMAX)	0.107
+log10(phi_LOKI_DOCACHI2MAX)	0.107
+log10(D_s_LOKI_VFASPF_VCHI2)	0.107
+D_s_LOKI_VFASPF_VPCHI2	0.105
+max((kaonplus_LOKI_PIDp),(kaonminus_LOKI_PIDp))	 0.1
+max((log10(kaonplus_LOKI_PT)),(log10(kaonminus_LOKI_PT)))	0.0982
+max((kaonplus_LOKI_TRCHI2DOF),(kaonminus_LOKI_TRCHI2DOF))	0.098
+max((kaonplus_LOKI_PIDK_PIDpi),(kaonminus_LOKI_PIDK_PIDpi))	0.0974
+max((kaonplus_LOKI_PIDK),(kaonminus_LOKI_PIDK))	0.0974
+max((log10(kaonplus_LOKI_P)),(log10(kaonminus_LOKI_P)))	0.0968
+phi_LOKI_BPVVDRHO	0.0966
+phi_LOKI_BPVVDR	0.0966
+pion_LOKI_TRPCHI2	0.0959
+max((log10(kaonplus_LOKI_TRCHI2DOF)),(log10(kaonminus_LOKI_TRCHI2DOF)))	0.0954
+min((kaonplus_LOKI_PIDe),(kaonminus_LOKI_PIDe))	0.0917
+log10(D_s_LOKI_BPVVDZ)	0.0915
+max((kaonplus_LOKI_PIDmu),(kaonminus_LOKI_PIDmu))	0.09
+pion_LOKI_PIDmu	0.0893
+min((kaonplus_LOKI_PIDp),(kaonminus_LOKI_PIDp))	0.089
+pion_LOKI_PIDpi_PIDmu	0.089
+min((log10(kaonplus_LOKI_TRCHI2)),(log10(kaonminus_LOKI_TRCHI2)))	0.0883
+max((kaonplus_LOKI_TRPCHI2),(kaonminus_LOKI_TRPCHI2))	0.0864
+min((kaonplus_LOKI_PIDK_PIDp),(kaonminus_LOKI_PIDK_PIDp))	0.0857
+pion_LOKI_P	0.0847
+max((kaonplus_LOKI_TRCHI2),(kaonminus_LOKI_TRCHI2))	0.078
+min((kaonplus_LOKI_MIPDV_PRIMARY),(kaonminus_LOKI_MIPDV_PRIMARY))	0.0773
+log10(phi_LOKI_VFASPF_VCHI2)	0.0754
+log10(phi_LOKI_VFASPF_VCHI2VDOF)	0.0754
+log10(pion_LOKI_P)	0.0701
+max((kaonplus_LOKI_PIDe),(kaonminus_LOKI_PIDe))	0.069
+pion_LOKI_MIPDV_PRIMARY	0.0688
+min((kaonplus_LOKI_PIDmu),(kaonminus_LOKI_PIDmu))	0.0646
+max((kaonplus_LOKI_MIPDV_PRIMARY),(kaonminus_LOKI_MIPDV_PRIMARY))	0.0631
+phi_LOKI_VFASPF_VCHI2VDOF	0.0625
+phi_LOKI_VFASPF_VCHI2	0.0625
+max((log10(kaonplus_LOKI_TRCHI2)),(log10(kaonminus_LOKI_TRCHI2)))	0.0584
+log10(D_s_LOKI_P)	0.0578
+phi_LOKI_VFASPF_VPCHI2	0.0566
+D_s_LOKI_P	0.0556
+max((kaonplus_LOKI_P),(kaonminus_LOKI_P))	0.0541
+D_s_LOKI_BPVVDR	0.0504
+D_s_LOKI_BPVVDRHO	0.0504
+phi_LOKI_BPVDIRA	0.0503
+log10(phi_LOKI_VFASPF_VPCHI2)	0.0498
+max((kaonplus_LOKI_BPVIPCHI2),(kaonminus_LOKI_BPVIPCHI2))	0.048
+max((kaonplus_LOKI_MIPCHI2DV_PRIMARY),(kaonminus_LOKI_MIPCHI2DV_PRIMARY))	0.048
+log10(phi_LOKI_BPVDIRA)	0.0447
+phi_LOKI_BPVIPCHI2	0.0433
+phi_LOKI_BPVVDCHI2	0.041
+max((kaonplus_LOKI_PIDK_PIDp),(kaonminus_LOKI_PIDK_PIDp))	0.0405
+min((kaonplus_LOKI_TRPCHI2),(kaonminus_LOKI_TRPCHI2))	0.0394
+log10(phi_LOKI_P)	0.0383
+D_s_LOKI_VMINVDDV	0.0369
+D_s_LOKI_BPVVDZ	0.031
+D_s_LOKI_BPVIPCHI2	0.03
+min((kaonplus_LOKI_BPVIPCHI2),(kaonminus_LOKI_BPVIPCHI2))	0.0282
+min((kaonplus_LOKI_MIPCHI2DV_PRIMARY),(kaonminus_LOKI_MIPCHI2DV_PRIMARY))	0.0282
+D_s_LOKI_BPVVDCHI2	0.0252
+min((kaonplus_LOKI_P),(kaonminus_LOKI_P))	0.022
+min((log10(kaonplus_LOKI_P)),(log10(kaonminus_LOKI_P)))	0.0167
+pion_LOKI_BPVIPCHI2	0.00896
+pion_LOKI_MIPCHI2DV_PRIMARY	0.00896
+log10(D_s_LOKI_ID)	0.00173
+log10(pion_LOKI_ID)	0.00173
+pion_LOKI_ID	0.00173
+D_s_LOKI_ID	0.00173
+min((kaonplus_LOKI_ID),(kaonminus_LOKI_ID))	4.35e-33
+max((kaonplus_LOKI_ID),(kaonminus_LOKI_ID))	4.35e-33
+min((kaonplus_LOKI_BPVVDZ),(kaonminus_LOKI_BPVVDZ))	   0
+min((kaonplus_LOKI_BPVDIRA),(kaonminus_LOKI_BPVDIRA))	   0
+max((kaonplus_LOKI_BPVDIRA),(kaonminus_LOKI_BPVDIRA))	   0
+max((kaonplus_LOKI_BPVVDZ),(kaonminus_LOKI_BPVVDZ))	   0
+min((kaonplus_LOKI_VFASPF_VCHI2),(kaonminus_LOKI_VFASPF_VCHI2))	   0
+max((kaonplus_LOKI_VFASPF_VCHI2),(kaonminus_LOKI_VFASPF_VCHI2))	   0
+max((kaonplus_LOKI_BPVVDRHO),(kaonminus_LOKI_BPVVDRHO))	   0
+min((kaonplus_LOKI_BPVVDRHO),(kaonminus_LOKI_BPVVDRHO))	   0
+max((kaonplus_LOKI_DOCAMAX),(kaonminus_LOKI_DOCAMAX))	   0
+max((kaonplus_LOKI_ABSID),(kaonminus_LOKI_ABSID))	   0
+min((kaonplus_LOKI_BPVVDR),(kaonminus_LOKI_BPVVDR))	   0
+min((kaonplus_LOKI_VFASPF_VPCHI2),(kaonminus_LOKI_VFASPF_VPCHI2))	   0
+min((kaonplus_LOKI_DOCAMAX),(kaonminus_LOKI_DOCAMAX))	   0
+max((kaonplus_LOKI_VFASPF_VDOF),(kaonminus_LOKI_VFASPF_VDOF))	   0
+min((kaonplus_LOKI_VFASPF_VDOF),(kaonminus_LOKI_VFASPF_VDOF))	   0
+min((kaonplus_LOKI_ABSID),(kaonminus_LOKI_ABSID))	   0
+max((kaonplus_LOKI_VMINVDDV),(kaonminus_LOKI_VMINVDDV))	   0
+min((kaonplus_LOKI_VMINVDDV),(kaonminus_LOKI_VMINVDDV))	   0
+max((kaonplus_LOKI_VFASPF_VPCHI2),(kaonminus_LOKI_VFASPF_VPCHI2))	   0
+min((kaonplus_LOKI_DOCACHI2MAX),(kaonminus_LOKI_DOCACHI2MAX))	   0
+max((kaonplus_LOKI_DOCACHI2MAX),(kaonminus_LOKI_DOCACHI2MAX))	   0
+max((kaonplus_LOKI_BPVVDR),(kaonminus_LOKI_BPVVDR))	   0
+phi_LOKI_TRCHI2DOF	   0
+pion_LOKI_VMINVDDV	   0
+pion_LOKI_VFASPF_VCHI2	   0
+pion_LOKI_ABSID	   0
+D_s_LOKI_TRPCHI2	   0
+D_s_LOKI_TRCHI2DOF	   0
+pion_LOKI_MINVDDV	   0
+phi_LOKI_TRPCHI2	   0
+pion_LOKI_MM	   0
+phi_LOKI_ID	   0
+pion_LOKI_BPVVDCHI2	   0
+pion_LOKI_DOCACHI2MAX	   0
+pion_LOKI_BPVVDRHO	   0
+pion_LOKI_BPVDIRA	   0
+pion_LOKI_DOCAMAX	   0
+log10(phi_LOKI_ABSID)	   0
+log10(D_s_LOKI_ABSID)	   0
+log10(D_s_LOKI_VFASPF_VDOF)	   0
+log10(pion_LOKI_VMINVDDV)	   0
+log10(pion_LOKI_ABSID)	   0
+log10(pion_LOKI_MINVDDV)	   0
+log10(phi_LOKI_ID)	   0
+min((kaonplus_LOKI_MINVDDV),(kaonminus_LOKI_MINVDDV))	   0
+max((kaonplus_LOKI_MINVDDV),(kaonminus_LOKI_MINVDDV))	   0
+min((kaonplus_LOKI_BPVVDCHI2),(kaonminus_LOKI_BPVVDCHI2))	   0
+max((kaonplus_LOKI_BPVVDCHI2),(kaonminus_LOKI_BPVVDCHI2))	   0
+min((log10(kaonplus_LOKI_ABSID)),(log10(kaonminus_LOKI_ABSID)))	   0
+max((log10(kaonplus_LOKI_ABSID)),(log10(kaonminus_LOKI_ABSID)))	   0
+min((log10(kaonplus_LOKI_VMINVDDV)),(log10(kaonminus_LOKI_VMINVDDV)))	   0
+max((log10(kaonplus_LOKI_VMINVDDV)),(log10(kaonminus_LOKI_VMINVDDV)))	   0
+min((log10(kaonplus_LOKI_MINVDDV)),(log10(kaonminus_LOKI_MINVDDV)))	   0
+max((log10(kaonplus_LOKI_MINVDDV)),(log10(kaonminus_LOKI_MINVDDV)))	   0
+min((log10(kaonplus_LOKI_ID)),(log10(kaonminus_LOKI_ID)))	   0
+max((log10(kaonplus_LOKI_ID)),(log10(kaonminus_LOKI_ID)))	   0
+phi_LOKI_TRCHI2	   0
+phi_LOKI_ABSID	   0
+D_s_LOKI_ABSID	   0
+D_s_LOKI_TRCHI2	   0
+pion_LOKI_VFASPF_VDOF	   0
+pion_LOKI_VFASPF_VPCHI2	   0
+pion_LOKI_BPVVDZ	   0
+pion_LOKI_M	   0
+pion_LOKI_BPVVDR	   0
+D_s_LOKI_VFASPF_VDOF	   0
+INFO: Parsing weightfile...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+INFO: ==========================================================================
+INFO: ds is a dataset of type Signal 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NDs_sw
+INFO:	Total Weighted Entries: 162.88+/-15.768
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: dplus is a dataset of type Signal 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NDplus_sw
+INFO:	Total Weighted Entries: 81.7686+/-13.272
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: bkg is a dataset of type Background 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NBkg_sw
+INFO:	Total Weighted Entries: 982.327+/-34.3329
+INFO: ==========================================================================
+pad = 0      Variable = min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2))) : log10(phi_LOKI_BPVIPCHI2)  Correlation = 0.86
+pad = 1      Variable = min((log10(kaonplus_LOKI_MIPCHI2DV_PRIMARY)),(log10(kaonminus_LOKI_MIPCHI2DV_PRIMARY))) : log10(phi_LOKI_BPVIPCHI2)  Correlation = 0.86
+pad = 2      Variable = min((log10(kaonplus_LOKI_MIPCHI2DV_PRIMARY)),(log10(kaonminus_LOKI_MIPCHI2DV_PRIMARY))) : min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))  Correlation =    1	 Removing First Variable
+pad = 3      Variable = log10(pion_LOKI_MIPCHI2DV_PRIMARY) : log10(phi_LOKI_BPVIPCHI2)  Correlation = 0.313
+pad = 4      Variable = log10(pion_LOKI_MIPCHI2DV_PRIMARY) : min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))  Correlation = 0.428
+pad = 5      Variable = log10(pion_LOKI_BPVIPCHI2) : log10(phi_LOKI_BPVIPCHI2)  Correlation = 0.313
+pad = 6      Variable = log10(pion_LOKI_BPVIPCHI2) : min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))  Correlation = 0.428
+pad = 7      Variable = log10(pion_LOKI_BPVIPCHI2) : log10(pion_LOKI_MIPCHI2DV_PRIMARY)  Correlation =    1	 Removing First Variable
+pad = 8      Variable = max((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2))) : log10(phi_LOKI_BPVIPCHI2)  Correlation = 0.921	 Removing First Variable
+pad = 9      Variable = max((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2))) : min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))  Correlation = 0.836
+pad = 10      Variable = max((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2))) : log10(pion_LOKI_MIPCHI2DV_PRIMARY)  Correlation = 0.32
+pad = 11      Variable = max((log10(kaonplus_LOKI_MIPCHI2DV_PRIMARY)),(log10(kaonminus_LOKI_MIPCHI2DV_PRIMARY))) : log10(phi_LOKI_BPVIPCHI2)  Correlation = 0.921	 Removing First Variable
+pad = 12      Variable = max((log10(kaonplus_LOKI_MIPCHI2DV_PRIMARY)),(log10(kaonminus_LOKI_MIPCHI2DV_PRIMARY))) : min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))  Correlation = 0.836
+pad = 13      Variable = max((log10(kaonplus_LOKI_MIPCHI2DV_PRIMARY)),(log10(kaonminus_LOKI_MIPCHI2DV_PRIMARY))) : log10(pion_LOKI_MIPCHI2DV_PRIMARY)  Correlation = 0.32
+pad = 14      Variable = log10(phi_LOKI_BPVVDCHI2) : log10(phi_LOKI_BPVIPCHI2)  Correlation =  0.9	 Removing First Variable
+pad = 15      Variable = log10(phi_LOKI_BPVVDCHI2) : min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))  Correlation = 0.857
+pad = 0      Variable = log10(phi_LOKI_BPVVDCHI2) : log10(pion_LOKI_MIPCHI2DV_PRIMARY)  Correlation = 0.328
+pad = 1      Variable = log10(D_s_LOKI_BPVVDCHI2) : log10(phi_LOKI_BPVIPCHI2)  Correlation = 0.611
+pad = 2      Variable = log10(D_s_LOKI_BPVVDCHI2) : min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))  Correlation = 0.686
+pad = 3      Variable = log10(D_s_LOKI_BPVVDCHI2) : log10(pion_LOKI_MIPCHI2DV_PRIMARY)  Correlation = 0.783
+pad = 4      Variable = D_s_LOKI_BPVDIRA : log10(phi_LOKI_BPVIPCHI2)  Correlation = 0.18
+pad = 5      Variable = D_s_LOKI_BPVDIRA : min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))  Correlation = 0.183
+pad = 6      Variable = D_s_LOKI_BPVDIRA : log10(pion_LOKI_MIPCHI2DV_PRIMARY)  Correlation = 0.116
+pad = 7      Variable = D_s_LOKI_BPVDIRA : log10(D_s_LOKI_BPVVDCHI2)  Correlation = 0.162
+pad = 8      Variable = log10(D_s_LOKI_BPVDIRA) : log10(phi_LOKI_BPVIPCHI2)  Correlation = 0.18
+pad = 9      Variable = log10(D_s_LOKI_BPVDIRA) : min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))  Correlation = 0.183
+pad = 10      Variable = log10(D_s_LOKI_BPVDIRA) : log10(pion_LOKI_MIPCHI2DV_PRIMARY)  Correlation = 0.116
+pad = 11      Variable = log10(D_s_LOKI_BPVDIRA) : log10(D_s_LOKI_BPVVDCHI2)  Correlation = 0.162
+pad = 12      Variable = log10(D_s_LOKI_BPVDIRA) : D_s_LOKI_BPVDIRA  Correlation =    1	 Removing First Variable
+pad = 13      Variable = D_s_LOKI_DOCACHI2MAX : log10(phi_LOKI_BPVIPCHI2)  Correlation = -0.17
+pad = 14      Variable = D_s_LOKI_DOCACHI2MAX : min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))  Correlation = -0.177
+pad = 15      Variable = D_s_LOKI_DOCACHI2MAX : log10(pion_LOKI_MIPCHI2DV_PRIMARY)  Correlation = -0.154
+pad = 0      Variable = D_s_LOKI_DOCACHI2MAX : log10(D_s_LOKI_BPVVDCHI2)  Correlation = -0.178
+pad = 1      Variable = D_s_LOKI_DOCACHI2MAX : D_s_LOKI_BPVDIRA  Correlation = -0.0872
+pad = 2      Variable = D_s_LOKI_DOCAMAX : log10(phi_LOKI_BPVIPCHI2)  Correlation = -0.17
+pad = 3      Variable = D_s_LOKI_DOCAMAX : min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))  Correlation = -0.177
+pad = 4      Variable = D_s_LOKI_DOCAMAX : log10(pion_LOKI_MIPCHI2DV_PRIMARY)  Correlation = -0.154
+pad = 5      Variable = D_s_LOKI_DOCAMAX : log10(D_s_LOKI_BPVVDCHI2)  Correlation = -0.178
+pad = 6      Variable = D_s_LOKI_DOCAMAX : D_s_LOKI_BPVDIRA  Correlation = -0.0872
+pad = 7      Variable = D_s_LOKI_DOCAMAX : D_s_LOKI_DOCACHI2MAX  Correlation =    1	 Removing First Variable
+pad = 8      Variable = log10(D_s_LOKI_BPVVDR) : log10(phi_LOKI_BPVIPCHI2)  Correlation = 0.579
+pad = 9      Variable = log10(D_s_LOKI_BPVVDR) : min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))  Correlation = 0.61
+pad = 10      Variable = log10(D_s_LOKI_BPVVDR) : log10(pion_LOKI_MIPCHI2DV_PRIMARY)  Correlation = 0.531
+pad = 11      Variable = log10(D_s_LOKI_BPVVDR) : log10(D_s_LOKI_BPVVDCHI2)  Correlation = 0.758
+pad = 12      Variable = log10(D_s_LOKI_BPVVDR) : D_s_LOKI_BPVDIRA  Correlation = 0.252
+pad = 13      Variable = log10(D_s_LOKI_BPVVDR) : D_s_LOKI_DOCACHI2MAX  Correlation = -0.099
+pad = 14      Variable = log10(D_s_LOKI_BPVVDRHO) : log10(phi_LOKI_BPVIPCHI2)  Correlation = 0.579
+pad = 15      Variable = log10(D_s_LOKI_BPVVDRHO) : min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))  Correlation = 0.61
+pad = 0      Variable = log10(D_s_LOKI_BPVVDRHO) : log10(pion_LOKI_MIPCHI2DV_PRIMARY)  Correlation = 0.531
+pad = 1      Variable = log10(D_s_LOKI_BPVVDRHO) : log10(D_s_LOKI_BPVVDCHI2)  Correlation = 0.758
+pad = 2      Variable = log10(D_s_LOKI_BPVVDRHO) : D_s_LOKI_BPVDIRA  Correlation = 0.252
+pad = 3      Variable = log10(D_s_LOKI_BPVVDRHO) : D_s_LOKI_DOCACHI2MAX  Correlation = -0.099
+pad = 4      Variable = log10(D_s_LOKI_BPVVDRHO) : log10(D_s_LOKI_BPVVDR)  Correlation =    1	 Removing First Variable
+pad = 5      Variable = pion_LOKI_PIDK : log10(phi_LOKI_BPVIPCHI2)  Correlation = -0.158
+pad = 6      Variable = pion_LOKI_PIDK : min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))  Correlation = -0.121
+pad = 7      Variable = pion_LOKI_PIDK : log10(pion_LOKI_MIPCHI2DV_PRIMARY)  Correlation = -0.0185
+pad = 8      Variable = pion_LOKI_PIDK : log10(D_s_LOKI_BPVVDCHI2)  Correlation = -0.0447
+pad = 9      Variable = pion_LOKI_PIDK : D_s_LOKI_BPVDIRA  Correlation = -0.086
+pad = 10      Variable = pion_LOKI_PIDK : D_s_LOKI_DOCACHI2MAX  Correlation = 0.118
+pad = 11      Variable = pion_LOKI_PIDK : log10(D_s_LOKI_BPVVDR)  Correlation = -0.0399
+pad = 12      Variable = pion_LOKI_PIDpi_PIDK : log10(phi_LOKI_BPVIPCHI2)  Correlation = 0.158
+pad = 13      Variable = pion_LOKI_PIDpi_PIDK : min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))  Correlation = 0.121
+pad = 14      Variable = pion_LOKI_PIDpi_PIDK : log10(pion_LOKI_MIPCHI2DV_PRIMARY)  Correlation = 0.0185
+pad = 15      Variable = pion_LOKI_PIDpi_PIDK : log10(D_s_LOKI_BPVVDCHI2)  Correlation = 0.0447
+pad = 0      Variable = pion_LOKI_PIDpi_PIDK : D_s_LOKI_BPVDIRA  Correlation = 0.086
+pad = 1      Variable = pion_LOKI_PIDpi_PIDK : D_s_LOKI_DOCACHI2MAX  Correlation = -0.118
+pad = 2      Variable = pion_LOKI_PIDpi_PIDK : log10(D_s_LOKI_BPVVDR)  Correlation = 0.0399
+pad = 3      Variable = pion_LOKI_PIDpi_PIDK : pion_LOKI_PIDK  Correlation =   -1	 Removing First Variable
+pad = 4      Variable = log10(pion_LOKI_PT) : log10(phi_LOKI_BPVIPCHI2)  Correlation = 0.155
+pad = 5      Variable = log10(pion_LOKI_PT) : min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))  Correlation = 0.121
+pad = 6      Variable = log10(pion_LOKI_PT) : log10(pion_LOKI_MIPCHI2DV_PRIMARY)  Correlation = 0.183
+pad = 7      Variable = log10(pion_LOKI_PT) : log10(D_s_LOKI_BPVVDCHI2)  Correlation = 0.193
+pad = 8      Variable = log10(pion_LOKI_PT) : D_s_LOKI_BPVDIRA  Correlation = 0.185
+pad = 9      Variable = log10(pion_LOKI_PT) : D_s_LOKI_DOCACHI2MAX  Correlation = -0.297
+pad = 10      Variable = log10(pion_LOKI_PT) : log10(D_s_LOKI_BPVVDR)  Correlation = 0.236
+pad = 11      Variable = log10(pion_LOKI_PT) : pion_LOKI_PIDK  Correlation = -0.199
+pad = 12      Variable = pion_LOKI_PIDp : log10(phi_LOKI_BPVIPCHI2)  Correlation = -0.182
+pad = 13      Variable = pion_LOKI_PIDp : min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))  Correlation = -0.125
+pad = 14      Variable = pion_LOKI_PIDp : log10(pion_LOKI_MIPCHI2DV_PRIMARY)  Correlation = 0.0314
+pad = 15      Variable = pion_LOKI_PIDp : log10(D_s_LOKI_BPVVDCHI2)  Correlation = -0.025
+pad = 0      Variable = pion_LOKI_PIDp : D_s_LOKI_BPVDIRA  Correlation = -0.117
+pad = 1      Variable = pion_LOKI_PIDp : D_s_LOKI_DOCACHI2MAX  Correlation = 0.13
+pad = 2      Variable = pion_LOKI_PIDp : log10(D_s_LOKI_BPVVDR)  Correlation = -0.0649
+pad = 3      Variable = pion_LOKI_PIDp : pion_LOKI_PIDK  Correlation = 0.895
+pad = 4      Variable = pion_LOKI_PIDp : log10(pion_LOKI_PT)  Correlation = -0.262
+pad = 5      Variable = pion_LOKI_PIDpi_PIDp : log10(phi_LOKI_BPVIPCHI2)  Correlation = 0.182
+pad = 6      Variable = pion_LOKI_PIDpi_PIDp : min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))  Correlation = 0.125
+pad = 7      Variable = pion_LOKI_PIDpi_PIDp : log10(pion_LOKI_MIPCHI2DV_PRIMARY)  Correlation = -0.0314
+pad = 8      Variable = pion_LOKI_PIDpi_PIDp : log10(D_s_LOKI_BPVVDCHI2)  Correlation = 0.025
+pad = 9      Variable = pion_LOKI_PIDpi_PIDp : D_s_LOKI_BPVDIRA  Correlation = 0.117
+pad = 10      Variable = pion_LOKI_PIDpi_PIDp : D_s_LOKI_DOCACHI2MAX  Correlation = -0.13
+pad = 11      Variable = pion_LOKI_PIDpi_PIDp : log10(D_s_LOKI_BPVVDR)  Correlation = 0.0649
+pad = 12      Variable = pion_LOKI_PIDpi_PIDp : pion_LOKI_PIDK  Correlation = -0.895
+pad = 13      Variable = pion_LOKI_PIDpi_PIDp : log10(pion_LOKI_PT)  Correlation = 0.262
+pad = 14      Variable = pion_LOKI_PIDpi_PIDp : pion_LOKI_PIDp  Correlation =   -1	 Removing First Variable
+INFO: Parsing weightfile...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+INFO: ==========================================================================
+INFO: ds is a dataset of type Signal 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NDs_sw/162.88
+INFO:	Total Weighted Entries: 1+/-0.0968076
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: dplus is a dataset of type Signal 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NDplus_sw/81.7686
+INFO:	Total Weighted Entries: 1+/-0.162312
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: bkg is a dataset of type Background 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NBkg_sw/982.327
+INFO:	Total Weighted Entries: 0.999999+/-0.0349506
+INFO: ==========================================================================
+page =0
+log10(phi_LOKI_BPVIPCHI2)	-1.3999999999999999	5.0000000000000009	20	""	lin
+min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))	0	4.6000000000000005	20	""	lin
+log10(pion_LOKI_MIPCHI2DV_PRIMARY)	0	6.3000000000000007	20	""	lin
+log10(D_s_LOKI_BPVVDCHI2)	1.1000000000000001	7.0000000000000009	20	""	lin
+D_s_LOKI_BPVDIRA	0.99989199999999989	1.000008	20	""	lin
+D_s_LOKI_DOCACHI2MAX	0	0.215	20	""	lin
+log10(D_s_LOKI_BPVVDR)	-1.8	1.8500000000000001	20	""	lin
+pion_LOKI_PIDK	-130	70	20	""	lin
+log10(pion_LOKI_PT)	1.6500000000000001	3.9500000000000002	20	""	lin
+pion_LOKI_PIDp	-130	66	20	""	lin
+INFO: Parsing weightfile...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+INFO: ==========================================================================
+INFO: ds is a dataset of type Signal 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NDs_sw
+INFO:	Total Weighted Entries: 162.88+/-15.768
+INFO:	Using Preprocessing cut: D_s_LOKI_PT>2000
+INFO:	Entries After Preprocessing cuts: 612
+INFO:	Weighted Entries After Preprocessing cuts: 118.164+/-12.6331
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: dplus is a dataset of type Signal 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NDplus_sw
+INFO:	Total Weighted Entries: 81.7686+/-13.272
+INFO:	Using Preprocessing cut: D_s_LOKI_PT>2000
+INFO:	Entries After Preprocessing cuts: 612
+INFO:	Weighted Entries After Preprocessing cuts: 66.0104+/-10.5057
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: bkg is a dataset of type Background 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NBkg_sw
+INFO:	Total Weighted Entries: 982.327+/-34.3329
+INFO:	Using Preprocessing cut: D_s_LOKI_PT>2000
+INFO:	Entries After Preprocessing cuts: 612
+INFO:	Weighted Entries After Preprocessing cuts: 427.815+/-22.848
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: ds is a dataset of type Signal 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NDs_sw
+INFO:	Total Weighted Entries: 162.88+/-15.768
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: dplus is a dataset of type Signal 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NDplus_sw
+INFO:	Total Weighted Entries: 81.7686+/-13.272
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: bkg is a dataset of type Background 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NBkg_sw
+INFO:	Total Weighted Entries: 982.327+/-34.3329
+INFO: ==========================================================================
+page =0
+log10(phi_LOKI_BPVIPCHI2)	-1.3999999999999999	5.0000000000000009	20	""	lin
+min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))	0	4.6000000000000005	20	""	lin
+log10(pion_LOKI_MIPCHI2DV_PRIMARY)	0	6.3000000000000007	20	""	lin
+log10(D_s_LOKI_BPVVDCHI2)	1.1000000000000001	7.0000000000000009	20	""	lin
+D_s_LOKI_BPVDIRA	0.99989199999999989	1.000008	20	""	lin
+D_s_LOKI_DOCACHI2MAX	0	0.215	20	""	lin
+log10(D_s_LOKI_BPVVDR)	-1.8	1.8500000000000001	20	""	lin
+pion_LOKI_PIDK	-130	70	20	""	lin
+log10(pion_LOKI_PT)	1.6500000000000001	3.9500000000000002	20	""	lin
+pion_LOKI_PIDp	-130	66	20	""	lin
+INFO: Parsing weightfile...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+INFO: ==========================================================================
+INFO: ds is a dataset of type Signal 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NDs_sw
+INFO:	Total Weighted Entries: 162.88+/-15.768
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: dplus is a dataset of type Signal 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NDplus_sw
+INFO:	Total Weighted Entries: 81.7686+/-13.272
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: bkg is a dataset of type Background 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NBkg_sw
+INFO:	Total Weighted Entries: 982.327+/-34.3329
+INFO: ==========================================================================
+Type	Total Entries	Total Proc. Entries	Proc. Cut Eff.	Total Weighted Entries	Total Proc. Weighted Entries	Proc Weight ratio	Name
+-------------------------------------------------------------------
+S	1.23e+03	1.23e+03	   1+/-   0	 163+/-15.8	 163+/-15.8	   1+/-   0	ds
+S	1.23e+03	1.23e+03	   1+/-   0	81.8+/-13.3	81.8+/-13.3	   1+/-   0	dplus
+S	2.45e+03	2.45e+03	   1+/-   0	 245+/-20.6	 245+/-20.6	   1+/-   0	TOTAL
+B	1.23e+03	1.23e+03	   1+/-   0	 982+/-34.3	 982+/-34.3	   1+/-   0	bkg
+B	1.23e+03	1.23e+03	   1+/-   0	 982+/-34.3	 982+/-34.3	   1+/-   0	TOTAL
+  ________  ____  ___    
+ / ___/ _ \/ __ \/ _ \   
+/ /__/ , _/ /_/ / ___/   
+\___/_/|_|\____/_/ 
+
+crop: Part of the SimpleTools Package v2.0m
+Author: Conor Fitzpatrick conor.fitzpatrick@cern.ch
+INFO: Parsing weightfile...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+INFO: ==========================================================================
+INFO: ds is a dataset of type Signal 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NDs_sw
+INFO:	Total Weighted Entries: 162.88+/-15.768
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: dplus is a dataset of type Signal 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NDplus_sw
+INFO:	Total Weighted Entries: 81.7686+/-13.272
+INFO: ==========================================================================
+INFO: ==========================================================================
+INFO: bkg is a dataset of type Background 
+INFO: --------------------------------------------------------------------------
+INFO:	File Path: exampledata.root
+INFO:	Ntuple Path: merged
+INFO:	Total Entries: 1227
+INFO:	Using per-event weight of NBkg_sw
+INFO:	Total Weighted Entries: 982.327+/-34.3329
+INFO: ==========================================================================
+Type	Total Entries	Total Proc. Entries	Proc. Cut Eff.	Total Weighted Entries	Total Proc. Weighted Entries	Proc Weight ratio	Name
+-------------------------------------------------------------------
+S	1.23e+03	1.23e+03	   1+/-   0	 163+/-15.8	 163+/-15.8	   1+/-   0	ds
+S	1.23e+03	1.23e+03	   1+/-   0	81.8+/-13.3	81.8+/-13.3	   1+/-   0	dplus
+S	2.45e+03	2.45e+03	   1+/-   0	 245+/-20.6	 245+/-20.6	   1+/-   0	TOTAL
+B	1.23e+03	1.23e+03	   1+/-   0	 982+/-34.3	 982+/-34.3	   1+/-   0	bkg
+B	1.23e+03	1.23e+03	   1+/-   0	 982+/-34.3	 982+/-34.3	   1+/-   0	TOTAL
+INFO: Parsing cutfile...
+Using Purity Ordering
+INFO: Initialising: Finding initial working point...
+order  number  Sig. Eff        Bkg. Rej        FoM     cut
+-----------------------------------------------------------
+0	0	0.93+/-0.0163	0.501+/-0.016	8.49+/-0.697	log10(phi_LOKI_BPVIPCHI2)>1.16
+1	1	0.627+/-0.0309	0.828+/-0.012	8.55+/-0.819	min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))>1.15
+2	2	1.01+/-0.00615	0.317+/-0.0148	8.15+/-0.656	log10(pion_LOKI_MIPCHI2DV_PRIMARY)>0.945
+3	3	0.82+/-0.0245	0.634+/-0.0154	8.48+/-0.727	log10(D_s_LOKI_BPVVDCHI2)>1.985
+4	4	0.797+/-0.0257	0.622+/-0.0155	8.19+/-0.722	D_s_LOKI_BPVDIRA>0.999967
+5	5	0.961+/-0.0124	0.399+/-0.0156	8.18+/-0.672	D_s_LOKI_DOCACHI2MAX<0.086
+6	6	0.936+/-0.0156	0.311+/-0.0148	7.61+/-0.644	log10(D_s_LOKI_BPVVDR)>-0.705
+7	7	0.723+/-0.0286	0.665+/-0.0151	7.86+/-0.725	pion_LOKI_PIDK<-10
+8	8	0.764+/-0.0272	0.577+/-0.0158	7.62+/-0.694	log10(pion_LOKI_PT)>2.8
+9	9	0.696+/-0.0294	0.694+/-0.0147	7.85+/-0.735	pion_LOKI_PIDp<-12.4
+INFO: Starting Optimisation....
+INFO: STEP NUMBER: 0 OF 10:
+convergency?	order  number  Sig. Eff        Bkg. Rej        FoM     cut
+---------------------------------------------------------------------------------------
+0		0	1	   1+/-   0	   0+/-   0	8.61+/-1.11	min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))>0
+0		1	9	   1+/-   0	   0+/-   0	9.22+/-1.11	pion_LOKI_PIDp<66
+0		2	7	0.905+/-0.0275	0.526+/-0.0788	9.32+/-1.08	pion_LOKI_PIDK<0
+0		3	3	   1+/-   0	   0+/-   0	9.66+/-1.08	log10(D_s_LOKI_BPVVDCHI2)>1.1
+0		4	4	0.927+/-0.0226	0.401+/-0.0728	10.1+/-1.06	D_s_LOKI_BPVDIRA>0.999938
+0		5	8	   1+/-0.00419	0.0572+/-0.0358	  11+/-1.04	log10(pion_LOKI_PT)>2.34
+1		6	0	0.952+/-0.017	0.523+/-0.0549	  11+/-1.04	log10(phi_LOKI_BPVIPCHI2)>1.16
+0		7	5	0.988+/-0.0086	0.251+/-0.0512	11.1+/-1.01	D_s_LOKI_DOCACHI2MAX<0.13975
+0		8	6	   1+/-0.00365	0.0349+/-0.0222	11.2+/-0.993	log10(D_s_LOKI_BPVVDR)>-0.8875
+1		9	2	0.971+/-0.0125	0.483+/-0.0441	11.2+/-0.993	log10(pion_LOKI_MIPCHI2DV_PRIMARY)>0.945
+INFO: STEP NUMBER: 1 OF 10:
+convergency?	order  number  Sig. Eff        Bkg. Rej        FoM     cut
+---------------------------------------------------------------------------------------
+0		0	7	0.971+/-0.0118	0.198+/-0.0347	11.3+/-0.939	pion_LOKI_PIDK<10
+1		1	0	0.937+/-0.0168	0.565+/-0.0317	11.3+/-0.939	log10(phi_LOKI_BPVIPCHI2)>1.16
+1		2	2	0.981+/-0.00978	0.418+/-0.0366	11.3+/-0.939	log10(pion_LOKI_MIPCHI2DV_PRIMARY)>0.945
+0		3	4	0.935+/-0.0169	0.248+/-0.0357	11.3+/-0.935	D_s_LOKI_BPVDIRA>0.999933
+0		4	5	0.921+/-0.019	0.387+/-0.0417	11.3+/-0.966	D_s_LOKI_DOCACHI2MAX<0.086
+0		5	8	0.995+/-0.00489	0.0237+/-0.016	11.4+/-0.961	log10(pion_LOKI_PT)>2.225
+1		6	6	   1+/-0.00476	0.0517+/-0.023	11.4+/-0.961	log10(D_s_LOKI_BPVVDR)>-0.8875
+1		7	1	   1+/-   0	   0+/-   0	11.4+/-0.961	min((log10(kaonplus_LOKI_BPVIPCHI2)),(log10(kaonminus_LOKI_BPVIPCHI2)))>0
+0		8	3	0.974+/-0.0117	0.148+/-0.0379	11.4+/-0.981	log10(D_s_LOKI_BPVVDCHI2)>1.69

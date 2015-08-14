@@ -1,0 +1,4 @@
+#S/B	file			ntuple	weight	cut	legend		fill	color
+S	exampledata.root	merged	NDs_sw	1	ds	3001	4
+S	exampledata.root	merged	NDplus_sw	1	dplus	3001	3
+B	exampledata.root	merged	NBkg_sw	1	bkg	3001	2
