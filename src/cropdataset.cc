@@ -3,10 +3,6 @@ using std::string;
 cropdataset::cropdataset(){}
 
 cropdataset::cropdataset(TString _name, TString _filePath, TString _ntuplePath, TString _preprocCutVar, TString _perEventWeightVar, UInt_t _color=0, UInt_t _fill =0, bool _signal=true){
-	init(_name, _filePath, _ntuplePath, _preprocCutVar,_perEventWeightVar,_color,_fill,_signal);
-}
-
-void cropdataset::init(TString _name, TString _filePath, TString _ntuplePath, TString _preprocCutVar, TString _perEventWeightVar, UInt_t _color=0, UInt_t _fill =0, bool _signal=true){
 	name = _name;
 	filePath = _filePath;
 	ntuplePath = _ntuplePath;
@@ -23,8 +19,8 @@ void cropdataset::init(TString _name, TString _filePath, TString _ntuplePath, TS
 	originalNtuple = (TTree*)originalTFile->Get(ntuplePath);
 	totalEntries = (Double_t)originalNtuple->GetEntries();
 	if(_perEventWeightVar=="A"){
-	perEventWeightVar="1/";
-	perEventWeightVar.Append(toString(totalEntries));
+		perEventWeightVar="1/";
+		perEventWeightVar.Append(toString(totalEntries));
 	}
 	procTFile = originalTFile;
 	procNtuple = originalNtuple;
@@ -39,7 +35,7 @@ void cropdataset::init(TString _name, TString _filePath, TString _ntuplePath, TS
 	print();
 }
 
-void cropdataset::stackerinit(TString _name, TString _filePath, TString _ntuplePath, TString _preprocCutVar, TString _perEventWeightVar, UInt_t _color=0, UInt_t _fill=0){
+cropdataset::cropdataset(TString _name, TString _filePath, TString _ntuplePath, TString _preprocCutVar="", TString _perEventWeightVar = "", UInt_t _color=0, UInt_t _fill=0){
 	name = _name;
 	filePath = _filePath;
 	ntuplePath = _ntuplePath;
@@ -56,8 +52,8 @@ void cropdataset::stackerinit(TString _name, TString _filePath, TString _ntupleP
 	originalNtuple = (TTree*)originalTFile->Get(ntuplePath);
 	totalEntries = (Double_t)originalNtuple->GetEntries();
 	if(_perEventWeightVar=="A"){
-	perEventWeightVar="1/";
-	perEventWeightVar.Append(toString(totalEntries));
+		perEventWeightVar="1/";
+		perEventWeightVar.Append(toString(totalEntries));
 	}
 	procTFile = originalTFile;
 	procTFile = originalTFile;
@@ -73,7 +69,7 @@ void cropdataset::stackerinit(TString _name, TString _filePath, TString _ntupleP
 	print();
 }
 
-void cropdataset::cropinit(TString _name, TString _filePath, TString _ntuplePath, bool _signal, TString _preprocCutVar, TString _perEventWeightVar){
+cropdataset::cropdataset(TString _name, TString _filePath, TString _ntuplePath, bool _signal, TString _preprocCutVar="", TString _perEventWeightVar = ""){
 	fill = 1001;
 	color = 1;
 	name = _name;
@@ -92,8 +88,8 @@ void cropdataset::cropinit(TString _name, TString _filePath, TString _ntuplePath
 	originalNtuple = (TTree*)originalTFile->Get(ntuplePath);
 	totalEntries = (Double_t)originalNtuple->GetEntries();
 	if(_perEventWeightVar=="A"){
-	perEventWeightVar="1/";
-	perEventWeightVar.Append(toString(totalEntries));
+		perEventWeightVar="1/";
+		perEventWeightVar.Append(toString(totalEntries));
 	}
 	procTFile = originalTFile;
 	procTFile = originalTFile;
@@ -111,37 +107,46 @@ void cropdataset::cropinit(TString _name, TString _filePath, TString _ntuplePath
 
 
 
-cropdataset::cropdataset(TString _name, TString _filePath, TString _ntuplePath, bool _signal, TString _preprocCutVar="", TString _perEventWeightVar = ""){
-	cropinit(_name, _filePath, _ntuplePath, _signal, _preprocCutVar, _perEventWeightVar);
-}
 
-cropdataset::cropdataset(TString _name, TString _filePath, TString _ntuplePath, TString _preprocCutVar="", TString _perEventWeightVar = "", UInt_t _color=0, UInt_t _fill=0){
-	stackerinit(_name, _filePath, _ntuplePath, _preprocCutVar, _perEventWeightVar, _color, _fill);
-
-}
 
 cropdataset::cropdataset(TString line, TString weightfilename, UInt_t linenum){
-	bool _signal = true;
-	TString _name = "default";
-	TString _filePath ="default";
-	TString _ntuplePath="default";
-	TString _preprocCutVar ="1";
-	TString _perEventWeightVar="1";
-	UInt_t _color =0;
-	UInt_t _fill =0;
+	signal = true;
+	name = "default";
+	filePath ="default";
+	ntuplePath="default";
+	preprocCutVar ="1";
+	perEventWeightVar="1";
+	special=1.0;
+	color =0;
+	fill =0;
 	TObjArray* Strings = line.Tokenize(cropdatasetdelimiters);
-	if(Strings->GetEntries() == 7){
+	cout << "Strings: " << Strings->GetEntries() << endl;
+	if(Strings->GetEntries() >=8){
 		TIter iString(Strings);
-		TObjString* os=(TObjString*)iString(); //Filename
+		TObjString* os=(TObjString*)iString(); //S/B:
+
+		TString word = os->GetString();
+		//S/B file ntuple weight cut legend fill color special 
+		if(word == cropdatasetBstr){
+			signal = false;
+		}else{
+			if(word==cropdatasetSstr){
+				signal = true;
+			}else{
+				cout << "FATAL: " << weightfilename << " line " << linenum << ": First character must be either S or B!" << endl;
+				exit(EXIT_FAILURE);
+			}
+		}
+		os=(TObjString*)iString(); //Filename
 		try{
-			_filePath = lexical_cast <string> (os->GetString());
+			filePath = lexical_cast <string> (os->GetString());
 		}catch(bad_lexical_cast &e){
 			cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid filename" << endl;
 			exit(EXIT_FAILURE);
 		}
 		os=(TObjString*)iString(); //Ntuplename
 		try{
-			_ntuplePath = lexical_cast <string> (os->GetString());
+			ntuplePath = lexical_cast <string> (os->GetString());
 		}catch(bad_lexical_cast &e){
 			cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid ntuplename" << endl;
 			exit(EXIT_FAILURE);
@@ -149,7 +154,7 @@ cropdataset::cropdataset(TString line, TString weightfilename, UInt_t linenum){
 		}
 		os=(TObjString*)iString(); //Weight
 		try{
-			_perEventWeightVar = lexical_cast <string> (os->GetString());
+			perEventWeightVar = lexical_cast <string> (os->GetString());
 
 		}catch(bad_lexical_cast &e){
 			cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid weight" << endl;
@@ -157,7 +162,7 @@ cropdataset::cropdataset(TString line, TString weightfilename, UInt_t linenum){
 		}
 		os=(TObjString*)iString(); //Cut
 		try{
-			_preprocCutVar = lexical_cast <string> (os->GetString());
+			preprocCutVar = lexical_cast <string> (os->GetString());
 		}catch(bad_lexical_cast &e){
 			cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid preproc. cut" << endl;
 			exit(EXIT_FAILURE);
@@ -165,7 +170,7 @@ cropdataset::cropdataset(TString line, TString weightfilename, UInt_t linenum){
 
 		os=(TObjString*)iString(); //Legend
 		try{
-			_name = lexical_cast <string> (os->GetString());
+			name = lexical_cast <string> (os->GetString());
 
 		}catch(bad_lexical_cast &e){
 			cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid legend" << endl;
@@ -175,7 +180,7 @@ cropdataset::cropdataset(TString line, TString weightfilename, UInt_t linenum){
 
 		os=(TObjString*)iString(); //fill
 		try{
-			_fill = lexical_cast <unsigned int> (os->GetString());
+			fill = lexical_cast <unsigned int> (os->GetString());
 		}catch(bad_lexical_cast &e){
 			cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid fill style" << endl;
 			exit(EXIT_FAILURE);
@@ -183,152 +188,100 @@ cropdataset::cropdataset(TString line, TString weightfilename, UInt_t linenum){
 
 		os=(TObjString*)iString(); //color
 		try{
-			_color = lexical_cast <unsigned int> (os->GetString());
+			color = lexical_cast <unsigned int> (os->GetString());
 		}catch(bad_lexical_cast &e){
 			cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid color" << endl;
 			exit(EXIT_FAILURE);
 		}
+		if(Strings->GetEntries() ==9){
+			os=(TObjString*)iString(); //special
+			try{
+				special = lexical_cast <double> (os->GetString());
+			}catch(bad_lexical_cast &e){
+				cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid special" << endl;
+				exit(EXIT_FAILURE);
+			}
+		}	
 
 	}else{
-		if(Strings->GetEntries() == 8){
 
+		if(Strings->GetEntries() != 5 && Strings->GetEntries() != 4){	
+			cout << "FATAL: " << weightfilename << " line " << linenum <<  " expected 8 entries, found " << Strings->GetEntries() << ". Check the line is correct and try again." << endl;
+			exit(EXIT_FAILURE);
+		}else{
 			TIter iString(Strings);
 			TObjString* os=(TObjString*)iString();
 			TString word = os->GetString();
-
-			//S/B file ntuple weight cut legend fill color 
 			if(word == cropdatasetBstr){
-				_signal = false;
+				signal = false;
+				name = "Background";
+				name += linenum;
 			}else{
+
 				if(word==cropdatasetSstr){
-					_signal = true;
+					signal = true;
+					name = "Signal";
+					name += linenum;
 				}else{
 					cout << "FATAL: " << weightfilename << " line " << linenum << ": First character must be either S or B!" << endl;
 					exit(EXIT_FAILURE);
 				}
 			}
+
 			os=(TObjString*)iString(); //Filename
 			try{
-				_filePath = lexical_cast <string> (os->GetString());
+				filePath = lexical_cast <string> (os->GetString());
 			}catch(bad_lexical_cast &e){
 				cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid filename" << endl;
 				exit(EXIT_FAILURE);
 			}
 			os=(TObjString*)iString(); //Ntuplename
 			try{
-				_ntuplePath = lexical_cast <string> (os->GetString());
+				ntuplePath = lexical_cast <string> (os->GetString());
 			}catch(bad_lexical_cast &e){
-				cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid ntuplename" << endl;
+				cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid ntuplename" << endl; 
 				exit(EXIT_FAILURE);
 
 			}
 			os=(TObjString*)iString(); //Weight
 			try{
-				_perEventWeightVar = lexical_cast <string> (os->GetString());
+				perEventWeightVar = lexical_cast <string> (os->GetString());
 
 			}catch(bad_lexical_cast &e){
 				cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid weight" << endl;
 				exit(EXIT_FAILURE);
 			}
-			os=(TObjString*)iString(); //Cut
-			try{
-				_preprocCutVar = lexical_cast <string> (os->GetString());
-			}catch(bad_lexical_cast &e){
-				cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid preproc. cut" << endl;
-				exit(EXIT_FAILURE);
-			}
-
-			os=(TObjString*)iString(); //Legend
-			try{
-				_name = lexical_cast <string> (os->GetString());
-
-			}catch(bad_lexical_cast &e){
-				cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid legend" << endl;
-				exit(EXIT_FAILURE);
-
-			}
-
-			os=(TObjString*)iString(); //fill
-			try{
-				_fill = lexical_cast <unsigned int> (os->GetString());
-			}catch(bad_lexical_cast &e){
-				cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid fill style" << endl;
-				exit(EXIT_FAILURE);
-			}
-
-			os=(TObjString*)iString(); //color
-			try{
-				_color = lexical_cast <unsigned int> (os->GetString());
-			}catch(bad_lexical_cast &e){
-				cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid color" << endl;
-				exit(EXIT_FAILURE);
-			}
-
-			//init(_name,_filePath,_ntuplePath,_preprocCutVar,_perEventWeightVar,_color,_fill,_signal);
-
-		}else{
-			if(Strings->GetEntries() != 5 && Strings->GetEntries() != 4){	
-				cout << "FATAL: " << weightfilename << " line " << linenum <<  " expected 8 entries, found " << Strings->GetEntries() << ". Check the line is correct and try again." << endl;
-				exit(EXIT_FAILURE);
+			if((os=(TObjString*)iString())){
+				try{
+					preprocCutVar = lexical_cast <string> (os->GetString());
+				}catch(bad_lexical_cast &e){
+					cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid preproc. cut" << endl;
+					exit(EXIT_FAILURE);
+				}
 			}else{
-				TIter iString(Strings);
-				TObjString* os=(TObjString*)iString();
-				TString word = os->GetString();
-				if(word == cropdatasetBstr){
-					_signal = false;
-					_name = "Background";
-					_name += linenum;
-				}else{
-
-					if(word==cropdatasetSstr){
-						_signal = true;
-						_name = "Signal";
-						_name += linenum;
-					}else{
-						cout << "FATAL: " << weightfilename << " line " << linenum << ": First character must be either S or B!" << endl;
-						exit(EXIT_FAILURE);
-					}
-				}
-				
-				os=(TObjString*)iString(); //Filename
-				try{
-					_filePath = lexical_cast <string> (os->GetString());
-				}catch(bad_lexical_cast &e){
-					cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid filename" << endl;
-					exit(EXIT_FAILURE);
-				}
-				os=(TObjString*)iString(); //Ntuplename
-				try{
-					_ntuplePath = lexical_cast <string> (os->GetString());
-				}catch(bad_lexical_cast &e){
-					cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid ntuplename" << endl; 
-					exit(EXIT_FAILURE);
-
-				}
-				os=(TObjString*)iString(); //Weight
-				try{
-					_perEventWeightVar = lexical_cast <string> (os->GetString());
-
-				}catch(bad_lexical_cast &e){
-					cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid weight" << endl;
-					exit(EXIT_FAILURE);
-				}
-				if((os=(TObjString*)iString())){
-					try{
-						_preprocCutVar = lexical_cast <string> (os->GetString());
-					}catch(bad_lexical_cast &e){
-						cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid preproc. cut" << endl;
-						exit(EXIT_FAILURE);
-					}
-				}else{
-					_preprocCutVar = "1";
-				}
-				//cropinit(_name, _filePath, _ntuplePath, _signal, _preprocCutVar, _perEventWeightVar);
-					
+				preprocCutVar = "1";
 			}
+
 		}
 	}
-	init(_name,_filePath,_ntuplePath,_preprocCutVar,_perEventWeightVar,_color,_fill,_signal);
+	originalTFile = TFile::Open(filePath,"READ");
+	originalNtuple = (TTree*)originalTFile->Get(ntuplePath);
+	totalEntries = (Double_t)originalNtuple->GetEntries();
+	if(perEventWeightVar=="A"){
+		perEventWeightVar="1/";
+		perEventWeightVar.Append(toString(totalEntries));
+	}
+	procTFile = originalTFile;
+	procNtuple = originalNtuple;
+	getWeightedEntries(new TString(""),&totalWeightedEntries, &d_totalWeightedEntries);
+	procNtuple->Draw(">>elist_"+name,preprocCutVar,"entrylist");
+	elist = (TEntryList*)gDirectory->Get("elist_"+name);
+	elist->SetReapplyCut(kTRUE);
+	procNtuple->SetEntryList(elist);
+	if(preprocCutVar == "1" || preprocCutVar == "1.0"){preprocCut=false;}else{preprocCut=true;}
+	procEntries = (Double_t)elist->GetN();
+	getWeightedEntries(new TString(""),&procWeightedEntries, &d_procWeightedEntries);
+	print();
 }
 
 void cropdataset::getWeightedEntries(TString *cut, Double_t *Entries=0, Double_t *d_Entries=0) const{
@@ -356,6 +309,7 @@ void cropdataset::print() const{
 	cout << "INFO:	Total Entries: " << totalEntries <<endl;
 	cout << "INFO:	Using per-event weight of " << perEventWeightVar << endl;
 	cout << "INFO:	Total Weighted Entries: " << totalWeightedEntries << "+/-" << d_totalWeightedEntries << endl;
+	cout << "INFO:	Special : " << special << endl;
 	if(preprocCut){
 		cout << "INFO:	Using Preprocessing cut: " << preprocCutVar << endl;
 		cout << "INFO:	Entries After Preprocessing cuts: " << procEntries << endl;
@@ -375,7 +329,7 @@ void cropdataset::printOneLine() const{
 
 	if(signal){cout << "S\t";}else{cout << "B\t";}
 
-	cout << prettyPrint(totalEntries) << "\t" << prettyPrint(procEntries) << "\t" << prettyPrint(eff) << "+/-" << prettyPrint(d_eff) << "\t" << prettyPrint(totalWeightedEntries) << "+/-" << prettyPrint(d_totalWeightedEntries) << "\t" << prettyPrint(procWeightedEntries) << "+/-" << prettyPrint(d_procWeightedEntries) << "\t" << prettyPrint(weff) << "+/-" << prettyPrint(d_weff) << "\t" << name << endl;
+	cout << prettyPrint(totalEntries) << "\t" << prettyPrint(procEntries) << "\t" << prettyPrint(eff) << "+/-" << prettyPrint(d_eff) << "\t" << prettyPrint(totalWeightedEntries) << "+/-" << prettyPrint(d_totalWeightedEntries) << "\t" << prettyPrint(procWeightedEntries) << "+/-" << prettyPrint(d_procWeightedEntries) << "\t" << prettyPrint(weff) << "+/-" << prettyPrint(d_weff) << "\t" << special << "\t" << name << endl;
 }
 
 void cropdataset::printOneLine(TString *cut1, TString *cut2) const{
@@ -387,7 +341,7 @@ void cropdataset::printOneLine(TString *cut1, TString *cut2) const{
 	getEfficiency(new TString(""), cut2, &excleff, &dexcleff);
 	getEfficiency(cut1, cut2, &incleff, &dincleff);
 	if(signal){cout << "S\t";}else{cout << "B\t";}
-	cout <<prettyPrint(exclcands) << "+/-" << prettyPrint(dexclcands) << "\t" << prettyPrint(excleff) << "+/-" << prettyPrint(dexcleff) << "\t" <<  prettyPrint(inclcands) << "+/-" << prettyPrint(dinclcands) << "\t" << prettyPrint(incleff) << "+/-" << prettyPrint(dincleff) << "\t" << name << endl;
+	cout <<prettyPrint(exclcands) << "+/-" << prettyPrint(dexclcands) << "\t" << prettyPrint(excleff) << "+/-" << prettyPrint(dexcleff) << "\t" <<  prettyPrint(inclcands) << "+/-" << prettyPrint(dinclcands) << "\t" << prettyPrint(incleff) << "+/-" << prettyPrint(dincleff) << "\t" << special << "\t" << name << endl;
 }
 
 TString cropdataset::getName() const{

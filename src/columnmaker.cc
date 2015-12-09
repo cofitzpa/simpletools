@@ -54,6 +54,8 @@ int main(int argc, char *argv[]) {
 	TTree* inTree = (TTree*)in->Get(tpath);
 	UInt_t total = (UInt_t)inTree->GetEntries();
 
+	//Ensure branch already named this way isn't copied: 
+	inTree->SetBranchStatus(cname,0);
 
 	TString slash = "/";
 	TString name = tpath;
@@ -66,9 +68,11 @@ int main(int argc, char *argv[]) {
 	}else{
 	sout->cd();
 	}
-	
-	cout << "copying ntuple" << endl; sw.Start();	 
 
+
+	
+
+	cout << "copying ntuple" << endl; sw.Start();	 
 	TTree *soutTree = inTree->CloneTree(-1);
 	Float_t val =0.0;
 	TBranch *formbranch = soutTree->Branch(cname, &val, cname);

@@ -143,7 +143,7 @@ void cropdatastore::getWeightedBackgroundEntries(TString *cut, Double_t *Entries
 }
 
 void cropdatastore::initStats() const{
-	cout << "Type	Total Entries	Total Proc. Entries	Proc. Cut Eff.	Total Weighted Entries	Total Proc. Weighted Entries	Proc Weight ratio	Name"<< endl;
+	cout << "Type	Total Entries	Total Proc. Entries	Proc. Cut Eff.	Total Weighted Entries	Total Proc. Weighted Entries	Proc Weight ratio	Special	Name"<< endl;
 	cout << "-------------------------------------------------------------------"<< endl;
 	for(UInt_t i =0; i<NSignalDatasets; i++){
 		SignalDatasets[i]->printOneLine();

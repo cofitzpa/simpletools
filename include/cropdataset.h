@@ -30,10 +30,6 @@ class cropvarensemble;
 
 class cropdataset {
 	public:
-		void init(TString, TString, TString, TString, TString, UInt_t, UInt_t, bool);
-		void stackerinit(TString, TString, TString, TString, TString, UInt_t, UInt_t);
-		void cropinit(TString,TString, TString, bool, TString, TString);
-
 		cropdataset();
 		~cropdataset(){cout << "deleting dataset" << endl;}
 		cropdataset(TString, TString, TString, TString, TString, UInt_t, UInt_t, bool);
@@ -47,6 +43,8 @@ class cropdataset {
 		TString getName() const;
 		void setName(TString);
 		bool isSignal() const{return signal;}
+
+		inline Double_t getSpecial() const{return special;}
 		inline Double_t getTotalEntries() const{return totalEntries;}
 		inline 	Double_t getProcEntries() const{return procEntries;}
 		inline 	Double_t getProcWeightedEntries() const{return procWeightedEntries;}
@@ -82,6 +80,7 @@ class cropdataset {
 		bool preprocCut;
 		UInt_t fill;
 		UInt_t color;
+		Double_t special;
 		Double_t totalEntries, procEntries;
 		Double_t totalWeightedEntries, d_totalWeightedEntries;
 		Double_t procWeightedEntries, d_procWeightedEntries;

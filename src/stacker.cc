@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include "stdio.h"
+#include <cmath>
 #include "TROOT.h"
 #include <TFile.h>
 #include <TSystem.h>
@@ -110,25 +111,31 @@ int main(int argc, char *argv[]) {
 				ctmp->cd();
 				hs->Draw(stackargs);
 
-				if(v==0){
-				TLegend *leg = (TLegend*)ctmp->BuildLegend(0.70,0.75,0.80,0.85);
+				if(v==0 && stats.size()>5){
+				TLegend *leg = (TLegend*)ctmp->BuildLegend(0.70,0.55,0.89,0.89);
 
 				leg->SetLineColor(0);
 				leg->SetFillStyle(0);
 				}
+				
+				TString yTitle = "Candidates/";
+				yTitle += varensemble->getVarResolution(nVarsDone);
 				varensemble->getUnits(nVarsDone,&units);
+				if(units !="\"\""){
 				hs->GetXaxis()->SetTitle(units);
-				hs->GetYaxis()->SetTitle("Candidates");
-				if(varensemble->isLogScale(nVarsDone)){
-					if(hs->GetMinimum()<=0.0){
-					hs->SetMinimum(0.1);
-					}else{
-					hs->SetMinimum(hs->GetMinimum());
-					}
-					gPad->SetLogy();
-					//hs->SetMinimum(1.0e-32);
-
+				yTitle += units;
 				}
+
+				hs->GetYaxis()->SetTitle(yTitle);
+				if(varensemble->isLogScale(nVarsDone)){
+
+					if(hs->GetMinimum()<0){
+					hs->SetMinimum(hs->GetMaximum()*10E-5); //Set log scale to cover 5 orders of magnitude.
+					}
+
+					gPad->SetLogy();
+				}
+			if(stats.size()<6){
 				Double_t x1 = 0.825;
 				Double_t x2 = 0.975;
 				Double_t y1 = 0.825;
@@ -140,6 +147,7 @@ int main(int argc, char *argv[]) {
 					y2 = y2 - 0.165;
 					stats[i]->Draw();
 				}
+			}
 				ctmp->Update();
 				cout << varensemble->toLine(nVarsDone) << endl;
 				nVarsDone++;

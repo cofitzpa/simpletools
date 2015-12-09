@@ -224,6 +224,21 @@ inline void cropBanner(){
 
 
 
+inline void bwdivInfo(){
+	genericInfo("bwdiv");
+	cout << "Optimises a set of L0 thresholds" << endl;
+	cout << "Usage: " << endl;
+	cout << "bwdiv <WeightFile> <cutfile> <max. bkg. eff>" << endl;
+	cout << "" << endl;
+	weightInfo();
+	cout << "" << endl;
+	cutInfo();
+	cout << "" << endl;
+
+}
+
+
+
 
 inline void cropInfo(){
 	cout << "Optimises a set of rectangular cuts" << endl;

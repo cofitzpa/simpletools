@@ -282,3 +282,26 @@ void cropcutensemble::writeAllPlots(TCanvas *c){
 		c->Write();
 	}
 }
+
+void cropcutensemble::buildorcut(Double_t *par, TString *orcut){
+	*orcut = "(";
+	for(UInt_t i = 0; i<NCutVars; i++){
+		*orcut += "(";
+		*orcut += CutVars[i];
+		*orcut += par[i];
+		*orcut += ")||";
+	}
+	orcut->Remove(TString::kTrailing,*cropcutensembleOr);
+	*orcut+=")";
+}
+void cropcutensemble::buildorcut(std::vector <Double_t> par, TString *orcut){
+	*orcut = "(";
+	for(UInt_t i = 0; i<NCutVars; i++){
+		*orcut += "(";
+		*orcut += CutVars[i];
+		*orcut += par[i];
+		*orcut += ")||";
+	}
+	orcut->Remove(TString::kTrailing,*cropcutensembleOr);
+	*orcut+=")";
+}
