@@ -41,7 +41,7 @@ class cropcutensemble {
 		cropcutensemble(TString, TString, TRandom3 *);
 		cropcutensemble(cropvarensemble *, cropdatastore *);
 		inline	void addCutSpacePoint(UInt_t n, UInt_t step, Double_t * _s, Double_t * _d_s, Double_t * _b, Double_t * _d_b, Double_t * _seff, Double_t * _d_seff,Double_t * _brej,Double_t * _d_brej,Double_t *_fom,Double_t * _d_fom){CutSpaces[CutOrder[n]].addPoint(&step,_s,_d_s,_b,_d_b,_seff,_d_seff,_brej,_d_brej,_fom,_d_fom);}
-
+		inline UInt_t getNCutVars() const{return NCutVars;}
 		void buildorcut(std::vector <Double_t>, TString *);
 		void buildorcut(Double_t *, TString *);
 		void addCut(TString,TString, UInt_t);
