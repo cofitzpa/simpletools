@@ -15,6 +15,7 @@
 #include "cropcutensemble.h"
 #include <iostream>
 #include <TFile.h>
+#include <TSpline.h>
 #include <TROOT.h>
 #include <TSystem.h>
 #include <TTree.h>
@@ -46,7 +47,8 @@ using namespace boost;
 
 
 Double_t ratelimit;
-Double_t *maxeffs, *dmaxeffs, *finaleffs, *dfinaleffs; 
+TSpline3 *deadtimespline;
+Double_t *nodtmaxeffs, *dnodtmaxeffs,*maxeffs, *dmaxeffs, *finaleffs, *dfinaleffs; 
 
 
 
@@ -54,6 +56,39 @@ std::vector< std::vector<Double_t> > maxincleffs;
 std::vector< std::vector<Double_t> > dmaxincleffs;
 std::vector< std::vector<Double_t> > finalincleffs;
 std::vector< std::vector<Double_t> > dfinalincleffs;
+
+//Determines 1.0 - the derandomiser deadtime
+//deadtimespline is built from scanning the ODIN with a given filling scheme
+//note: 1100 is hardcoded, assuming the target rate is for 1.1MHz. 
+double technicaldeadtime(double rate){
+	return deadtimespline->Eval((rate/ratelimit)*1100);
+} 
+
+//returns 1-deadtime for _physics_ deadtime
+//ie: if your thresholds accept more than 1.1MHz
+//your signal effs will be throttled by the returned amount
+double physicsdeadtime(double rate){
+	if(rate < ratelimit){
+		return 1.0;
+	}
+	//	return ratelimit/rate;
+	return 0.0;
+}
+
+
+//returns the larger of the tech and phys deadtimes
+double ratelimiter(TString *cut, cropdatastore *dstore){
+	Double_t Beff = 0;
+	Double_t d_Beff = 0;
+	dstore->getBackgroundEfficiency(new TString(""),cut, &Beff,&d_Beff);
+	//	double techtime = technicaldeadtime(Beff);
+	//	double phystime = physicsdeadtime(Beff);
+	//	if(techtime>phystime){
+	//		return phystime;
+	//	}
+	//	return techtime;
+	return technicaldeadtime(Beff)*physicsdeadtime(Beff);
+}
 
 class initfcn : public TMVA::IFitterTarget {
 	public: 
@@ -63,26 +98,15 @@ class initfcn : public TMVA::IFitterTarget {
 			dset = _dset;
 			thresholds = _thresholds;
 		}
-
-		double ratelimiter(TString *cut){
-			Double_t Beff = 0;
-			Double_t d_Beff = 0;
-			dstore->getBackgroundEfficiency(new TString(""),cut, &Beff,&d_Beff);
-			if(Beff < ratelimit){
-				return 0.01*Beff;
-			}else{
-				return (0.01*Beff)+10000*(Beff-ratelimit)*(Beff-ratelimit);
-			}
-		}
-
+		//Chi2 to minimise for a single dataset
 		double EstimatorFunction( std::vector<double> &par){
 			TString cut;
 			thresholds->buildorcut(par,&cut);
 			Double_t Seff=0;
 			Double_t d_Seff=0;
 			dset->getEfficiency(new TString(""),&cut, &Seff,&d_Seff);
-			double f=ratelimiter(&cut);
-			f+= ((1.0-Seff)*(1.0-Seff));
+			Seff = Seff * ratelimiter(&cut, dstore);
+			double f = ((1.0-Seff)*(1.0-Seff));
 			return f;
 		}
 
@@ -100,30 +124,23 @@ class optfcn : public TMVA::IFitterTarget {
 			dstore = _dstore;
 			thresholds = _thresholds;
 		}
-
-		double ratelimiter(TString *cut){
-			Double_t Beff = 0;
-			Double_t d_Beff = 0;
-			dstore->getBackgroundEfficiency(new TString(""),cut, &Beff,&d_Beff);
-			if(Beff < ratelimit){
-				return 0.01*Beff;
-			}else{
-				return (0.01*Beff)+10000*((Beff-ratelimit)*(Beff-ratelimit));
-			}
-		}
-
+		//Chi2 to minimise for the ensemble of datasets
 		double EstimatorFunction(std::vector<double> &par){
 			TString cut;
 			thresholds->buildorcut(par,&cut);
 			Double_t Seff=0;
 			Double_t d_Seff=0;
 			Double_t Stot = 0;
-			double f=ratelimiter(&cut);
+			double f=0.0;
+			double rlim = ratelimiter(&cut, dstore);
 			for(UInt_t k = 0; k<dstore->getNSignalDatasets(); k++){
-				dstore->getSignalDataset(k)->getEfficiency(new TString(""),&cut, &Seff,&d_Seff);
-				f+=  dstore->getSignalDataset(k)->getSpecial()*((1.0-(Seff/maxeffs[k]))*(1.0-(Seff/maxeffs[k])));
+				if(dstore->getSignalDataset(k)->getSpecial()>0.0){
+					dstore->getSignalDataset(k)->getEfficiency(new TString(""),&cut, &Seff,&d_Seff);
+					Seff = Seff*rlim;
+					f+=  dstore->getSignalDataset(k)->getSpecial()*((1.0-(Seff/maxeffs[k]))*(1.0-(Seff/maxeffs[k])));
+				}
 			}
-				return f;
+			return f;
 		}
 
 	private:
@@ -134,20 +151,27 @@ class optfcn : public TMVA::IFitterTarget {
 
 int main(int argc, char *argv[]) {
 
-	if(argc != 4){
-		if(argc != 5){
-			bwdivInfo();
-			exit(EXIT_FAILURE);
-		}
+	if(argc != 6){
+		bwdivInfo();
+		exit(EXIT_FAILURE);
 	}
 
 	std::string weightListName = argv[1];
 	std::string thresholdsName = argv[2];
 	ratelimit = atof(argv[3]);
-	TString outname = "output.C";
-	if(argc==5){
-		outname = argv[4];
+	TFile *deadtimefile = TFile::Open(argv[4]);
+	if(!deadtimefile){cout << "Couldn't find deadtime file" << endl;
+		exit(0);
 	}
+	TGraph *deadtimegraph;
+	deadtimefile->GetObject("deadtimegraph",deadtimegraph);
+	if(!deadtimegraph){
+		cout << "Couldn't find graph in file" << endl;
+		exit(0);
+	}
+	deadtimespline = new TSpline3("deadtimespline",deadtimegraph);
+	TString outname = argv[5];
+
 
 	TCanvas* c=new TCanvas("Effs","Effs",1024,768);
 	c->SetBottomMargin(0.5);
@@ -171,6 +195,9 @@ int main(int argc, char *argv[]) {
 		//		cout << parameterRanges[i]->GetStepSize() << endl;
 	}
 
+
+	nodtmaxeffs = new Double_t [datastore->getNSignalDatasets()];
+	dnodtmaxeffs = new Double_t [datastore->getNSignalDatasets()];
 	maxeffs = new Double_t [datastore->getNSignalDatasets()];
 	dmaxeffs = new Double_t [datastore->getNSignalDatasets()];
 	finaleffs = new Double_t [datastore->getNSignalDatasets()];
@@ -198,42 +225,59 @@ int main(int argc, char *argv[]) {
 
 
 	for(UInt_t k = 0; k<datastore->getNSignalDatasets(); k++){
-		maxincleffs[k].resize(thresholds->NCutVars);
-		dmaxincleffs[k].resize(thresholds->NCutVars);
+		cropdataset* dataset = datastore->getSignalDataset(k);
 		finalincleffs[k].resize(thresholds->NCutVars);
 		dfinalincleffs[k].resize(thresholds->NCutVars);
-		cropdataset* dataset = datastore->getSignalDataset(k);
-		// Now ready for minimization step
-		ffit = new initfcn(datastore,dataset,thresholds);
-		fitter = new TMVA::GeneticFitter( *ffit,"FitterGA",parameterRanges, opt);
-		fitter->Run(pars);
-		thresholds->buildorcut(pars, &bestcut);
-		cout << bestcut << endl;
-		dataset->getEfficiency(new TString(""),&bestcut, &Seff,&d_Seff);
-		datastore->getBackgroundEfficiency(new TString(""),&bestcut,&Beff,&d_Beff);
-		cout << endl;
-		cout << "=========================== Max Eff =========================" << endl;
-		cout << "CHI^2: " << ffit->EstimatorFunction(pars) << endl;
-		cout << dataset->getName() << " MAX EFF: $" << prettyPrint(Seff)<<"\\pm"<<prettyPrint(d_Seff)<< "$ BACKGROUND EFF: $" << prettyPrint(Beff)<<"\\pm"<<prettyPrint(d_Beff) << "$"<< endl;
-
-		maxeffs[k]=Seff;
-		dmaxeffs[k]=d_Seff;
-
-
-		cout << "=========================== THRESHOLDS at max eff =========================" << endl;
-		for(int i=0; i<thresholds->NCutVars; i++){
-			thresholds->getCutVar(i,&bestcut);
-			bestcut+=prettyPrint(pars[i]);
-			datastore->getBackgroundEfficiency(new TString(""),&bestcut,&Beff,&d_Beff);
+		maxincleffs[k].resize(thresholds->NCutVars);
+		dmaxincleffs[k].resize(thresholds->NCutVars);
+		if (dataset->getSpecial()<=0.0){
+			maxeffs[k]=0.0;
+			dmaxeffs[k]=0.0;
+			nodtmaxeffs[k]=0.0;
+			dnodtmaxeffs[k]=0.0;
+		}else{
+			// Now ready for minimization step
+			ffit = new initfcn(datastore,dataset,thresholds);
+			fitter = new TMVA::GeneticFitter( *ffit,"FitterGA",parameterRanges, opt);
+			fitter->Run(pars);
+			thresholds->buildorcut(pars, &bestcut);
+			cout << bestcut << endl;
 			dataset->getEfficiency(new TString(""),&bestcut, &Seff,&d_Seff);
+			datastore->getBackgroundEfficiency(new TString(""),&bestcut,&Beff,&d_Beff);
 
-			maxincleffs[k][i] = Seff;
-			dmaxincleffs[k][i] = d_Seff;
-			cout << bestcut << "	$" << prettyPrint(Seff)<<"\\pm"<<prettyPrint(d_Seff) << "$ 	&	$" <<  prettyPrint(Beff)<<"\\pm"<<prettyPrint(d_Beff) << "$" << endl;
+			cout << endl;
+			cout << "=========================== Max Eff =========================" << endl;
+
+			cout << "CHI^2: " << ffit->EstimatorFunction(pars) << endl;
+			cout << dataset->getName() << " MAX EFF: $" << prettyPrint(Seff)<<"\\pm"<<prettyPrint(d_Seff)<< "$ BACKGROUND EFF: $" << prettyPrint(Beff)<<"\\pm"<<prettyPrint(d_Beff) << endl; 
+			cout << "PHYS DEADTIME: "<< prettyPrint(1.0 - physicsdeadtime(Beff)) << " TECH DEADTIME: " <<  prettyPrint(1.0 - technicaldeadtime(Beff)) << endl;
+
+			maxeffs[k]=Seff*technicaldeadtime(Beff);
+			dmaxeffs[k]=d_Seff*technicaldeadtime(Beff);
+			nodtmaxeffs[k]=Seff;
+			dnodtmaxeffs[k]=d_Seff;
+
+			/*	if(physicsdeadtime(Beff) > technicaldeadtime(Beff)){
+				maxeffs[k]=Seff*physicsdeadtime(Beff);
+				dmaxeffs[k]=d_Seff*physicsdeadtime(Beff);
+				}else{
+				maxeffs[k]=Seff*technicaldeadtime(Beff);
+				dmaxeffs[k]=d_Seff*technicaldeadtime(Beff);
+				}
+				*/
+			cout << "=========================== THRESHOLDS at max eff =========================" << endl;	
+			for(int i=0; i<thresholds->NCutVars; i++){
+				thresholds->getCutVar(i,&bestcut);
+				bestcut+=prettyPrint(pars[i]);
+				datastore->getBackgroundEfficiency(new TString(""),&bestcut,&Beff,&d_Beff);
+				dataset->getEfficiency(new TString(""),&bestcut, &Seff,&d_Seff);
+				maxincleffs[k][i] = Seff;
+				dmaxincleffs[k][i] = d_Seff;
+				cout << bestcut << "	$" << prettyPrint(Seff)<<"\\pm"<<prettyPrint(d_Seff) << "$ 	&	$" <<  prettyPrint(Beff)<<"\\pm"<<prettyPrint(d_Beff) << "$" << endl;
+			}
+			cout << "===========================================================================" << endl;
 		}
-		cout << "===========================================================================" << endl;
 	}
-
 
 	ffit = new optfcn(datastore,thresholds);
 	fitter = new TMVA::GeneticFitter( *ffit,"FitterGA",parameterRanges, opt);
@@ -254,25 +298,6 @@ int main(int argc, char *argv[]) {
 
 	cout << "=========================== EFFs ==========================================" << endl;
 	cout << endl;
-
-	/*
-	   cout << "Thresh.				";
-	   for(UInt_t k = 0; k<datastore->getNSignalDatasets(); k++){ 
-	   cout << datastore->getSignalDataset(k)->getName() << "	";
-	   }
-	   cout << endl;
-	   for(int i=0; i<thresholds->NCutVars; i++){
-	   thresholds->getCutVar(i,&thiscut);
-	   thiscut+=prettyPrint(pars[i]);
-	   cout << thiscut << "		"; 
-	   for(UInt_t k = 0; k<datastore->getNSignalDatasets(); k++){
-	   cropdataset* dataset = datastore->getSignalDataset(k);
-	   dataset->getEfficiency(new TString(""),&thiscut, &Seff,&d_Seff);
-	   cout << prettyPrint(Seff) << "+/-" << prettyPrint(d_Seff)<< "		";
-	   }
-	   cout << endl;
-	   }
-	   */
 
 	cout << "Cut	&	";
 	for(int i=0; i<thresholds->NCutVars; i++){
@@ -327,7 +352,7 @@ int main(int argc, char *argv[]) {
 			inclfinaleffbars->SetBinContent(i,finalincleffs[k][i-1]);
 			inclfinaleffbars->SetBinError(i,dfinalincleffs[k][i-1]);
 			thresholds->getCutVar(i-1,&thiscut);
-	
+
 			inclmaxeffbars->GetXaxis()->SetBinLabel(i,thiscut);
 			inclfinaleffbars->GetXaxis()->SetBinLabel(i,thiscut);
 
@@ -389,19 +414,21 @@ int main(int argc, char *argv[]) {
 	for(UInt_t k = 0; k<datastore->getNSignalDatasets(); k++){
 		cropdataset * dataset = datastore->getSignalDataset(k);
 		dataset->getEfficiency(new TString(""), &bestcut,&Seff,&d_Seff);
-		cout << dataset->getName() << " & $"<< prettyPrint(maxeffs[k]) << "\\pm"<< prettyPrint(dmaxeffs[k])<< "$ & $" << prettyPrint(Seff) << "\\pm" << prettyPrint(d_Seff) <<"$ \\\\"<< endl;
+		cout << dataset->getName() << " & $"<< prettyPrint(nodtmaxeffs[k]) << "\\pm"<< prettyPrint(dnodtmaxeffs[k])<< "$ & $" << prettyPrint(Seff) << "\\pm" << prettyPrint(d_Seff) <<"$ \\\\"<< endl;
 		finaleffs[k]=Seff;
 		dfinaleffs[k]=d_Seff;
 
 
 
 	}
-	cout << "Ratelimit & $"<< prettyPrint(ratelimit) << "$ & $" << prettyPrint(Beff) << "\\pm" << prettyPrint(d_Beff) <<"$ \\\\"<< endl;  
 
+	cout << "Retention & $"<< prettyPrint(ratelimit) << "$ & $" << prettyPrint(Beff) << "\\pm" << prettyPrint(d_Beff) <<"$ \\\\"<< endl;  
+	cout << "Phys Deadtime & $"<< " 0.0 " << "$ & $" << prettyPrint(1.0 - physicsdeadtime(Beff)) <<"$ \\\\"<< endl;  
+	cout << "Tech Deadtime & $"<< " 0.0 " << "$ & $" << prettyPrint(1.0 - technicaldeadtime(Beff)) <<"$ \\\\"<< endl;  
 
 	for(UInt_t k = 1; k<=datastore->getNSignalDatasets(); k++){
-		maxeffbars->SetBinContent(k,maxeffs[k-1]);
-		maxeffbars->SetBinError(k,dmaxeffs[k-1]);
+		maxeffbars->SetBinContent(k,nodtmaxeffs[k-1]);
+		maxeffbars->SetBinError(k,dnodtmaxeffs[k-1]);
 		maxeffbars->GetXaxis()->SetBinLabel(k,datastore->getSignalDataset(k-1)->getName());
 		finaleffbars->SetBinContent(k,finaleffs[k-1]);
 		finaleffbars->SetBinError(k,dfinaleffs[k-1]);
@@ -418,13 +445,6 @@ int main(int argc, char *argv[]) {
 
 	c->Print(outname+"_totals.pdf");
 	c->Print(outname+"_totals.C");
-
-
-
-
-
-
-
 
 	timer.Stop();
 	timer.Print();

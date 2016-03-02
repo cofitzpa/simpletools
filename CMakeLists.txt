@@ -7,11 +7,12 @@ endif()
 
 project(SMPT)
 
-set(CMAKE_CXX_FLAGS "-std=c++11")
+set(CMAKE_CXX_FLAGS "-std=c++11 -fopenmp")
 
 # Load Macro to locate ROOT and needed libraries
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
-find_package(ROOT REQUIRED Core RIO Net Hist Graf Graf3d Gpad Tree Rint Postscript Matrix Physics MathCore Thread Gui TreePlayer)
+find_package(ROOT REQUIRED Core RIO Net Hist Graf Graf3d Gpad Tree Rint
+Postscript Matrix Physics MathCore Thread Gui TreePlayer Minuit TMVA)
 
 #Check the compiler and set the compile and link flags
 set(CMAKE_BUILD_TYPE Debug)
@@ -23,10 +24,16 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY lib)
 include_directories(${ROOT_INCLUDE_DIRS} ${SMPT_SOURCE_DIR}/include)
 
 # Build one shared lib with all sources
-add_library(cropsimpletools SHARED ${SMPT_SOURCE_DIR}/src/cropcutspace.cc ${SMPT_SOURCE_DIR}/src/cropdataset.cc ${SMPT_SOURCE_DIR}/src/cropvarensemble.cc ${SMPT_SOURCE_DIR}/src/cropoptimisationengine.cc ${SMPT_SOURCE_DIR}/src/cropcutensemble.cc ${SMPT_SOURCE_DIR}/src/cropdatastore.cc)
+add_library(cropsimpletools SHARED ${SMPT_SOURCE_DIR}/src/cropcutspace.cc
+${SMPT_SOURCE_DIR}/src/cropdataset.cc
+${SMPT_SOURCE_DIR}/src/cropvarensemble.cc
+${SMPT_SOURCE_DIR}/src/cropoptimisationengine.cc
+${SMPT_SOURCE_DIR}/src/cropcutensemble.cc
+${SMPT_SOURCE_DIR}/src/cropdatastore.cc
+)
 
 
-set(EXELIST crop stackergen rangefinder sepper mergevars updatedatastore stacker varstocuts eff corr cuttester columnmaker tuplesampler tuplescrambler cutapplier)
+set(EXELIST thresholdeffs bwdiv crop stackergen rangefinder sepper mergevars updatedatastore stacker varstocuts eff corr cuttester columnmaker tuplesampler tuplescrambler cutapplier)
 
 foreach(exe ${EXELIST})
   add_executable(${exe} ${SMPT_SOURCE_DIR}/src/${exe}.cc)
