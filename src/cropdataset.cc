@@ -306,7 +306,7 @@ void cropdataset::getWeightedEntries(TString *cut, Double_t *Entries=0, Double_t
 	 	procNtuple->Draw(*cut+">>"+n,"("+*cut+")*("+perEventWeightVar+")");
 		}
 	}else{
-		//#pragma omp critical(crasheswithoutme)
+		#pragma omp critical(crasheswithoutme)
 		{
 		procNtuple->Draw("1>>"+n,"("+perEventWeightVar+")");
 		}
