@@ -1,3 +1,7 @@
+#ifdef _OPENMP
+#include <omp.h>
+#endif
+
 #include "cropdataset.h"
 using std::string;
 cropdataset::cropdataset(){}
@@ -285,16 +289,32 @@ cropdataset::cropdataset(TString line, TString weightfilename, UInt_t linenum){
 }
 
 void cropdataset::getWeightedEntries(TString *cut, Double_t *Entries=0, Double_t *d_Entries=0) const{
-	TH1D *tmpWeightHisto;
-	tmpWeightHisto = new TH1D("tmpWeightHisto","tmpWeightHisto",1,-3.0,3.0);
-	tmpWeightHisto->Sumw2();
+	TString n("tmpWeightHisto_");
+	#ifdef _OPENMP
+	char uniq = 'a'+(omp_get_thread_num()%26);
+	n+=uniq;
+	n+=+"_";
+	#endif
+	n+=name;
+	//cout << n << endl;
+	//TH1D *tmpWeightHisto = new TH1D(n,n,1,-3.0,3.0);
+	//tmpWeightHisto->Sumw2();
 	if(*cut != ""){
-		procNtuple->Draw(*cut+">>tmpWeightHisto","("+*cut+")*("+perEventWeightVar+")");
+		//Critical directives added here to prevent crashing. Literally only these two functions (so far) seem to cause crashes 
+		#pragma omp critical(crasheswithoutme)
+		{
+	 	procNtuple->Draw(*cut+">>"+n,"("+*cut+")*("+perEventWeightVar+")");
+		}
 	}else{
-		procNtuple->Draw("1>>tmpWeightHisto","("+perEventWeightVar+")");
+		//#pragma omp critical(crasheswithoutme)
+		{
+		procNtuple->Draw("1>>"+n,"("+perEventWeightVar+")");
+		}
 	}
+	TH1D *tmpWeightHisto = (TH1D*)gDirectory->Get(n);
 	*Entries = tmpWeightHisto->Integral();
-	*d_Entries = sqrt(tmpWeightHisto->GetSumw2()->At(1));
+//	*d_Entries = sqrt(tmpWeightHisto->GetSumw2()->At(1));
+	*d_Entries = sqrt(tmpWeightHisto->GetSumw2()->GetSum());
 	tmpWeightHisto->Delete();
 }
 

@@ -8,7 +8,10 @@
  * conor.fitzpatrick@cern.ch
  *
  */
-
+#ifdef _OPENMP
+#include <omp.h>
+#include <TThread.h>
+#endif
 
 #include "TFunctor.h"
 #include "cropdatastore.h"
@@ -148,9 +151,18 @@ class optfcn : public TMVA::IFitterTarget {
 		cropcutensemble* thresholds;
 };
 
+void *handle(void *ptr)
+{
+	long nr = (long) ptr;
+	return 0;
+}
+
 
 int main(int argc, char *argv[]) {
-
+	TThread::Initialize();
+	ROOT::EnableThreadSafety();
+	gROOT->SetBatch(true);
+	TThread *h1 = new TThread("h1", handle, (void*) 1);
 	if(argc != 6){
 		bwdivInfo();
 		exit(EXIT_FAILURE);
@@ -173,28 +185,16 @@ int main(int argc, char *argv[]) {
 	TString outname = argv[5];
 
 
-	TCanvas* c=new TCanvas("Effs","Effs",1024,768);
-	c->SetBottomMargin(0.5);
+
 
 	cout << "INFO: Parsing weightfile..." << endl;
 	cropdatastore *datastore = new cropdatastore("test",weightListName);
 	datastore->initStats();
 
-
-
 	cout << "INFO: thresholds..." << endl;
-	TRandom3 rndGen(0);
-	cropcutensemble* thresholds = new cropcutensemble("thresholds", thresholdsName, &rndGen);
 	cout << endl;
 	TStopwatch timer;
 	timer.Start();
-
-	std::vector<TMVA::Interval*> parameterRanges;
-	for(int i=0; i<thresholds->NCutVars; i++){
-		parameterRanges.push_back(new TMVA::Interval(thresholds->getCutMinVal(i),thresholds->getCutMaxVal(i),thresholds->getCutResolution(i)));
-		//		cout << parameterRanges[i]->GetStepSize() << endl;
-	}
-
 
 	nodtmaxeffs = new Double_t [datastore->getNSignalDatasets()];
 	dnodtmaxeffs = new Double_t [datastore->getNSignalDatasets()];
@@ -202,30 +202,33 @@ int main(int argc, char *argv[]) {
 	dmaxeffs = new Double_t [datastore->getNSignalDatasets()];
 	finaleffs = new Double_t [datastore->getNSignalDatasets()];
 	dfinaleffs = new Double_t [datastore->getNSignalDatasets()];
-
-
-
 	maxincleffs.resize(datastore->getNSignalDatasets());
 	dmaxincleffs.resize(datastore->getNSignalDatasets());
 	finalincleffs.resize(datastore->getNSignalDatasets());
 	dfinalincleffs.resize(datastore->getNSignalDatasets());
 
-	std::vector<Double_t> pars(parameterRanges.size());
-
-
-
 	//TString opt="PopSize=40:Steps=30:Cycles=3:ConvCrit=0.01:SaveBestCycle=5";
 	TString opt="PopSize=20:Steps=30:Cycles=3:ConvCrit=0.01:SaveBestCycle=5";
-	TMVA::IFitterTarget *ffit; 
-	TMVA::FitterBase* fitter;
-
-	TString bestcut, thiscut;
-	Double_t S, d_S, Seff, d_Seff;
-	Double_t B, d_B, Beff, d_Beff;
-
-
+	//Parallel part: division computes the maximimum efficiency a channel would have if it alone is optimised for, over all channels. 
+	//Should be 'embarassingly parallel' because the result of each loop is completely independent. 
+	#pragma omp parallel for schedule(dynamic) 
 	for(UInt_t k = 0; k<datastore->getNSignalDatasets(); k++){
 		cropdataset* dataset = datastore->getSignalDataset(k);
+		TRandom3 rndGen(k+1);
+		char tn = 'a'+k%26;
+		TString threadname(tn);
+		cropcutensemble* thresholds = new cropcutensemble("thresholds_"+threadname, thresholdsName, &rndGen);
+		std::vector<TMVA::Interval*> parameterRanges;
+		for(int i=0; i<thresholds->NCutVars; i++){
+			parameterRanges.push_back(new TMVA::Interval(thresholds->getCutMinVal(i),thresholds->getCutMaxVal(i),thresholds->getCutResolution(i)));
+		}
+		std::vector<Double_t> pars(parameterRanges.size());
+		TMVA::IFitterTarget *ffit; 
+		TMVA::FitterBase* fitter;
+		TString bestcut, thiscut;
+		Double_t S, d_S, Seff, d_Seff;
+		Double_t B, d_B, Beff, d_Beff;
+
 		finalincleffs[k].resize(thresholds->NCutVars);
 		dfinalincleffs[k].resize(thresholds->NCutVars);
 		maxincleffs[k].resize(thresholds->NCutVars);
@@ -241,50 +244,59 @@ int main(int argc, char *argv[]) {
 			fitter = new TMVA::GeneticFitter( *ffit,"FitterGA",parameterRanges, opt);
 			fitter->Run(pars);
 			thresholds->buildorcut(pars, &bestcut);
-			cout << bestcut << endl;
+
 			dataset->getEfficiency(new TString(""),&bestcut, &Seff,&d_Seff);
 			datastore->getBackgroundEfficiency(new TString(""),&bestcut,&Beff,&d_Beff);
 
-			cout << endl;
-			cout << "=========================== Max Eff =========================" << endl;
-
-			cout << "CHI^2: " << ffit->EstimatorFunction(pars) << endl;
-			cout << dataset->getName() << " MAX EFF: $" << prettyPrint(Seff)<<"\\pm"<<prettyPrint(d_Seff)<< "$ BACKGROUND EFF: $" << prettyPrint(Beff)<<"\\pm"<<prettyPrint(d_Beff) << endl; 
-			cout << "PHYS DEADTIME: "<< prettyPrint(1.0 - physicsdeadtime(Beff)) << " TECH DEADTIME: " <<  prettyPrint(1.0 - technicaldeadtime(Beff)) << endl;
-
-			maxeffs[k]=Seff*technicaldeadtime(Beff);
-			dmaxeffs[k]=d_Seff*technicaldeadtime(Beff);
-			nodtmaxeffs[k]=Seff;
-			dnodtmaxeffs[k]=d_Seff;
-
-			/*	if(physicsdeadtime(Beff) > technicaldeadtime(Beff)){
-				maxeffs[k]=Seff*physicsdeadtime(Beff);
-				dmaxeffs[k]=d_Seff*physicsdeadtime(Beff);
-				}else{
 				maxeffs[k]=Seff*technicaldeadtime(Beff);
 				dmaxeffs[k]=d_Seff*technicaldeadtime(Beff);
+				nodtmaxeffs[k]=Seff; 
+				dnodtmaxeffs[k]=d_Seff;
+
+			#pragma omp critical(print)
+			{
+				cout << endl;
+				cout << bestcut << endl;
+				cout << endl;
+				cout << "=========================== Max Eff =========================" << endl;
+				cout << "CHI^2: " << ffit->EstimatorFunction(pars) << endl;
+				cout << dataset->getName() << " MAX EFF: $" << prettyPrint(Seff)<<"\\pm"<<prettyPrint(d_Seff)<< "$ BACKGROUND EFF: $" << prettyPrint(Beff)<<"\\pm"<<prettyPrint(d_Beff) << endl; 
+				cout << "PHYS DEADTIME: "<< prettyPrint(1.0 - physicsdeadtime(Beff)) << " TECH DEADTIME: " <<  prettyPrint(1.0 - technicaldeadtime(Beff)) << endl;
+				cout << "=========================== THRESHOLDS at max eff =========================" << endl;	
+				for(int i=0; i<thresholds->NCutVars; i++){
+					thresholds->getCutVar(i,&bestcut);
+					bestcut+=prettyPrint(pars[i]);
+					datastore->getBackgroundEfficiency(new TString(""),&bestcut,&Beff,&d_Beff);
+					dataset->getEfficiency(new TString(""),&bestcut, &Seff,&d_Seff);
+					maxincleffs[k][i] = Seff;
+					dmaxincleffs[k][i] = d_Seff;
+					cout << bestcut << "	$" << prettyPrint(Seff)<<"\\pm"<<prettyPrint(d_Seff) << "$ 	&	$" <<  prettyPrint(Beff)<<"\\pm"<<prettyPrint(d_Beff) << "$" << endl;
 				}
-				*/
-			cout << "=========================== THRESHOLDS at max eff =========================" << endl;	
-			for(int i=0; i<thresholds->NCutVars; i++){
-				thresholds->getCutVar(i,&bestcut);
-				bestcut+=prettyPrint(pars[i]);
-				datastore->getBackgroundEfficiency(new TString(""),&bestcut,&Beff,&d_Beff);
-				dataset->getEfficiency(new TString(""),&bestcut, &Seff,&d_Seff);
-				maxincleffs[k][i] = Seff;
-				dmaxincleffs[k][i] = d_Seff;
-				cout << bestcut << "	$" << prettyPrint(Seff)<<"\\pm"<<prettyPrint(d_Seff) << "$ 	&	$" <<  prettyPrint(Beff)<<"\\pm"<<prettyPrint(d_Beff) << "$" << endl;
+				cout << "===========================================================================" << endl;
+
 			}
-			cout << "===========================================================================" << endl;
 		}
 	}
+	cout << "============================== GLOBAL =======================================" << endl;
+	TRandom3 rndGen(0);
+	cropcutensemble* thresholds = new cropcutensemble("thresholds", thresholdsName, &rndGen);
+	std::vector<TMVA::Interval*> parameterRanges;
+	for(int i=0; i<thresholds->NCutVars; i++){
+		parameterRanges.push_back(new TMVA::Interval(thresholds->getCutMinVal(i),thresholds->getCutMaxVal(i),thresholds->getCutResolution(i)));
+	}
+	std::vector<Double_t> pars(parameterRanges.size());
+
+	TMVA::IFitterTarget *ffit; 
+	TMVA::FitterBase* fitter;
+	TString bestcut, thiscut;
+	Double_t S, d_S, Seff, d_Seff;
+	Double_t B, d_B, Beff, d_Beff;
 
 	ffit = new optfcn(datastore,thresholds);
 	fitter = new TMVA::GeneticFitter( *ffit,"FitterGA",parameterRanges, opt);
 	fitter->Run(pars);
 	thresholds->buildorcut(pars, &bestcut);
 	cout << bestcut << endl;
-
 
 	cout << endl;
 	cout << "============================== DONE =======================================" << endl;
@@ -307,6 +319,8 @@ int main(int argc, char *argv[]) {
 	}
 	cout << "\\\\" << endl;
 
+	TCanvas* c=new TCanvas("Effs","Effs",1024,768);
+	c->SetBottomMargin(0.5);
 	for(UInt_t k = 0; k<datastore->getNSignalDatasets(); k++){
 
 		cropdataset* dataset = datastore->getSignalDataset(k);

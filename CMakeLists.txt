@@ -7,7 +7,7 @@ endif()
 
 project(SMPT)
 
-set(CMAKE_CXX_FLAGS "-std=c++11 -fopenmp")
+set(CMAKE_CXX_FLAGS "-std=c++11 -fopenmp -pthread -std=c++11 -Wno-deprecated-declarations -m64 -I/home/conor/root_v6-06-00/include")
 
 # Load Macro to locate ROOT and needed libraries
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
