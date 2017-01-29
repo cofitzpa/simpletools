@@ -63,7 +63,7 @@ inline void quadPow(Double_t a, Double_t d_a, Double_t tothe, Double_t *atothe=0
 }
 
 inline void genericInfo(TString tool){
-        TString SimpleToolsVersion = "2.0q";
+        TString SimpleToolsVersion = "2.0t";
 	cout << tool << ": Part of the SimpleTools Package v" << SimpleToolsVersion << endl;
 	cout << "Author: Conor Fitzpatrick conor.fitzpatrick@cern.ch" << endl;
 }
@@ -213,6 +213,15 @@ inline void sepperInfo(){
 }
 
 
+inline void bwdivBanner(){
+	cout << "   __            ___     "<< endl;
+	cout << "  / / _    _____/ (_)  __"<<endl;
+	cout << " / _ \\ |/|/ / _  / / |/ /"<<endl;
+	cout << "/_.__/__,__/\\_,_/_/|___/ "<< endl;
+	cout << ""  << endl;
+	genericInfo("bwdiv");
+}
+
 inline void cropBanner(){
 	cout << "  ________  ____  ___    "<< endl;
 	cout << " / ___/ _ \\/ __ \\/ _ \\   "<<endl;
@@ -228,7 +237,7 @@ inline void bwdivInfo(){
 	genericInfo("bwdiv");
 	cout << "Optimises a set of L0 thresholds" << endl;
 	cout << "Usage: " << endl;
-	cout << "bwdiv <WeightFile> <cutfile> <max. bkg. eff>" << endl;
+	cout << "bwdiv <WeightFile> <cutfile> <max. bkg. eff> <deadtimefile> <outputdir> [target rate Hz]" << endl;
 	cout << "" << endl;
 	weightInfo();
 	cout << "" << endl;
