@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
 	if(ratio>1.0){
 	ratio=1.0;
 	}
-	sout1 = new TFile(soutname1,"RECREATE");
+	sout1 = new TFile(soutname1,"RECREATE",0);
 	if(name!=tpath){
 	sout1->mkdir(tpath);
 	sout1->cd(tpath);
