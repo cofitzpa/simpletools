@@ -33,12 +33,10 @@ int main(int argc, char *argv[]) {
 	Double_t cl95p[11] = {3.09,5.14,6.72,8.25,9.76,11.26,12.75,13.81,15.29,16.77,17.82};
 
 
-	TFile *in(0);
 	TString inname = argv[1];   
 	TString tpath = argv[2];   
 	TString name = tpath;
 	TString cname = argv[3];
-	TFile *sout(0);
 	TString soutname = argv[4];
 	Bool_t clerrs = false;
 	Double_t accepted = 0, rejected = 0, total = 0;
@@ -58,7 +56,7 @@ int main(int argc, char *argv[]) {
 	cout << "output file:		" << soutname 	<< endl;
 	cout << "-------------------------------------------------------" << endl;
 
-	in = TFile::Open( inname );
+	TFile* in = TFile::Open( inname );
 	TString slash = "/";
 
 	TTree* inTree;
@@ -81,7 +79,7 @@ int main(int argc, char *argv[]) {
 	}
 	Int_t aftotal = inTree->GetEntries(cname);
 	if(aftotal!=0){
-		sout = new TFile(soutname,"RECREATE");
+		TFile* sout = TFile::Open(soutname,"RECREATE");
 		if(name!=tpath){
 			sout->mkdir(tpath);
 			sout->cd(tpath);
@@ -92,9 +90,11 @@ int main(int argc, char *argv[]) {
 		TTree *soutTree = inTree->CopyTree(cname);
 		accepted = (Double_t)soutTree->GetEntries();
 		sout->Write();
+		sout->Close();
 	}else{
 	accepted = 0.0;
 	}
+	in->Close();
 
 	if(accepted>10){
 		daccepted = sqrt(accepted);
