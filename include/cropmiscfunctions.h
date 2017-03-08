@@ -63,7 +63,7 @@ inline void quadPow(Double_t a, Double_t d_a, Double_t tothe, Double_t *atothe=0
 }
 
 inline void genericInfo(TString tool){
-        TString SimpleToolsVersion = "2.0t";
+        TString SimpleToolsVersion = "2.0u";
 	cout << tool << ": Part of the SimpleTools Package v" << SimpleToolsVersion << endl;
 	cout << "Author: Conor Fitzpatrick conor.fitzpatrick@cern.ch" << endl;
 }

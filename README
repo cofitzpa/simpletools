@@ -16,6 +16,12 @@ Bug reports, feature requests, comments and patches are always welcome.
 conor.fitzpatrick@cern.ch
 
 changelog
+v2.0u - included fixes to prevent segfaults on close to cutapplier, columnmaker from Adam Morris, added randommaker tool to add uniform random number as a column for prescale calculations
+
+v2.0t - added ability to set rate scale for deadtime in bwdiv. Allows you to optimise for retentions different to 1MHz
+
+v2.0r - ability to 'monitor' selected lines now added. Setting special < 0 does this. 
+
 v2.0q - bwdiv deadtime is now introduced by way of deadtime curves. Currently only the 2330 bunch curve is ready, others to follow soon. 
 
 v2.0p - bwdiv tool now uses a deadtime-like rate limiting function instead of the empirical formulation applied in 2.0o.
