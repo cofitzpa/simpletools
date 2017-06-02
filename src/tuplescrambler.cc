@@ -1,8 +1,8 @@
 /* tuplesampler: Part of the simpletools package
  * (c) Conor Fitzpatrick, 2008
  *
- * If you find this program useful in whole or in part 
- * please cite this paper: 
+ * If you find this program useful in whole or in part
+ * please cite this paper:
  *
  * Feel free to send bugreports, feature requests, patches etc to:
  * conor.fitzpatrick@cern.ch
@@ -58,8 +58,8 @@ int main(int argc, char *argv[]) {
 	}
 
 	TFile *in;
-	TString inname = argv[1];   
-	TString tpath = argv[2];   
+	TString inname = argv[1];
+	TString tpath = argv[2];
 	TString name = tpath;
 	rndGen = new TRandom3(atoi(argv[3]));
 	TFile *sout1(0);
@@ -74,13 +74,13 @@ int main(int argc, char *argv[]) {
 	cout << "getting tree " << tpath << endl;
 	TTree* inTree = (TTree*)in->Get(tpath);
 	UInt_t total =  inTree->GetEntries();
-	
+
 	TString slash = "/";
 	tpath.Resize(std::max(tpath.First(slash),0)); 
 	sout1 = new TFile(soutname1,"RECREATE");
 	if(name!=tpath){
 	sout1->mkdir(tpath);
-	sout1->cd(tpath);	
+	sout1->cd(tpath);
 	}else{
 	sout1->cd();
 	}
@@ -95,7 +95,7 @@ int main(int argc, char *argv[]) {
 	cout << "---------------------------------------------------------" << endl;
 	//inTree->Print();
 
-	
+
 		sw.Start();
 	vector<int> entries;
 	INSERT_ELEMENTS(entries,0,total-1);

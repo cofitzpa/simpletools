@@ -4,7 +4,7 @@
 #include "cropmiscfunctions.h"
 
 
-//Punzi FoM at the request of Steve-O and Young John. Significance set to 3.0 sigma, change and recompile if you want different. 
+//Punzi FoM at the request of Steve-O and Young John. Significance set to 3.0 sigma, change and recompile if you want different.
 inline void cropFoM_Punzi(cropdatastore* data =0, TString *cut =0, Double_t *FoM=0, Double_t *d_FoM=0){
 	Double_t S;
 	Double_t d_S;
@@ -21,7 +21,7 @@ inline void cropFoM_Punzi(cropdatastore* data =0, TString *cut =0, Double_t *FoM
 		if(B>0){
 		quadPow(B, d_B, 0.5, &sqrtb, &d_sqrtb);
 		}
-		Double_t punzidenom = 3.0/2.0; //Change 3.0 to desired signif... 
+		Double_t punzidenom = 3.0/2.0; //Change 3.0 to desired signif...
 		punzidenom += sqrtb;
 		quadEff(S,d_S,punzidenom,d_sqrtb,FoM,d_FoM);
 //	cout << *FoM << "	" << *d_FoM << endl;

@@ -1,7 +1,7 @@
 #include "cropoptimisationengine.h"
 
 cropoptimisationengine::cropoptimisationengine(cropdatastore *_datastore, cropcutensemble  *_cutensemble, TCanvas *_c, TRandom3 *_rng, void(*_fom)(cropdatastore*, TString*, Double_t*, Double_t*), TFunctor *_OrderMethod){
-	
+
 	datastore = _datastore;
 	cutensemble = _cutensemble;
 	fom = _fom;
@@ -24,10 +24,10 @@ void cropoptimisationengine::initialise(){
 
 	Double_t initS;
 	Double_t initB;
-	Double_t d_initS; 
-	Double_t d_initB; 
+	Double_t d_initS;
+	Double_t d_initB;
 	TString cut;
-	
+
 	datastore->getWeightedSignalEntries(new TString(""),&initS, &d_initS);
 	datastore->getWeightedBackgroundEntries(new TString(""),&initB, &d_initB);
 	cout << "order  number  Sig. Eff        Bkg. Rej        FoM     cut"    << endl;
@@ -72,8 +72,8 @@ bool cropoptimisationengine::optimise(UInt_t maxsteps){
 	Double_t d_FoM = 0;
 	Double_t initS;
 	Double_t initB;
-	Double_t d_initS; 
-	Double_t d_initB; 
+	Double_t d_initS;
+	Double_t d_initB;
 
 	TString cut;
 	TString inclcut;

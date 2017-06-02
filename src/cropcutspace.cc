@@ -54,14 +54,14 @@ void cropcutspace::addPoint(UInt_t * step, Double_t * _s, Double_t * _d_s, Doubl
 }
 
 UInt_t cropcutspace::setMaxFoMStep(bool gtCut){
-	if(!gtCut){ 
+	if(!gtCut){
 		//LTCUT: x<number means start low and go high to make more events available so loop is positive
 		//If the current step has a FoM equal to the previous maximum, make this the maxFoMstep as looser is safer in the ensemble
 		Double_t max = FoM[0];
 		maxFoMStep = 0;
 		for(UInt_t i = 1; i<steps; i++){
 			if(FoM[i] >= max){
-				max = FoM[i]; 
+				max = FoM[i];
 				maxFoMStep = i;
 			}
 		}
@@ -73,13 +73,13 @@ UInt_t cropcutspace::setMaxFoMStep(bool gtCut){
 		maxFoMStep = steps-1;
 		for(Int_t j = steps-2; j>=0; j--){
 			if(FoM[j] >= max){
-				max = FoM[j]; 
+				max = FoM[j];
 				maxFoMStep = j;
 			}
 		}
 
 	}
-	return maxFoMStep; 
+	return maxFoMStep;
 }
 
 void cropcutspace::setVals(Double_t min){
@@ -128,12 +128,12 @@ void cropcutspace::plotSeff(TString name)const{
 	SeffGraph->GetYaxis()->SetTitle("#varepsilon_{S}");
 
 	TArrow* Seffarrow1 = new TArrow(Vals[maxFoMStep],SeffGraph->GetYaxis()->GetXmin(),Vals[maxFoMStep],Seff[maxFoMStep],0.01,"<-");
-	Seffarrow1->SetLineWidth(2) ; 
+	Seffarrow1->SetLineWidth(2) ;
 	Seffarrow1->SetLineColor(kBlue);
 	Seffarrow1->Draw();
 
 	TArrow* Seffarrow2 = new TArrow(SeffGraph->GetXaxis()->GetXmin(),Seff[maxFoMStep],Vals[maxFoMStep],Seff[maxFoMStep],0.01,"<-");
-	Seffarrow2->SetLineWidth(2) ; 
+	Seffarrow2->SetLineWidth(2) ;
 	Seffarrow2->SetLineColor(kBlue);
 	Seffarrow2->Draw();
 }
@@ -148,12 +148,12 @@ void cropcutspace::plotBrej(TString name)const{
 	BrejGraph->GetYaxis()->SetTitle("1-#varepsilon_{B}");
 
 	TArrow* Brejarrow1 = new TArrow(Vals[maxFoMStep],BrejGraph->GetYaxis()->GetXmin(),Vals[maxFoMStep],Brej[maxFoMStep],0.01,"<-");
-	Brejarrow1->SetLineWidth(2) ; 
+	Brejarrow1->SetLineWidth(2) ;
 	Brejarrow1->SetLineColor(kBlue);
 	Brejarrow1->Draw();
 
 	TArrow* Brejarrow2 = new TArrow(BrejGraph->GetXaxis()->GetXmin(),Brej[maxFoMStep],Vals[maxFoMStep],Brej[maxFoMStep],0.01,"<-");
-	Brejarrow2->SetLineWidth(2) ; 
+	Brejarrow2->SetLineWidth(2) ;
 	Brejarrow2->SetLineColor(kBlue);
 	Brejarrow2->Draw();
 }
@@ -169,12 +169,12 @@ void cropcutspace::plotRoC(TString name)const{
 	RoCGraph->GetYaxis()->SetTitle("1-#varepsilon_{B}");
 
 	TArrow* RoCarrow1 = new TArrow(Seff[maxFoMStep],RoCGraph->GetYaxis()->GetXmin(),Seff[maxFoMStep],Brej[maxFoMStep],0.01,"<-");
-	RoCarrow1->SetLineWidth(2) ; 
+	RoCarrow1->SetLineWidth(2) ;
 	RoCarrow1->SetLineColor(kBlue);
 	RoCarrow1->Draw();
 
 	TArrow* RoCarrow2 = new TArrow(RoCGraph->GetXaxis()->GetXmin(),Brej[maxFoMStep],Seff[maxFoMStep],Brej[maxFoMStep],0.01,"<-");
-	RoCarrow2->SetLineWidth(2) ; 
+	RoCarrow2->SetLineWidth(2) ;
 	RoCarrow2->SetLineColor(kBlue);
 	RoCarrow2->Draw();
 }

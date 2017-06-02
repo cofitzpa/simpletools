@@ -85,14 +85,14 @@ void cropdatastore::print() const{
 	cout << "INFO:	-------------------------------------------------------------------------- " << endl;
 	cout << "INFO:	SIGNAL totals in this datastore:" << endl;
 	cout << "INFO:  Total Entries: " << prettyPrint(totalSignalEntries) <<endl;
-	cout << "INFO:	Weighted Entries: " << prettyPrint(totalSignalWeightedEntries) << "+/-" << prettyPrint(d_totalSignalWeightedEntries) << endl; 
+	cout << "INFO:	Weighted Entries: " << prettyPrint(totalSignalWeightedEntries) << "+/-" << prettyPrint(d_totalSignalWeightedEntries) << endl;
 	if(totalSignalWeightedEntries != procSignalWeightedEntries){
 		cout << "INFO:  Entries after Preproc. Cuts: " << prettyPrint(procSignalEntries) <<endl;
 		cout << "INFO:	Weighted Entries after Preproc. Cuts: " << prettyPrint(procSignalWeightedEntries) << "+/-" << prettyPrint(d_procSignalWeightedEntries) << endl; 		}
 		cout << "INFO:	-------------------------------------------------------------------------- " << endl;
 		cout << "INFO:  BACKGROUND totals in this datastore:" << endl;
 		cout << "INFO:  Total Entries: " << prettyPrint(totalBackgroundEntries) <<endl;
-		cout << "INFO:  Weighted Entries: " << prettyPrint(totalBackgroundWeightedEntries) << "+/-" << prettyPrint(d_totalBackgroundWeightedEntries) << endl; 
+		cout << "INFO:  Weighted Entries: " << prettyPrint(totalBackgroundWeightedEntries) << "+/-" << prettyPrint(d_totalBackgroundWeightedEntries) << endl;
 		if(totalBackgroundWeightedEntries!=procBackgroundWeightedEntries){
 			cout << "INFO:  Entries after Preproc. Cuts: " << prettyPrint(procBackgroundEntries) <<endl;
 			cout << "INFO:  Weighted Entries after Preproc. Cuts: " << prettyPrint(procBackgroundWeightedEntries) << "+/-" << prettyPrint(d_procBackgroundWeightedEntries) << endl; }
@@ -126,7 +126,7 @@ void cropdatastore::getWeightedSignalEntries(TString *cut, Double_t *Entries, Do
 	for(UInt_t i =0; i<NSignalDatasets; i++){
 		SignalDatasets[i]->getWeightedEntries(cut, &tmpEntries, &d_tmpEntries);
 		*Entries += tmpEntries;
-		*d_Entries = sqrt(*d_Entries**d_Entries + d_tmpEntries*d_tmpEntries);	
+		*d_Entries = sqrt(*d_Entries**d_Entries + d_tmpEntries*d_tmpEntries);
 	}
 }
 
@@ -138,7 +138,7 @@ void cropdatastore::getWeightedBackgroundEntries(TString *cut, Double_t *Entries
 	for(UInt_t i =0; i<NBackgroundDatasets; i++){
 		BackgroundDatasets[i]->getWeightedEntries(cut, &tmpEntries, &d_tmpEntries);
 		*Entries += tmpEntries;
-		*d_Entries = sqrt(*d_Entries**d_Entries + d_tmpEntries*d_tmpEntries);	
+		*d_Entries = sqrt(*d_Entries**d_Entries + d_tmpEntries*d_tmpEntries);
 	}
 }
 
@@ -246,7 +246,7 @@ TH2D * cropdatastore::getSignalHisto(TString varX, UInt_t binsX, Double_t minX, 
 	TH2D* Histo = new TH2D("signal",name,binsX,minX,maxX,binsY,minY,maxY);
 	Histo->Sumw2();
 	for(UInt_t i =0; i<NSignalDatasets; i++){
-		TH2D *tmpHisto = SignalDatasets[i]->getHisto(varX, binsX, minX, maxX, varY, binsY, minY, maxY);	                
+		TH2D *tmpHisto = SignalDatasets[i]->getHisto(varX, binsX, minX, maxX, varY, binsY, minY, maxY);
 		Histo->Add(tmpHisto);
 		delete tmpHisto;
 	}
@@ -304,7 +304,7 @@ TH2D * cropdatastore::getHisto(TString cut, cropvarensemble *varsX, cropvarensem
 return getHisto(cut, varsX->getVar(nX), varsX->getVarBins(nX), varsX->getVarMinVal(nX), varsX->getVarMaxVal(nX),varsY->getVar(nY), varsY->getVarBins(nY), varsY->getVarMinVal(nY), varsY->getVarMaxVal(nY));
 }
 TH2D * cropdatastore::getHisto(TString varX, UInt_t binsX, Double_t minX, Double_t maxX,TString varY, UInt_t binsY, Double_t minY, Double_t maxY)const{
-	TH2D* Histo = new TH2D(varX+":"+varY+"_"+name,varX+":"+varY+"_"+name,binsX,minX,maxX,binsY,minY,maxY);  
+	TH2D* Histo = new TH2D(varX+":"+varY+"_"+name,varX+":"+varY+"_"+name,binsX,minX,maxX,binsY,minY,maxY);
 	Histo->Sumw2();
 	TH2D *signal = getSignalHisto(varX,binsX,minX,maxX,varY,binsY,minY,maxY);
 	Histo->Add(signal);
@@ -416,7 +416,7 @@ TH1D* cropdatastore::getSignalHisto(cropvarensemble *_data, UInt_t n)const{
 }
 TH1D* cropdatastore::getSignalHisto(TString cut, cropvarensemble *_data, UInt_t n)const{
 	return getSignalHisto(cut, _data->getVar(n),_data->getVarBins(n),_data->getVarMinVal(n),_data->getVarMaxVal(n));
-} 
+}
 
 THStack* cropdatastore::getStack(cropvarensemble *_data, UInt_t n)const{
 	return getStack(_data->getVar(n),_data->getVarBins(n),_data->getVarMinVal(n),_data->getVarMaxVal(n));

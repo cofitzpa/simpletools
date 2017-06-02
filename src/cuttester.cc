@@ -1,8 +1,8 @@
 /* cuttester: Part of the simpletools package
  * (c) Conor Fitzpatrick, 2008
  *
- * If you find this program useful in whole or in part 
- * please cite this paper: 
+ * If you find this program useful in whole or in part
+ * please cite this paper:
  *
  * Feel free to send bugreports, feature requests, patches etc to:
  * conor.fitzpatrick@cern.ch
@@ -25,7 +25,7 @@ using std::vector;
 using std::ifstream;
 using std::ofstream;
 
-char pretty[10]; 
+char pretty[10];
 UInt_t ncuts=0;
 vector<TString> cuts;
 const TString And = "&&";
@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
 		weightVar = argv[4];
 	}
 
-	TString filepath = argv[1];   
+	TString filepath = argv[1];
 	TString ntuplepath = argv[2];
 	std::string cutListName = argv[3];
 	cout << "--------CUTTESTER - Conor Fitzpatrick, 2008 ----------" << endl;
@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
 	cout <<	"to ntuple:		" << ntuplepath 	<< endl;
 	cout <<	"in file:		" << filepath 	<< endl;
 	cout << "-------------------------------------------------------" << endl;
-	
+
 	cropdataset *dataset = new cropdataset("data",filepath,ntuplepath,"1",weightVar,1,1,true);
 	dataset->print();
 	ifstream fileStream;

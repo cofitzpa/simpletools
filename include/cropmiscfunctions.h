@@ -276,7 +276,7 @@ inline Double_t GetSeparation( const TH1D& S, const TH1D& B ){
 	// <s2> = (1/2) Int_-oo..+oo { (S^2(x) - B^2(x))/(S(x) + B(x)) dx }
 	Double_t separation = 0;
 	// sanity checks
-	// signal and background histograms must have same number of bins and 
+	// signal and background histograms must have same number of bins and
 	// same limits
 	if ((S.GetNbinsX() != B.GetNbinsX()) || (S.GetNbinsX() <= 0)) {
 		cout << "<GetSeparation> signal and background"
@@ -288,13 +288,13 @@ inline Double_t GetSeparation( const TH1D& S, const TH1D& B ){
 			S.GetXaxis()->GetXmax() != B.GetXaxis()->GetXmax() ||
 			S.GetXaxis()->GetXmax() <= S.GetXaxis()->GetXmin()) {
 		cout << S.GetXaxis()->GetXmin() << " " << B.GetXaxis()->GetXmin()
-			<< " " << S.GetXaxis()->GetXmax() << " " << B.GetXaxis()->GetXmax() 
+			<< " " << S.GetXaxis()->GetXmax() << " " << B.GetXaxis()->GetXmax()
 			<< " " << S.GetXaxis()->GetXmax() << " " << S.GetXaxis()->GetXmin() << endl;
 		cout << "<GetSeparation> signal and background"
 			<< " histograms have different or invalid dimensions:" << endl;
 	}
 
-	Int_t    nbins = S.GetNbinsX(); 
+	Int_t    nbins = S.GetNbinsX();
 	Double_t nS    = S.Integral( 0, nbins+1, "width" ); // include under/overflow bins
 	Double_t nB    = B.Integral( 0, nbins+1, "width" );
 
@@ -308,7 +308,7 @@ inline Double_t GetSeparation( const TH1D& S, const TH1D& B ){
 			if (s + b > 0) separation += 0.5*(s - b)*(s - b)/(s + b)*S.GetXaxis()->GetBinWidth(ibin);
 			//separation += 0.5*(s - b)*(s - b)/(s + b)*S.GetXaxis()->GetBinWidth(ibin);
 
-			//   cout << nS << "    " << nB << "    " << separation << endl; 
+			//   cout << nS << "    " << nB << "    " << separation << endl;
 		}
 	}
 	else {
@@ -346,7 +346,7 @@ inline void set_plot_style()
 //	Double_t green[NRGBs] = { 0.00, 0.81, 1.00, 0.20, 0.00 };
 //	Double_t blue[NRGBs]  = { 0.51, 1.00, 0.12, 0.00, 0.00 };
 
-    
+
     TColor::CreateGradientColorTable(NRGBs, stops, red, green, blue, NCont);
     gStyle->SetNumberContours(NCont);
 }

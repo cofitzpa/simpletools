@@ -44,7 +44,7 @@ class cropvarensemble {
 		UInt_t Nvars;
 		cropvarensemble();
 		~cropvarensemble();
-		cropvarensemble(TString);	
+		cropvarensemble(TString);
 		cropvarensemble(TString, TString);
 
 		cropvarensemble(cropcutensemble *, bool);
