@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
 	TString mode = argv[4];
 	TString outname = argv[5];
 	TApplication theApp("App", &argc, argv);
-	TFile * outFile = new TFile(outname,"RECREATE");
+	TFile * outFile = TFile::Open(outname,"RECREATE");
 	TCanvas *guiACanvas;
 	if(gui){
 		TGMainFrame * guiMain = new TGMainFrame(gClient->GetRoot(),1024,768);

@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
 	TString name = tpath;
 	tpath.Resize(std::max(tpath.First(slash),0));
 
-	TFile* sout = new TFile(soutname,"RECREATE");
+	TFile* sout = TFile::Open(soutname,"RECREATE");
 	if(tpath!=name){
 	sout->mkdir(tpath);
 	sout->cd(tpath);

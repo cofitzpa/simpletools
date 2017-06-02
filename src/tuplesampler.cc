@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
 	if(ratio>1.0){
 	ratio=1.0;
 	}
-	sout1 = new TFile(soutname1,"RECREATE",0);
+	sout1 = TFile::Open(soutname1,"RECREATE",0);
 	if(name!=tpath){
 	sout1->mkdir(tpath);
 	sout1->cd(tpath);
@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
 	}
 	TTree *soutTree1 = inTree->CloneTree(0);
 
-	sout2 = new TFile(soutname2,"RECREATE");
+	sout2 = TFile::Open(soutname2,"RECREATE");
 	if(name!=tpath){
 	sout2->mkdir(tpath);
 	sout2->cd(tpath);

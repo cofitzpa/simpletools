@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
 	varensemble = new cropvarensemble("test", varListName);
 
 	gSystem->mkdir( outdir );
-	TFile *outFile = new TFile(outdir+"/plots.root","RECREATE");
+	TFile *outFile = TFile::Open(outdir+"/plots.root","RECREATE");
 
 	UInt_t nVarsDone = 0, page = 0;
 	TString units;

@@ -76,8 +76,8 @@ int main(int argc, char *argv[]) {
 	UInt_t total =  inTree->GetEntries();
 
 	TString slash = "/";
-	tpath.Resize(std::max(tpath.First(slash),0)); 
-	sout1 = new TFile(soutname1,"RECREATE");
+	tpath.Resize(std::max(tpath.First(slash),0));
+	sout1 = TFile::Open(soutname1,"RECREATE");
 	if(name!=tpath){
 	sout1->mkdir(tpath);
 	sout1->cd(tpath);

@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
     UInt_t nVarsX = varensemble1->Nvars;
     UInt_t nVarsY = varensemble2->Nvars;
 
-    TFile *outFile = new TFile(outdir+"/plots.root","RECREATE");
+    TFile *outFile = TFile::Open(outdir+"/plots.root","RECREATE");
     TH2D *corrs = new TH2D("correlations","correlations",nVarsX+1,0,nVarsX+1,nVarsY+1,0,nVarsY+1);
     UInt_t nVarsDone = 0, page = 0;
     UInt_t nVarsDonepp = ppp;
