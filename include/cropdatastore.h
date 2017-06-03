@@ -17,7 +17,7 @@ class cropdatastore {
 	public:
 		cropdatastore();
 		cropdatastore(TString);
-		cropdatastore(TString, TString);	
+		cropdatastore(TString, TString);
 		~cropdatastore();
 		void addDataset(cropdataset*);
 		void print() const;

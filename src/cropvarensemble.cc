@@ -271,14 +271,14 @@ cropvarensemble::cropvarensemble(cropdatastore *_datastore, TString _varfile, bo
 					_min = tmpmin;
 					drawn = true;
 				}
-			}	
+			}
 		}
 
 		for(UInt_t b = 0; b<nBackground; b++){
 			success = _datastore->getBackgroundDataset(b)->getTree()->Draw(_var+">>tmp",_datastore->getBackgroundDataset(b)->getWeightVar());
-			if(success == -1){ 
+			if(success == -1){
 				cout << "WARNING: finding range for " << _var  << " in dataset " << _datastore->getBackgroundDataset(b)->getName() << " failed" << endl;
-				_useless = true; 
+				_useless = true;
 			}else{
 				TH1F *tmp = (TH1F*)gDirectory->Get("tmp");
 				tmpmax = tmp->GetXaxis()->GetXmax();
@@ -287,12 +287,12 @@ cropvarensemble::cropvarensemble(cropdatastore *_datastore, TString _varfile, bo
 				if(drawn){
 					if(tmpmax > _max){_max = tmpmax;}
 					if(tmpmin < _min){_min = tmpmin;}
-				}else{  
-					_max = tmpmax; 
+				}else{
+					_max = tmpmax;
 					_min = tmpmin;
-					drawn = true; 
+					drawn = true;
 				}
-			}       
+			}
 
 
 		}
@@ -376,14 +376,14 @@ cropvarensemble::cropvarensemble(cropdatastore *_datastore, bool _logx, bool _lo
 					_min = tmpmin;
 					drawn = true;
 				}
-			}	
+			}
 		}
 
 		for(UInt_t b = 0; b<nBackground; b++){
 			success = _datastore->getBackgroundDataset(b)->getTree()->Draw(_var+">>tmp",_datastore->getBackgroundDataset(b)->getWeightVar());
-			if(success == -1){ 
+			if(success == -1){
 				cout << "WARNING: finding range for " << _var  << " in dataset " << _datastore->getBackgroundDataset(b)->getName() << " failed" << endl;
-				_useless = true; 
+				_useless = true;
 			}else{
 				TH1F *tmp = (TH1F*)gDirectory->Get("tmp");
 				tmpmax = tmp->GetXaxis()->GetXmax();
@@ -392,12 +392,12 @@ cropvarensemble::cropvarensemble(cropdatastore *_datastore, bool _logx, bool _lo
 				if(drawn){
 					if(tmpmax > _max){_max = tmpmax;}
 					if(tmpmin < _min){_min = tmpmin;}
-				}else{  
-					_max = tmpmax; 
+				}else{
+					_max = tmpmax;
 					_min = tmpmin;
-					drawn = true; 
+					drawn = true;
 				}
-			}       
+			}
 
 
 		}
@@ -441,11 +441,11 @@ TString cropvarensemble::toLine(UInt_t n) const{
 	out += cropvarensembleTab;
 	out += mins[v];
 	out += cropvarensembleTab;
-	out += maxs[v]; 
+	out += maxs[v];
 	out += cropvarensembleTab;
-	out += bins[v]; 
+	out += bins[v];
 	out += cropvarensembleTab;
-	out += units[v]; 
+	out += units[v];
 	out += cropvarensembleTab;
 	if(logScale[v]){
 		out += "log";
@@ -483,11 +483,11 @@ TH1D * cropvarensemble::getHisto(UInt_t n, cropdatastore *_data){
 
 
 void cropvarensemble::sortbySepPower(cropdatastore *_data){
-	vector<point1D> seps; 
+	vector<point1D> seps;
 	for(UInt_t v = 0; v < Nvars; v++){
 		TH1D *S = _data->getSignalHisto(vars[v],bins[v],mins[v],maxs[v]);
 		TH1D *B = _data->getBackgroundHisto(vars[v],bins[v],mins[v],maxs[v]);
-		point1D point; 
+		point1D point;
 		point.x = v;
 		point.y = GetSeparation(*S,*B);
 		if(point.y == 0.0){

@@ -126,7 +126,7 @@ cropdataset::cropdataset(TString line, TString weightfilename, UInt_t linenum){
 		TObjString* os=(TObjString*)iString(); //S/B:
 
 		TString word = os->GetString();
-		//S/B file ntuple weight cut legend fill color special 
+		//S/B file ntuple weight cut legend fill color special
 		if(word == cropdatasetBstr){
 			signal = false;
 		}else{
@@ -201,11 +201,11 @@ cropdataset::cropdataset(TString line, TString weightfilename, UInt_t linenum){
 				cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid special" << endl;
 				exit(EXIT_FAILURE);
 			}
-		}	
+		}
 
 	}else{
 
-		if(Strings->GetEntries() != 5 && Strings->GetEntries() != 4){	
+		if(Strings->GetEntries() != 5 && Strings->GetEntries() != 4){
 			cout << "FATAL: " << weightfilename << " line " << linenum <<  " expected 8 entries, found " << Strings->GetEntries() << ". Check the line is correct and try again." << endl;
 			exit(EXIT_FAILURE);
 		}else{
@@ -239,7 +239,7 @@ cropdataset::cropdataset(TString line, TString weightfilename, UInt_t linenum){
 			try{
 				ntuplePath = lexical_cast <string> (os->GetString());
 			}catch(bad_lexical_cast &e){
-				cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid ntuplename" << endl; 
+				cout << "FATAL: " << weightfilename << " line " << linenum <<  "Invalid ntuplename" << endl;
 				exit(EXIT_FAILURE);
 
 			}
@@ -302,7 +302,7 @@ void cropdataset::print() const{
 
 
 	cout << "INFO: ==========================================================================" << endl;
-	cout << "INFO: "<< name << " is a dataset of type "; if(signal){cout << "Signal " << endl; }else{ cout << "Background " << endl;} 
+	cout << "INFO: "<< name << " is a dataset of type "; if(signal){cout << "Signal " << endl; }else{ cout << "Background " << endl;}
 	cout << "INFO: --------------------------------------------------------------------------" << endl;
 	cout << "INFO:	File Path: " << filePath << endl;
 	cout << "INFO:	Ntuple Path: " << ntuplePath << endl;
@@ -367,7 +367,7 @@ void cropdataset::getEfficiency(TString *cut1, TString *cut2, Double_t *eff, Dou
 }
 
 TString cropdataset::toLine()const{
-	//S/B file ntuple weight cut legend fill color 
+	//S/B file ntuple weight cut legend fill color
 	TString out;
 	if(signal){out = "S";}else{out = "B";}
 	out += cropdatasetTab;

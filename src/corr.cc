@@ -1,8 +1,8 @@
 /* crop: Part of the simpletools package
  * (c) Conor Fitzpatrick, 2008
  *
- * If you find this program useful in whole or in part 
- * please cite this paper: 
+ * If you find this program useful in whole or in part
+ * please cite this paper:
  *
  * Feel free to send bugreports, feature requests, patches etc to:
  * conor.fitzpatrick@cern.ch
@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 
 
     TCanvas *c = new TCanvas("null","null",0,0);
-    if(argc != 11){	
+    if(argc != 11){
 	corrInfo();
 	exit(EXIT_FAILURE);
     }
@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
     UInt_t nVarsX = varensemble1->Nvars;
     UInt_t nVarsY = varensemble2->Nvars;
 
-    TFile *outFile = new TFile(outdir+"/plots.root","RECREATE");
+    TFile *outFile = TFile::Open(outdir+"/plots.root","RECREATE");
     TH2D *corrs = new TH2D("correlations","correlations",nVarsX+1,0,nVarsX+1,nVarsY+1,0,nVarsY+1);
     UInt_t nVarsDone = 0, page = 0;
     UInt_t nVarsDonepp = ppp;
@@ -118,7 +118,7 @@ int main(int argc, char *argv[]) {
 			    cout << "pad = " << nVarsDonepp << "      Variable = " << vX<<" : "<<vY << "  Correlation = " << prettyPrint(corr);
 			    if(fabs(corr)>maxcorr){
 				varensemble2->makeUseless(nX);
-				cout << "\t Removing First Variable"; 
+				cout << "\t Removing First Variable";
 			    }
 			    cout << endl;
 			    nVarsDonepp++;
@@ -175,7 +175,7 @@ int main(int argc, char *argv[]) {
 			cout << "pad = " << nVarsDonepp << "      Variable = " << vX<<" : "<<vY << "  Correlation = " << prettyPrint(corr);
 			if(fabs(corr)>maxcorr){
 			    varensemble2->makeUseless(nY);
-			    cout << "\t Removing Second Variable"; 
+			    cout << "\t Removing Second Variable";
 			}
 			cout << endl;
 			nVarsDonepp++;

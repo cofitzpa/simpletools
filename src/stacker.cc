@@ -1,8 +1,8 @@
 /* crop: Part of the simpletools package
  * (c) Conor Fitzpatrick, 2008
  *
- * If you find this program useful in whole or in part 
- * please cite this paper: 
+ * If you find this program useful in whole or in part
+ * please cite this paper:
  *
  * Feel free to send bugreports, feature requests, patches etc to:
  * conor.fitzpatrick@cern.ch
@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
 
 
 	TCanvas *c = new TCanvas("null","null",0,0);
-	if(argc != 9){	
+	if(argc != 9){
 	stackerInfo();
 	exit(EXIT_FAILURE);
 	}
@@ -88,7 +88,7 @@ int main(int argc, char *argv[]) {
 	varensemble = new cropvarensemble("test", varListName);
 
 	gSystem->mkdir( outdir );
-	TFile *outFile = new TFile(outdir+"/plots.root","RECREATE");
+	TFile *outFile = TFile::Open(outdir+"/plots.root","RECREATE");
 
 	UInt_t nVarsDone = 0, page = 0;
 	TString units;
@@ -117,7 +117,7 @@ int main(int argc, char *argv[]) {
 				leg->SetLineColor(0);
 				leg->SetFillStyle(0);
 				}
-				
+
 				TString yTitle = "Candidates/";
 				yTitle += varensemble->getVarResolution(nVarsDone);
 				varensemble->getUnits(nVarsDone,&units);

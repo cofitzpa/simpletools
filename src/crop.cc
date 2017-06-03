@@ -1,8 +1,8 @@
 /* crop: Part of the simpletools package
  * (c) Conor Fitzpatrick, 2008
  *
- * If you find this program useful in whole or in part 
- * please cite this paper: 
+ * If you find this program useful in whole or in part
+ * please cite this paper:
  *
  * Feel free to send bugreports, feature requests, patches etc to:
  * conor.fitzpatrick@cern.ch
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
 	cropBanner();
 
 	Bool_t gui=true;
-	if(argc != 6){	
+	if(argc != 6){
 		if(argc != 7){
 
 				cropInfo();
@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
 		}else{
 
 			TString b = "-b";
-			if(argv[6] == b){ 
+			if(argv[6] == b){
 				gui = false;
 			}else{
 				cropInfo();
@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
 
 		}
 	}
-	
+
 	gROOT->SetStyle("Plain");
 	gStyle->SetFrameBorderMode(0);
 	gStyle->SetCanvasBorderMode(0);
@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
 	TString mode = argv[4];
 	TString outname = argv[5];
 	TApplication theApp("App", &argc, argv);
-	TFile * outFile = new TFile(outname,"RECREATE");
+	TFile * outFile = TFile::Open(outname,"RECREATE");
 	TCanvas *guiACanvas;
 	if(gui){
 		TGMainFrame * guiMain = new TGMainFrame(gClient->GetRoot(),1024,768);
@@ -110,7 +110,7 @@ int main(int argc, char *argv[]) {
 	cout << "Using Background rejection ordering" << endl;
 	}else{
 		if(mode == "R"){OrderMethod = &ROrderMethod;
-		
+
 	cout << "Using Random ordering" << endl;
 		}else{
 			if(mode == "S"){OrderMethod = &SOrderMethod;

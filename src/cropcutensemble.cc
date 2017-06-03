@@ -210,7 +210,7 @@ bool cropcutensemble::OrderAscendingSeff(){
 	return sane;
 }
 bool cropcutensemble::OrderDescendingBrej(){
-	bool sane = false; 
+	bool sane = false;
 	Double_t firstbrej = CutSpaces[0].getOptimalBrej();
 	vector <bool> used(NCutVars,false);
 	Double_t maxbrej;
@@ -250,7 +250,7 @@ bool cropcutensemble::OrderAscendingSeffBeff(){
 					minN = j;
 				}
 			}
-		}		
+		}
 		CutOrder[i] = minN;
 		used[minN] = true;
 	}
@@ -273,7 +273,7 @@ bool cropcutensemble::OrderOriginal(){
 	for(UInt_t i=0; i<NCutVars; i++){
 		CutOrder[i] = i;
 	}
-	return true;	
+	return true;
 }
 void cropcutensemble::writeAllPlots(TCanvas *c){
 	for(UInt_t n=0; n<NCutVars; n++){

@@ -1,8 +1,8 @@
 /* crop: Part of the simpletools package
  * (c) Conor Fitzpatrick, 2008
  *
- * If you find this program useful in whole or in part 
- * please cite this paper: 
+ * If you find this program useful in whole or in part
+ * please cite this paper:
  *
  * Feel free to send bugreports, feature requests, patches etc to:
  * conor.fitzpatrick@cern.ch
@@ -24,10 +24,10 @@ cropvarensemble * varensemble;
 cropcutensemble * cutensemble;
 int main(int argc, char *argv[]) {
 	TCanvas *c = new TCanvas("null","null",0,0);
-	if(argc != 4){	
+	if(argc != 4){
 	varstocutsInfo();
 	exit(EXIT_FAILURE);
-	
+
 	}
 
 

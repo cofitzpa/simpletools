@@ -1,8 +1,8 @@
 /* cutapplier: Part of the simpletools package
  * (c) Conor Fitzpatrick, 2008
  *
- * If you find this program useful in whole or in part 
- * please cite this paper: 
+ * If you find this program useful in whole or in part
+ * please cite this paper:
  *
  * Feel free to send bugreports, feature requests, patches etc to:
  * conor.fitzpatrick@cern.ch
@@ -33,8 +33,8 @@ int main(int argc, char *argv[]) {
 	Double_t cl95p[11] = {3.09,5.14,6.72,8.25,9.76,11.26,12.75,13.81,15.29,16.77,17.82};
 
 
-	TString inname = argv[1];   
-	TString tpath = argv[2];   
+	TString inname = argv[1];
+	TString tpath = argv[2];
 	TString name = tpath;
 	TString cname = argv[3];
 	TString soutname = argv[4];
@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
 	Double_t acceptedm = 0, rejectedm = 0, totalm = 0;
 	Double_t acceptedp = 0, rejectedp = 0, totalp = 0;
 	Double_t daccepted = 0, drejected = 0, dtotal = 0;
-	Double_t eff = 0, rej = 0; 
+	Double_t eff = 0, rej = 0;
 	Double_t effp = 0, rejp = 0;
 	Double_t effm = 0, rejm = 0;
 	Double_t deff = 0, drej = 0;
@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
 		cout << "Error opening the specified ntuple- is the path you specified correct?" << endl;
 		exit(1);
 	}
-	tpath.Resize(std::max(tpath.First(slash),0)); 
+	tpath.Resize(std::max(tpath.First(slash),0));
 	total = (Double_t)inTree->GetEntries();
 	if(total>10){
 		dtotal = sqrt((Double_t)total);
@@ -85,8 +85,8 @@ int main(int argc, char *argv[]) {
 			sout->cd(tpath);
 		}else{
 			sout->cd();
-		}	
-		cout << "applying cut..." << endl; sw.Start();	 
+		}
+		cout << "applying cut..." << endl; sw.Start();
 		TTree *soutTree = inTree->CopyTree(cname);
 		accepted = (Double_t)soutTree->GetEntries();
 		sout->Write();
@@ -101,7 +101,7 @@ int main(int argc, char *argv[]) {
 		acceptedm = accepted;
 		acceptedp = accepted;
 	}else{
-		acceptedm =  cl95m[(UInt_t)accepted];	
+		acceptedm =  cl95m[(UInt_t)accepted];
 		acceptedp =  cl95p[(UInt_t)accepted];
 		if(clerrs == false){
 			clerrs = true;
@@ -122,7 +122,7 @@ int main(int argc, char *argv[]) {
 			clerrs = true;
 			cout << "WARNING: Total rejected events < 10. Using 95\% confidence limits" << endl;
 		}
-	}	
+	}
 
 
 	sw.Stop();
@@ -144,7 +144,7 @@ int main(int argc, char *argv[]) {
 
 		cout << "rejected:	" << rejected << "	+/-	" << drejected << endl;
 
-		cout << "efficiency:	" << eff      << "	+/-	" << deff << endl;	
+		cout << "efficiency:	" << eff      << "	+/-	" << deff << endl;
 
 		cout << "reject. rate: 	" << rej      << "	+/-	" << drej << endl;
 		cout << "-------------------------------------------------------" << endl;
@@ -157,7 +157,7 @@ int main(int argc, char *argv[]) {
 		rejp = rejectedp/totalp;
 		rejm = rejectedm/totalm;
 
-		cout << "-------------------------------------------------------" << endl;	
+		cout << "-------------------------------------------------------" << endl;
 
 		if(total>10){
 			cout << "total:    	" << total    << "	+/-	" << dtotal <<	endl;
@@ -175,7 +175,7 @@ int main(int argc, char *argv[]) {
 		}else{
 			cout << "rejected:      (" << rejected <<")     "<< rejectedm << "      < 95\%CL <      "<< rejectedp <<  endl;
 		}
-		cout << "efficiency:	" << eff      << "	+/-	" << deff << endl;	
+		cout << "efficiency:	" << eff      << "	+/-	" << deff << endl;
 		cout << "reject. rate: 	" << rej      << "	+/-	" << drej << endl;
 		cout << "-------------------------------------------------------" << endl;
 		sw.Print();

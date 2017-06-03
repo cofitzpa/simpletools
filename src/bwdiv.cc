@@ -1,8 +1,8 @@
 /* crop: Part of the simpletools package
  * (c) Conor Fitzpatrick, 2008
  *
- * If you find this program useful in whole or in part 
- * please cite this paper: 
+ * If you find this program useful in whole or in part
+ * please cite this paper:
  *
  * Feel free to send bugreports, feature requests, patches etc to:
  * conor.fitzpatrick@cern.ch
@@ -48,11 +48,11 @@ using namespace boost;
 
 Double_t ratelimit, hertz;
 TSpline3 *deadtimespline;
-Double_t *nodtmaxeffs, *dnodtmaxeffs,*maxeffs, *dmaxeffs, *finaleffs, *dfinaleffs; 
+Double_t *nodtmaxeffs, *dnodtmaxeffs,*maxeffs, *dmaxeffs, *finaleffs, *dfinaleffs;
 
 
 
-std::vector< std::vector<Double_t> > maxincleffs; 
+std::vector< std::vector<Double_t> > maxincleffs;
 std::vector< std::vector<Double_t> > dmaxincleffs;
 std::vector< std::vector<Double_t> > finalincleffs;
 std::vector< std::vector<Double_t> > dfinalincleffs;
@@ -64,7 +64,7 @@ return rate*0.0001;
 
 //Determines 1.0 - the derandomiser deadtime
 //deadtimespline is built from scanning the ODIN with a given filling scheme
-//note: 1100 is hardcoded, assuming the target rate is for 1.1MHz. 
+//note: 1100 is hardcoded, assuming the target rate is for 1.1MHz.
 double technicaldeadtime(double rate){
 	if(((rate/ratelimit)*hertz)>2000.0){
 	return 0.0;
@@ -94,7 +94,7 @@ double ratelimiter(double rate){
 }
 
 class initfcn : public TMVA::IFitterTarget {
-	public: 
+	public:
 		//default constructor
 		initfcn(cropdatastore* _dstore, cropdataset* _dset, cropcutensemble * _thresholds){
 			dstore = _dstore;
@@ -121,7 +121,7 @@ class initfcn : public TMVA::IFitterTarget {
 
 
 class optfcn : public TMVA::IFitterTarget {
-	public: 
+	public:
 		//default constructor
 		optfcn(cropdatastore* _dstore, cropcutensemble * _thresholds){
 			dstore = _dstore;
@@ -228,7 +228,7 @@ int main(int argc, char *argv[]) {
 
 	//TString opt="PopSize=40:Steps=30:Cycles=3:ConvCrit=0.01:SaveBestCycle=5";
 	TString opt="PopSize=100:Steps=30:Cycles=3:ConvCrit=0.01:SaveBestCycle=5";
-	TMVA::IFitterTarget *ffit; 
+	TMVA::IFitterTarget *ffit;
 	TMVA::FitterBase* fitter;
 
 	TString bestcut, thiscut;
@@ -261,7 +261,7 @@ int main(int argc, char *argv[]) {
 			cout << "=========================== Max Eff =========================" << endl;
 
 			cout << "CHI^2: " << ffit->EstimatorFunction(pars) << endl;
-			cout << dataset->getName() << " MAX EFF: $" << prettyPrint(Seff)<<"\\pm"<<prettyPrint(d_Seff)<< "$ BACKGROUND EFF: $" << prettyPrint(Beff)<<"\\pm"<<prettyPrint(d_Beff) << endl; 
+			cout << dataset->getName() << " MAX EFF: $" << prettyPrint(Seff)<<"\\pm"<<prettyPrint(d_Seff)<< "$ BACKGROUND EFF: $" << prettyPrint(Beff)<<"\\pm"<<prettyPrint(d_Beff) << endl;
 			cout << "PHYS DEADTIME: "<< prettyPrint(1.0 - physicsdeadtime(Beff)) << " TECH DEADTIME: " <<  prettyPrint(1.0 - technicaldeadtime(Beff)) << endl;
 
 			maxeffs[k]=Seff*ratelimiter(Beff);
@@ -269,7 +269,7 @@ int main(int argc, char *argv[]) {
 			nodtmaxeffs[k]=Seff;
 			dnodtmaxeffs[k]=d_Seff;
 
-			cout << "=========================== THRESHOLDS at max eff =========================" << endl;	
+			cout << "=========================== THRESHOLDS at max eff =========================" << endl;
 			for(int i=0; i<thresholds->NCutVars; i++){
 				thresholds->getCutVar(i,&bestcut);
 				bestcut+=prettyPrint(pars[i]);
@@ -307,7 +307,7 @@ int main(int argc, char *argv[]) {
 	for(int i=0; i<thresholds->NCutVars; i++){
 		thresholds->getCutVar(i,&thiscut);
 		thiscut+=prettyPrint(pars[i]);
-		cout << thiscut << "     &       "; 
+		cout << thiscut << "     &       ";
 	}
 	cout << "\\\\" << endl;
 
@@ -426,9 +426,9 @@ int main(int argc, char *argv[]) {
 
 	}
 
-	cout << "Retention & $"<< prettyPrint(ratelimit) << "$ & $" << prettyPrint(Beff) << "\\pm" << prettyPrint(d_Beff) <<"$ \\\\"<< endl;  
-	cout << "Phys Deadtime & $"<< " 0.0 " << "$ & $" << prettyPrint(1.0 - physicsdeadtime(Beff)) <<"$ \\\\"<< endl;  
-	cout << "Tech Deadtime & $"<< " 0.0 " << "$ & $" << prettyPrint(1.0 - technicaldeadtime(Beff)) <<"$ \\\\"<< endl;  
+	cout << "Retention & $"<< prettyPrint(ratelimit) << "$ & $" << prettyPrint(Beff) << "\\pm" << prettyPrint(d_Beff) <<"$ \\\\"<< endl;
+	cout << "Phys Deadtime & $"<< " 0.0 " << "$ & $" << prettyPrint(1.0 - physicsdeadtime(Beff)) <<"$ \\\\"<< endl;
+	cout << "Tech Deadtime & $"<< " 0.0 " << "$ & $" << prettyPrint(1.0 - technicaldeadtime(Beff)) <<"$ \\\\"<< endl;
 
 	for(UInt_t k = 1; k<=datastore->getNSignalDatasets(); k++){
 		maxeffbars->SetBinContent(k,nodtmaxeffs[k-1]);

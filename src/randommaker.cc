@@ -1,8 +1,8 @@
 /* randommaker: Part of the simpletools package
  * (c) Conor Fitzpatrick, 2008
  *
- * If you find this program useful in whole or in part 
- * please cite this paper: 
+ * If you find this program useful in whole or in part
+ * please cite this paper:
  *
  * Feel free to send bugreports, feature requests, patches etc to:
  * conor.fitzpatrick@cern.ch
@@ -32,8 +32,8 @@ int main(int argc, char *argv[]) {
 		return EXIT_FAILURE;
 	}
 
-	TString inname = argv[1];   
-	TString tpath = argv[2];   
+	TString inname = argv[1];
+	TString tpath = argv[2];
 	int seed = atoi(argv[3]);
 	TString cname = argv[4];
 	TString soutname = argv[5];
@@ -53,14 +53,14 @@ int main(int argc, char *argv[]) {
 	TTree* inTree = (TTree*)in->Get(tpath);
 	UInt_t total = (UInt_t)inTree->GetEntries();
 
-	//Ensure branch already named this way isn't copied: 
+	//Ensure branch already named this way isn't copied:
 	inTree->SetBranchStatus(cname,0);
 
 	TString slash = "/";
 	TString name = tpath;
-	tpath.Resize(std::max(tpath.First(slash),0)); 
+	tpath.Resize(std::max(tpath.First(slash),0));
 
-	TFile* sout = new TFile(soutname,"RECREATE");
+	TFile* sout = TFile::Open(soutname,"RECREATE");
 	if(tpath!=name){
 	sout->mkdir(tpath);
 	sout->cd(tpath);
@@ -70,13 +70,13 @@ int main(int argc, char *argv[]) {
 
 	TRandom3*  rndGen = new TRandom3(seed);
 
-	
 
-	cout << "copying ntuple" << endl; sw.Start();	 
+
+	cout << "copying ntuple" << endl; sw.Start();
 	TTree *soutTree = inTree->CloneTree(-1);
 	Double_t val =0.0;
 	TBranch *formbranch = soutTree->Branch(cname, &val,cname+"/D");
-	cout << "creating new column" << endl; sw.Start();	 
+	cout << "creating new column" << endl; sw.Start();
 	int k=0;
 	int pc =0;
 	for(UInt_t l=0; l<total; l++){
@@ -90,7 +90,7 @@ int main(int argc, char *argv[]) {
 		}
 	}
 	cout << "100" << "\% complete\r" << endl;
-	soutTree->Write();	
+	soutTree->Write();
 	sout->Write();
 	sout->Close();
 	in->Close();
