@@ -21,6 +21,7 @@ class cropdatastore {
 		~cropdatastore();
 		void addDataset(cropdataset*);
 		void print() const;
+		void printDataSets() const;
 		void print(TString, TString) const;
 		void printOneLine(bool) const;
 		void printOneLine(bool, TString *, TString *) const;

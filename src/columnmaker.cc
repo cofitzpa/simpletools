@@ -68,8 +68,6 @@ int main(int argc, char *argv[]) {
 	}
 
 
-
-
 	cout << "copying ntuple" << endl; sw.Start();
 	TTree *soutTree = inTree->CloneTree(-1);
 	Float_t val =0.0;

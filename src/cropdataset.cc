@@ -32,7 +32,7 @@ cropdataset::cropdataset(TString _name, TString _filePath, TString _ntuplePath, 
 	if(preprocCutVar == "1" || preprocCutVar == "1.0"){preprocCut=false;}else{preprocCut=true;}
 	procEntries = (Double_t)elist->GetN();
 	getWeightedEntries(new TString(""),&procWeightedEntries, &d_procWeightedEntries);
-	print();
+	//print();
 }
 
 cropdataset::cropdataset(TString _name, TString _filePath, TString _ntuplePath, TString _preprocCutVar="", TString _perEventWeightVar = "", UInt_t _color=0, UInt_t _fill=0){
@@ -66,7 +66,7 @@ cropdataset::cropdataset(TString _name, TString _filePath, TString _ntuplePath, 
 	preprocCut=true;
 	procEntries = (Double_t)elist->GetN();
 	getWeightedEntries(new TString(""),&procWeightedEntries, &d_procWeightedEntries);
-	print();
+	//print();
 }
 
 cropdataset::cropdataset(TString _name, TString _filePath, TString _ntuplePath, bool _signal, TString _preprocCutVar="", TString _perEventWeightVar = ""){
@@ -102,7 +102,7 @@ cropdataset::cropdataset(TString _name, TString _filePath, TString _ntuplePath, 
 	preprocCut=true;
 	procEntries = (Double_t)elist->GetN();
 	getWeightedEntries(new TString(""),&procWeightedEntries, &d_procWeightedEntries);
-	print();
+	//print();
 }
 
 
@@ -281,7 +281,7 @@ cropdataset::cropdataset(TString line, TString weightfilename, UInt_t linenum){
 	if(preprocCutVar == "1" || preprocCutVar == "1.0"){preprocCut=false;}else{preprocCut=true;}
 	procEntries = (Double_t)elist->GetN();
 	getWeightedEntries(new TString(""),&procWeightedEntries, &d_procWeightedEntries);
-	print();
+	//print();
 }
 
 void cropdataset::getWeightedEntries(TString *cut, Double_t *Entries=0, Double_t *d_Entries=0) const{

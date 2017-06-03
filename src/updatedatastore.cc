@@ -32,6 +32,7 @@ int main(int argc, char *argv[]) {
 
 	cout << "INFO: Parsing weightfile..." << endl;
 	datastore = new cropdatastore("test",weightListName);
+	datastore->printDataSets();
 	datastore->initStats();
 	datastore->writeToFile(outname);
 }

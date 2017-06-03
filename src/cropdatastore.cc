@@ -79,6 +79,15 @@ void cropdatastore::addDataset(cropdataset *dataset){
 
 }
 
+void cropdatastore::printDataSets() const{
+	for(UInt_t i =0; i<NSignalDatasets; i++){
+		SignalDatasets[i]->print();
+	}
+	for(UInt_t i =0; i<NBackgroundDatasets; i++){
+		BackgroundDatasets[i]->print();
+	}
+}
+
 void cropdatastore::print() const{
 	cout << "INFO:	========================================================================== " << endl;
 	cout << "INFO: "<< name << " is a datastore containing " << NSignalDatasets << " signal and " << NBackgroundDatasets << " background datasets" << endl;

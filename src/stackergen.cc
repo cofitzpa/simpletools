@@ -49,6 +49,7 @@ int main(int argc, char *argv[]) {
 	}
 	cout << "INFO: Parsing weightfile..." << endl;
 	datastore = new cropdatastore("test",weightListName);
+	datastore->printDataSets();
 	datastore->initStats();
 	varensemble = new cropvarensemble(datastore, usinglogsx, usinglogsy, bins);
 	varensemble->writeToFile(outname);

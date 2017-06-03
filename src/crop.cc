@@ -93,6 +93,7 @@ int main(int argc, char *argv[]) {
 
 	cout << "INFO: Parsing weightfile..." << endl;
 	cropdatastore *datastore = new cropdatastore("test",weightListName);
+	datastore->printDataSets();
 	datastore->initStats();
 
 	cout << "INFO: Parsing cutfile..." << endl;
