@@ -1,21 +1,3 @@
-simpletools: Handy command-line tools for the manipulation of ROOT ntuples
-(c) Conor Fitzpatrick 2007-2015
-
-README.pdf is outdated. Read the tutorial and run the tutorial scripts available from the same location you got the source from. 
-
-If you find these tools useful either in whole or in part, please cite the documentation:
-
-simpletools: Handy command line tools for ntuple manipulation and analysis
-LHCb Internal Note 2009-029
-Conor Fitzpatrick, University of Edinburgh
-
-The most recent version of simpletools, including the above documentation will always be available from
-/afs/cern.ch/user/c/cofitzpa/public/simpletools/
-
-Bug reports, feature requests, comments and patches are always welcome.
-conor.fitzpatrick@cern.ch
-
-changelog
 v2.0u - included fixes to prevent segfaults on close to cutapplier, columnmaker from Adam Morris, added randommaker tool to add uniform random number as a column for prescale calculations
 
 v2.0t - added ability to set rate scale for deadtime in bwdiv. Allows you to optimise for retentions different to 1MHz
