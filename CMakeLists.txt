@@ -33,7 +33,7 @@ ${SMPT_SOURCE_DIR}/src/cropdatastore.cc
 )
 
 
-set(EXELIST thresholdeffs bwdiv crop stackergen rangefinder sepper mergevars updatedatastore stacker varstocuts eff corr cuttester columnmaker tuplesampler tuplescrambler cutapplier)
+set(EXELIST thresholdeffs bwdiv crop stackergen rangefinder sepper mergevars updatedatastore stacker varstocuts eff corr cuttester columnmaker multicolumnmaker tuplesampler tuplescrambler cutapplier)
 
 foreach(exe ${EXELIST})
   add_executable(${exe} ${SMPT_SOURCE_DIR}/src/${exe}.cc)
