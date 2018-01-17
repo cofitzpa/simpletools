@@ -83,7 +83,7 @@ int main(int argc, char *argv[]) {
 	TString soutname = argv[4];
 	TStopwatch sw;
 
-	cout << "--------MULTICOLUMNMAKER - Conor Fitzpatrick, 2008 ----------" << endl;
+	cout << "--------MULTICOLUMNMAKER - Adam Morris, 2018 ----------" << endl;
 	cout << "adding colums using formulae in:		" << fname 	<< endl;
 	cout <<	"to ntuple:		" << tpath 	<< endl;
 	cout <<	"in file:		" << inname 	<< endl;
