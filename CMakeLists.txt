@@ -22,6 +22,9 @@ foreach(opt ${ROOT_OPTIONAL_COMPONENTS})
   endif()
 endforeach()
 
+# Locate Boost
+find_package(Boost REQUIRED system)
+
 #Check the compiler and set the compile and link flags
 set(CMAKE_BUILD_TYPE Debug)
 
