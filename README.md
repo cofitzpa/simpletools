@@ -13,3 +13,28 @@ The most recent version of simpletools, including the above documentation will a
 
 Bug reports, feature requests, comments and patches are always welcome.  \
 conor.fitzpatrick@cern.ch
+
+## Installation
+
+Building and installing are done with CMake.
+If you want to install simpletools system-wide, run:
+
+    cmake .
+    make
+    sudo make install
+
+If you don't have administrator privileges and/or want to install locally, use `-DCMAKE_INSTALL_PREFIX` to change the destination, *e.g.*:
+
+    cmake . -DCMAKE_INSTALL_PREFIX=~/.local/
+    make
+    make install
+
+### Uninstallation
+
+After running `make install`, a file called `install_manifest.txt` will be created, which lists the destinations of all installed binaries and libraries.
+To uninstall, you can run:
+
+    make uninstall
+
+which will delete every file listed in `install_manifest.txt`.
+

@@ -51,7 +51,10 @@ endforeach()
 
 # Configure install destination
 install(TARGETS cropsimpletools ${EXELIST}
-  RUNTIME DESTINATION ${SMPT_SOURCE_DIR}/bin
-  LIBRARY DESTINATION ${SMPT_SOURCE_DIR}/lib
-  ARCHIVE DESTINATION ${SMPT_SOURCE_DIR}/lib/static)
+  RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin
+  LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/static)
+
+# Provide easy (but dumb) way to uninstall
+add_custom_target(uninstall xargs rm -v < install_manifest.txt)
 
