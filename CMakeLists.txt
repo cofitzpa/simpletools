@@ -25,12 +25,10 @@ endforeach()
 # Locate Boost
 find_package(Boost REQUIRED system)
 
-#Check the compiler and set the compile and link flags
-set(CMAKE_BUILD_TYPE Debug)
-
+# Check the compiler and set the compile and link flags
+#set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY lib)
-
 
 include_directories(${ROOT_INCLUDE_DIRS} ${SMPT_SOURCE_DIR}/include)
 
@@ -43,7 +41,7 @@ ${SMPT_SOURCE_DIR}/src/cropcutensemble.cc
 ${SMPT_SOURCE_DIR}/src/cropdatastore.cc
 )
 
-
+# List executables and link each of them to the local and ROOT libraries
 set(EXELIST thresholdeffs bwdiv crop stackergen rangefinder sepper mergevars updatedatastore stacker varstocuts eff corr cuttester columnmaker multicolumnmaker tuplesampler tuplescrambler cutapplier)
 
 foreach(exe ${EXELIST})
@@ -51,8 +49,9 @@ foreach(exe ${EXELIST})
   target_link_libraries (${exe} cropsimpletools ${ROOT_LIBRARIES})
 endforeach()
 
-
+# Configure install destination
 install(TARGETS cropsimpletools ${EXELIST}
   RUNTIME DESTINATION ${SMPT_SOURCE_DIR}/bin
   LIBRARY DESTINATION ${SMPT_SOURCE_DIR}/lib
   ARCHIVE DESTINATION ${SMPT_SOURCE_DIR}/lib/static)
+
