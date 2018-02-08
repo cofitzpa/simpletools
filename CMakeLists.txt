@@ -22,6 +22,8 @@ foreach(opt ${ROOT_OPTIONAL_COMPONENTS})
   endif()
 endforeach()
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ROOT_CXX_FLAGS}")
+
 # Locate Boost
 find_package(Boost REQUIRED system)
 
