@@ -7,19 +7,30 @@ endif()
 
 project(SMPT)
 
-#set(CMAKE_CXX_FLAGS "-std=c++11")
-
 # Load Macro to locate ROOT and needed libraries
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
-find_package(ROOT REQUIRED Core RIO Net Hist Graf Graf3d Gpad Tree Rint
+set(ROOT_REQUIRED_COMPONENTS Core RIO Net Hist Graf Graf3d Gpad Tree Rint
 Postscript Matrix Physics MathCore Thread Gui TreePlayer Minuit TMVA)
+#set(ROOT_OPTIONAL_COMPONENTS Proof)
+find_package(ROOT REQUIRED ${ROOT_REQUIRED_COMPONENTS}
+OPTIONAL_COMPONENTS ${ROOT_OPTIONAL_COMPONENTS})
 
-#Check the compiler and set the compile and link flags
-set(CMAKE_BUILD_TYPE Debug)
+# Set preprocessor flags for optional components
+foreach(opt ${ROOT_OPTIONAL_COMPONENTS})
+  if(ROOT_${opt}_LIBRARY)
+    add_definitions(-Duse_${opt})
+  endif()
+endforeach()
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ROOT_CXX_FLAGS}")
+
+# Locate Boost
+find_package(Boost REQUIRED system)
+
+# Check the compiler and set the compile and link flags
+#set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY lib)
-
 
 include_directories(${ROOT_INCLUDE_DIRS} ${SMPT_SOURCE_DIR}/include)
 
@@ -32,16 +43,20 @@ ${SMPT_SOURCE_DIR}/src/cropcutensemble.cc
 ${SMPT_SOURCE_DIR}/src/cropdatastore.cc
 )
 
-
+# List executables and link each of them to the local and ROOT libraries
 set(EXELIST thresholdeffs bwdiv crop stackergen rangefinder sepper mergevars updatedatastore stacker varstocuts eff corr cuttester columnmaker multicolumnmaker tuplesampler tuplescrambler cutapplier)
 
 foreach(exe ${EXELIST})
   add_executable(${exe} ${SMPT_SOURCE_DIR}/src/${exe}.cc)
-  target_link_libraries (${exe} cropsimpletools ${ROOT_LIBRARIES}) 
+  target_link_libraries (${exe} cropsimpletools ${ROOT_LIBRARIES})
 endforeach()
 
-
+# Configure install destination
 install(TARGETS cropsimpletools ${EXELIST}
-  RUNTIME DESTINATION ${SMPT_SOURCE_DIR}/bin
-  LIBRARY DESTINATION ${SMPT_SOURCE_DIR}/lib
-  ARCHIVE DESTINATION ${SMPT_SOURCE_DIR}/lib/static)
+  RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin
+  LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/static)
+
+# Provide easy (but dumb) way to uninstall
+add_custom_target(uninstall xargs rm -v < install_manifest.txt)
+

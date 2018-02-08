@@ -1,281 +1,203 @@
-# - Find the ROOT libraries, headers and tools.
-# Components:
-#   Core Reflex RIO Hist Tree TreePlayer Cintex Matrix GenVector MathCore MathMore XMLIO
+# - Finds ROOT instalation
+# This module sets up ROOT information
+# It defines:
+# ROOT_FOUND             If the ROOT is found
+# ROOT_INCLUDE_DIR       PATH to the include directory
+# ROOT_INCLUDE_DIRS      PATH to the include directories (not cached)
+# ROOT_LIBRARIES         Most common libraries
+# ROOT_<name>_LIBRARY    Full path to the library <name>
+# ROOT_LIBRARY_DIR       PATH to the library directory
+# ROOT_ETC_DIR           PATH to the etc directory
+# ROOT_DEFINITIONS       Compiler definitions
+# ROOT_CXX_FLAGS         Compiler flags to used by client packages
+# ROOT_C_FLAGS           Compiler flags to used by client packages
+# ROOT_EXE_LINKER_FLAGS  Linker flags to used by client packages
+#
+# Updated by K. Smith (ksmith37@nd.edu) to properly handle
+#  dependencies in ROOT_GENERATE_DICTIONARY
 
+find_program(ROOT_CONFIG_EXECUTABLE root-config
+  HINTS $ENV{ROOTSYS}/bin)
 
-if(ROOT_OVERRIDE_PATH)
-  if(NOT ROOTSYS AND NOT ENV{ROOTSYS})
-    message(FATAL_ERROR "You must specify ROOTSYS in conjunction with ROOT_OVERRIDE_PATH.")
-  endif()
-  #message(STATUS "Overriding CMAKE_PREFIX_PATH looking for ROOT")
-  set(ROOT_OVERRIDE_PATH NO_CMAKE_PATH)
-endif()
+execute_process(
+    COMMAND ${ROOT_CONFIG_EXECUTABLE} --prefix
+    OUTPUT_VARIABLE ROOTSYS
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
 
-# Find ROOTSYS
-#  We assume TROOT.h is in $ROOTSYS/include
-if(NOT ROOT_INCLUDE_DIR)
-  find_path(ROOT_INCLUDE_DIR TROOT.h
-            HINTS ${ROOTSYS}/include $ENV{ROOTSYS}/include
-            PATH_SUFFIXES root
-            ${ROOT_OVERRIDE_PATH})
-  if(ROOT_INCLUDE_DIR MATCHES "include$")
-    # ROOTSYS-style installation
-    get_filename_component(ROOTSYS ${ROOT_INCLUDE_DIR} PATH)
-    set(ROOTSYS ${ROOTSYS} CACHE PATH "Location of the installation of ROOT" FORCE)
-  else()
-    set(ROOT_NO_ROOTSYS TRUE CACHE BOOL "ROOT is installed with system packages and not in a ROOTSYS")
-  endif()
-endif()
+execute_process(
+    COMMAND ${ROOT_CONFIG_EXECUTABLE} --version
+    OUTPUT_VARIABLE ROOT_VERSION
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
 
+execute_process(
+    COMMAND ${ROOT_CONFIG_EXECUTABLE} --incdir
+    OUTPUT_VARIABLE ROOT_INCLUDE_DIR
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
 set(ROOT_INCLUDE_DIRS ${ROOT_INCLUDE_DIR})
 
-# This is the list of some known component libraries
-set(ROOT_ALL_COMPONENTS Core Reflex RIO Hist Tree TreePlayer Cintex Matrix
-                        GenVector MathCore MathMore XMLIO Graf Gui Rint Physics)
-# and build tools
-set(ROOT_ALL_TOOLS genreflex genmap root rootcint)
+execute_process(
+    COMMAND ${ROOT_CONFIG_EXECUTABLE} --etcdir
+    OUTPUT_VARIABLE ROOT_ETC_DIR
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+set(ROOT_ETC_DIRS ${ROOT_ETC_DIR})
 
-# Helper macro to discover the dependencies between components needed on Mac)
-macro(_root_get_deps libpath var)
-  # reset output var
-  set(${var})
-  if(APPLE)
-    get_filename_component(_libname ${libpath} NAME)
-    # get all required libraries
-    execute_process(COMMAND otool -L ${libpath}
-                    OUTPUT_VARIABLE _otool_out)
-    # find all the libs taken from @rpath (they come from ROOT)
-    string(REGEX MATCHALL "@rpath/lib[^ ]*\\.so" _otool_out "${_otool_out}")
-    # remove the current library (if present)
-    list(REMOVE_ITEM _otool_out "@rpath/${_libname}")
-    # translate to a list of component names
-    set(${var})
-    foreach(_c ${_otool_out})
-      string(REPLACE "@rpath/lib" "" _c ${_c})
-      string(REPLACE ".so" "" _c ${_c})
-      list(APPEND ${var} ${_c})
-    endforeach()
-  endif()
-endmacro()
+execute_process(
+    COMMAND ${ROOT_CONFIG_EXECUTABLE} --libdir
+    OUTPUT_VARIABLE ROOT_LIBRARY_DIR
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+set(ROOT_LIBRARY_DIRS ${ROOT_LIBRARY_DIR})
 
-# Enforce a minimal list if none is explicitly requested
-if(NOT ROOT_FIND_COMPONENTS)
-  set(ROOT_FIND_COMPONENTS Core)
-endif()
-
-# Locate the libraries (forcing few default ones)
-while(ROOT_FIND_COMPONENTS)
-  # pop the first element from the list
-  list(GET ROOT_FIND_COMPONENTS 0 component)
-  list(REMOVE_AT ROOT_FIND_COMPONENTS 0)
-  # look for the library if not found yet
-  if(NOT ROOT_${component}_LIBRARY)
-    find_library(ROOT_${component}_LIBRARY NAMES ${component} lib${component}
-                 HINTS ${ROOTSYS}/lib
-                 PATH_SUFFIXES root
-                 ${ROOT_OVERRIDE_PATH})
-    if(ROOT_${component}_LIBRARY)
-      mark_as_advanced(ROOT_${component}_LIBRARY)
-      set(_found_components ${_found_components} ${component})
-    endif()
-  endif()
-  if(APPLE)
-    if(ROOT_${component}_LIBRARY AND NOT DEFINED ROOT_${component}_DEPS)
-      #message(STATUS "scanning dependencies of ${component} (${ROOT_${component}_LIBRARY})")
-      _root_get_deps(${ROOT_${component}_LIBRARY} ROOT_${component}_DEPS)
-      #message(STATUS "found: ${ROOT_${component}_DEPS}")
-      set(ROOT_${component}_DEPS ${ROOT_${component}_DEPS} CACHE INTERNAL "Components ${component} depends on.")
-    endif()
-    list(APPEND ROOT_FIND_COMPONENTS ${ROOT_${component}_DEPS})
-    list(REMOVE_DUPLICATES ROOT_FIND_COMPONENTS)
-  endif()
-  #message(STATUS "ROOT_FIND_COMPONENTS=${ROOT_FIND_COMPONENTS}")
-  set(ROOT_LIBRARIES ${ROOT_LIBRARIES} ${ROOT_${component}_LIBRARY})
-endwhile()
-
-# Locate the tools
-foreach(component ${ROOT_ALL_TOOLS})
-  if(NOT ROOT_${component}_CMD)
-    find_program(ROOT_${component}_CMD ${component}
-                 HINTS ${ROOTSYS}/bin
-                 ${ROOT_OVERRIDE_PATH})
-    if(ROOT_${component}_CMD)
-      mark_as_advanced(ROOT_${component}_CMD)
-      set(_found_tools ${_found_tools} ${component})
+set(rootlibs Core RIO Net Hist Graf Graf3d Gpad Tree Rint Postscript Matrix Physics MathCore Thread MultiProc)
+set(ROOT_LIBRARIES)
+foreach(_cpt ${rootlibs} ${ROOT_FIND_COMPONENTS})
+  find_library(ROOT_${_cpt}_LIBRARY ${_cpt} HINTS ${ROOT_LIBRARY_DIR})
+  if(ROOT_${_cpt}_LIBRARY)
+    mark_as_advanced(ROOT_${_cpt}_LIBRARY)
+    list(APPEND ROOT_LIBRARIES ${ROOT_${_cpt}_LIBRARY})
+    if(ROOT_FIND_COMPONENTS)
+      list(REMOVE_ITEM ROOT_FIND_COMPONENTS ${_cpt})
     endif()
   endif()
 endforeach()
-
-# handle the QUIETLY and REQUIRED arguments and set ROOT_FOUND to TRUE if
-# all listed variables are TRUE
-INCLUDE(FindPackageHandleStandardArgs)
-FIND_PACKAGE_HANDLE_STANDARD_ARGS(ROOT DEFAULT_MSG ROOT_INCLUDE_DIR)
-mark_as_advanced(ROOT_FOUND ROOTSYS ROOT_INCLUDE_DIR)
-
-######################################################################
-# Report findings
-if(ROOT_FOUND)
-  if(NOT ROOT_VERSION_STRING)
-    file(STRINGS ${ROOT_INCLUDE_DIR}/RVersion.h _RVersion REGEX "define *ROOT_RELEASE ")
-    string(REGEX MATCH "\"(([0-9]+)\\.([0-9]+)/([0-9]+)[a-z]*)\"" _RVersion ${_RVersion})
-    set(ROOT_VERSION_STRING ${CMAKE_MATCH_1} CACHE INTERNAL "Version of ROOT")
-    set(ROOT_VERSION_MAJOR ${CMAKE_MATCH_2} CACHE INTERNAL "Major version of ROOT")
-    set(ROOT_VERSION_MINOR ${CMAKE_MATCH_3} CACHE INTERNAL "Minor version of ROOT")
-    set(ROOT_VERSION_PATCH ${CMAKE_MATCH_4} CACHE INTERNAL "Patch version of ROOT")
-  endif()
-  if (NOT ROOT_FIND_QUIETLY AND (_found_components OR _found_tools))
-    message(STATUS "ROOT version: ${ROOT_VERSION_STRING}")
-    if(_found_components)
-      message(STATUS "Found the following ROOT libraries:")
-      foreach(component ${_found_components})
-        message(STATUS "  ${component}")
-      endforeach()
-    endif()
-    if(_found_tools)
-      message(STATUS "Found the following ROOT tools:")
-      foreach(component ${_found_tools})
-        message(STATUS "  ${component}")
-      endforeach()
-    endif()
-  endif()
-  set(_found_components)
-  set(_found_tools)
+if(ROOT_LIBRARIES)
+  list(REMOVE_DUPLICATES ROOT_LIBRARIES)
 endif()
 
-################################################################################
-# Useful functions
-################################################################################
+execute_process(
+    COMMAND ${ROOT_CONFIG_EXECUTABLE} --cflags
+    OUTPUT_VARIABLE __cflags
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+string(REGEX MATCHALL "-(D|U)[^ ]*" ROOT_DEFINITIONS "${__cflags}")
+string(REGEX REPLACE "(^|[ ]*)-I[^ ]*" "" ROOT_CXX_FLAGS "${__cflags}")
+string(REGEX REPLACE "(^|[ ]*)-I[^ ]*" "" ROOT_C_FLAGS "${__cflags}")
+
+execute_process(
+    COMMAND ${ROOT_CONFIG_EXECUTABLE} --ldflags
+    OUTPUT_VARIABLE __ldflags
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+set(ROOT_EXE_LINKER_FLAGS "${__ldflags}")
+
+set(ROOT_USE_FILE ${CMAKE_CURRENT_LIST_DIR}/RootUseFile.cmake)
+
+execute_process(
+  COMMAND ${ROOT_CONFIG_EXECUTABLE} --features
+  OUTPUT_VARIABLE _root_options
+  OUTPUT_STRIP_TRAILING_WHITESPACE)
+separate_arguments(_root_options)
+foreach(_opt ${_root_options})
+  set(ROOT_${_opt}_FOUND TRUE)
+endforeach()
+
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(ROOT DEFAULT_MSG ROOT_CONFIG_EXECUTABLE
+    ROOTSYS ROOT_VERSION ROOT_INCLUDE_DIR ROOT_LIBRARIES ROOT_LIBRARY_DIR)
+
+mark_as_advanced(ROOT_CONFIG_EXECUTABLE)
+
 include(CMakeParseArguments)
+find_program(ROOTCLING_EXECUTABLE rootcling HINTS $ENV{ROOTSYS}/bin)
+find_program(GENREFLEX_EXECUTABLE genreflex HINTS $ENV{ROOTSYS}/bin)
+find_package(GCCXML)
 
-#-------------------------------------------------------------------------------
-# reflex_generate_dictionary(dictionary headerfile selectionfile OPTIONS opt1 opt2 ...)
-#
-# Generate a Reflex dictionary library from the specified header and selection.
-#-------------------------------------------------------------------------------
-macro(reflex_generate_dictionary dictionary _headerfile _selectionfile)
-  find_package(GCCXML)
-  if(NOT GCCXML)
-    message(FATAL_ERROR "GCCXML not found, cannot generate Reflex dictionaries.")
-  endif()
-
-  CMAKE_PARSE_ARGUMENTS(ARG "" "" "OPTIONS" ${ARGN})
-
-  # Ensure that the path to the header and selection files are absolute
-  if(IS_ABSOLUTE ${_selectionfile})
-   set(selectionfile ${_selectionfile})
-  else()
-   set(selectionfile ${CMAKE_CURRENT_SOURCE_DIR}/${_selectionfile})
-  endif()
-  if(IS_ABSOLUTE ${_headerfile})
-    set(headerfiles ${_headerfile})
-  else()
-    set(headerfiles ${CMAKE_CURRENT_SOURCE_DIR}/${_headerfile})
-  endif()
-
-  set(gensrcdict ${dictionary}_dict.cpp)
-
-  if(NOT MSVC)
-    set(GCCXML_CXX_COMPILER ${CMAKE_CXX_COMPILER} CACHE STRING "Compiler that GCCXML must use.")
-  else()
-    set(GCCXML_CXX_COMPILER cl CACHE STRING "Compiler that GCCXML must use.")
-  endif()
-  mark_as_advanced(GCCXML_CXX_COMPILER)
-  set(gccxmlopts "--gccxml-compiler ${GCCXML_CXX_COMPILER}")
-
-  if(GCCXML_CXX_FLAGS)
-    set(gccxmlopts "${gccxmlopts} --gccxml-cxxflags ${GCCXML_CXX_FLAGS}")
-  endif()
-
-  set(rootmapname ${dictionary}Dict.rootmap)
-  set(rootmapopts --rootmap=${rootmapname})
-  if (NOT WIN32)
-    set(rootmapopts ${rootmapopts} --rootmap-lib=lib${dictionary}Dict)
-  else()
-    set(rootmapopts ${rootmapopts} --rootmap-lib=${dictionary}Dict)
-  endif()
-
-  #set(include_dirs -I${CMAKE_CURRENT_SOURCE_DIR})
-  get_directory_property(_incdirs INCLUDE_DIRECTORIES)
-  foreach(d ${CMAKE_CURRENT_SOURCE_DIR} ${_incdirs})
-   set(include_dirs ${include_dirs} -I${d})
+#----------------------------------------------------------------------------
+# function ROOT_GENERATE_DICTIONARY( dictionary
+#                                    header1 header2 ...
+#                                    LINKDEF linkdef1 ...
+#                                    OPTIONS opt1...)
+function(ROOT_GENERATE_DICTIONARY dictionary)
+  CMAKE_PARSE_ARGUMENTS(ARG "" "" "LINKDEF;OPTIONS" "" ${ARGN})
+  #---Get the list of include directories------------------
+  get_directory_property(incdirs INCLUDE_DIRECTORIES)
+  set(includedirs)
+  foreach( d ${incdirs})
+     set(includedirs ${includedirs} -I${d})
   endforeach()
-
-  get_directory_property(_defs COMPILE_DEFINITIONS)
-  foreach(d ${_defs})
-   set(definitions ${definitions} -D${d})
+  #---Get the list of header files-------------------------
+  set(headerfiles)
+  foreach(fp ${ARG_UNPARSED_ARGUMENTS})
+    if(${fp} MATCHES "[*?]") # Is this header a globbing expression?
+      file(GLOB files ${fp})
+      foreach(f ${files})
+        if(NOT f MATCHES LinkDef) # skip LinkDefs from globbing result
+          set(headerfiles ${headerfiles} ${f})
+        endif()
+      endforeach()
+    else()
+      find_file(headerFile ${fp} HINTS ${incdirs})
+      set(headerfiles ${headerfiles} ${headerFile})
+      unset(headerFile CACHE)
+    endif()
   endforeach()
-
-  if(gccxmlopts)
-    set(gccxmlopts "--gccxmlopt=${gccxmlopts}")
-  endif()
-
-  get_filename_component(GCCXML_home ${GCCXML} PATH)
-  add_custom_command(
-    OUTPUT ${gensrcdict} ${rootmapname}
-    COMMAND ${ROOT_genreflex_CMD}
-         ${headerfiles} -o ${gensrcdict} ${gccxmlopts} ${rootmapopts} --select=${selectionfile}
-         --gccxmlpath=${GCCXML_home} ${ARG_OPTIONS} ${include_dirs} ${definitions}
-    DEPENDS ${headerfiles} ${selectionfile})
-
-  # Creating this target at ALL level enables the possibility to generate dictionaries (genreflex step)
-  # well before the dependent libraries of the dictionary are build
-  add_custom_target(${dictionary}Gen ALL DEPENDS ${gensrcdict} ${rootmapname})
-
-  set_property(TARGET ${dictionary}Gen PROPERTY ROOTMAPFILE ${rootmapname})
-
-endmacro()
-
-#-------------------------------------------------------------------------------
-# reflex_dictionary(dictionary headerfile selectionfile OPTIONS opt1 opt2 ...)
-#
-# Generate and build a Reflex dictionary library from the specified header and selection.
-#-------------------------------------------------------------------------------
-function(reflex_dictionary dictionary headerfile selectionfile)
-  CMAKE_PARSE_ARGUMENTS(ARG "" "" "LINK_LIBRARIES;OPTIONS" ${ARGN})
-  # ensure that we split on the spaces
-  separate_arguments(ARG_OPTIONS)
-  reflex_generate_dictionary(${dictionary} ${headerfile} ${selectionfile} OPTIONS ${ARG_OPTIONS})
-  add_library(${dictionary}Dict MODULE ${gensrcdict})
-  target_link_libraries(${dictionary}Dict ${ARG_LINK_LIBRARIES} ${ROOT_Reflex_LIBRARY})
-  # ensure that *Gen and *Dict are not built at the same time
-  add_dependencies(${dictionary}Dict ${dictionary}Gen)
-  # Attach the name of the rootmap file to the target so that it can be used from
-  set_property(TARGET ${dictionary}Dict PROPERTY ROOTMAPFILE ${rootmapname})
+  #---Get LinkDef.h file------------------------------------
+  set(linkdefs)
+  foreach( f ${ARG_LINKDEF})
+    find_file(linkFile ${f} HINTS ${incdirs})
+    set(linkdefs ${linkdefs} ${linkFile})
+    unset(linkFile CACHE)
+  endforeach()
+  #---call rootcling------------------------------------------
+  add_custom_command(OUTPUT ${dictionary}.cxx
+                     COMMAND ${ROOTCLING_EXECUTABLE} -f ${dictionary}.cxx
+                                          -c ${ARG_OPTIONS} ${includedirs} ${headerfiles} ${linkdefs}
+                     DEPENDS ${headerfiles} ${linkdefs} VERBATIM)
 endfunction()
 
-
-macro (ROOT_GENERATE_DICTIONARY INFILES LINKDEF_FILE OUTFILE INCLUDE_DIRS_IN)
-  set(INCLUDE_DIRS)
-  foreach (_current_FILE ${INCLUDE_DIRS_IN})
-    set(INCLUDE_DIRS ${INCLUDE_DIRS} -I${_current_FILE})
-  endforeach (_current_FILE ${INCLUDE_DIRS_IN})
-  STRING(REGEX REPLACE "^(.*)\\.(.*)$" "\\1.h" bla "${OUTFILE}")
-  SET (OUTFILES ${OUTFILE} ${bla})
-  if (CMAKE_SYSTEM_NAME MATCHES Linux)
-    ADD_CUSTOM_COMMAND(OUTPUT ${OUTFILES}
-    COMMAND LD_LIBRARY_PATH=${ROOT_LIBRARY_DIR} ROOTSYS=${ROOTSYS}
-    ARGS -f ${OUTFILE} -c -DHAVE_CONFIG_H ${INCLUDE_DIRS} ${INFILES} ${LINKDEF_FILE}
-    DEPENDS ${INFILES} ${LINKDEF_FILE})
-  else (CMAKE_SYSTEM_NAME MATCHES Linux)
-    if (CMAKE_SYSTEM_NAME MATCHES Darwin)
-    ADD_CUSTOM_COMMAND(
-      OUTPUT ${OUTFILES}
-      COMMAND DYLD_LIBRARY_PATH=${ROOT_LIBRARY_DIR} ROOTSYS=${ROOTSYS} 
-      ARGS -f ${OUTFILE} -c -DHAVE_CONFIG_H ${INCLUDE_DIRS} ${INFILES} ${LINKDEF_FILE}
-      DEPENDS ${INFILES} ${LINKDEF_FILE} )
-    endif (CMAKE_SYSTEM_NAME MATCHES Darwin)
-  endif (CMAKE_SYSTEM_NAME MATCHES Linux)
-endmacro (ROOT_GENERATE_DICTIONARY)
-
-
-if(ROOTSYS)
-  set(ROOT_ENVIRONMENT SET ROOTSYS ${ROOTSYS})
-  set(ROOT_BINARY_PATH ${ROOTSYS}/bin)
-  set(ROOT_LIBRARY_DIRS ${ROOTSYS}/lib)
-
-  if(WIN32)
-    set(ROOT_PYTHON_PATH ${ROOTSYS}/bin)
+#----------------------------------------------------------------------------
+# function REFLEX_GENERATE_DICTIONARY(dictionary
+#                                     header1 header2 ...
+#                                     SELECTION selectionfile ...
+#                                     OPTIONS opt1...)
+function(REFLEX_GENERATE_DICTIONARY dictionary)
+  CMAKE_PARSE_ARGUMENTS(ARG "" "" "SELECTION;OPTIONS" "" ${ARGN})
+  #---Get the list of header files-------------------------
+  set(headerfiles)
+  foreach(fp ${ARG_UNPARSED_ARGUMENTS})
+    file(GLOB files ${fp})
+    if(files)
+      foreach(f ${files})
+        set(headerfiles ${headerfiles} ${f})
+      endforeach()
+    else()
+      set(headerfiles ${headerfiles} ${fp})
+    endif()
+  endforeach()
+  #---Get Selection file------------------------------------
+  if(IS_ABSOLUTE ${ARG_SELECTION})
+    set(selectionfile ${ARG_SELECTION})
   else()
-    set(ROOT_PYTHON_PATH ${ROOTSYS}/lib)
+    set(selectionfile ${CMAKE_CURRENT_SOURCE_DIR}/${ARG_SELECTION})
   endif()
-endif()
+  #---Get the list of include directories------------------
+  get_directory_property(incdirs INCLUDE_DIRECTORIES)
+  set(includedirs)
+  foreach( d ${incdirs})
+    set(includedirs ${includedirs} -I${d})
+  endforeach()
+  #---Get preprocessor definitions--------------------------
+  get_directory_property(defs COMPILE_DEFINITIONS)
+  foreach( d ${defs})
+   set(definitions ${definitions} -D${d})
+  endforeach()
+  #---Nanes and others---------------------------------------
+  set(gensrcdict ${dictionary}.cpp)
+  if(MSVC)
+    set(gccxmlopts "--gccxmlopt=\"--gccxml-compiler cl\"")
+  else()
+    #set(gccxmlopts "--gccxmlopt=\'--gccxml-cxxflags -m64 \'")
+    set(gccxmlopts)
+  endif()
+  #set(rootmapname ${dictionary}Dict.rootmap)
+  #set(rootmapopts --rootmap=${rootmapname} --rootmap-lib=${libprefix}${dictionary}Dict)
+  #---Check GCCXML and get path-----------------------------
+  if(GCCXML)
+    get_filename_component(gccxmlpath ${GCCXML} PATH)
+  else()
+    message(WARNING "GCCXML not found. Install and setup your environment to find 'gccxml' executable")
+  endif()
+  #---Actual command----------------------------------------
+  add_custom_command(OUTPUT ${gensrcdict} ${rootmapname}
+                     COMMAND ${GENREFLEX_EXECUTABLE} ${headerfiles} -o ${gensrcdict} ${gccxmlopts} ${rootmapopts} --select=${selectionfile}
+                             --gccxmlpath=${gccxmlpath} ${ARG_OPTIONS} ${includedirs} ${definitions}
+                     DEPENDS ${headerfiles} ${selectionfile})
+endfunction()
+
