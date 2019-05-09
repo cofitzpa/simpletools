@@ -8,7 +8,6 @@ endif()
 project(SMPT)
 
 # Load Macro to locate ROOT and needed libraries
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
 set(ROOT_REQUIRED_COMPONENTS Core RIO Net Hist Graf Graf3d Gpad Tree Rint
 Postscript Matrix Physics MathCore Thread Gui TreePlayer Minuit TMVA)
 #set(ROOT_OPTIONAL_COMPONENTS Proof)
