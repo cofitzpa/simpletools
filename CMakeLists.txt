@@ -41,6 +41,7 @@ ${SMPT_SOURCE_DIR}/src/cropoptimisationengine.cc
 ${SMPT_SOURCE_DIR}/src/cropcutensemble.cc
 ${SMPT_SOURCE_DIR}/src/cropdatastore.cc
 )
+target_link_libraries(cropsimpletools ${ROOT_LIBRARIES})
 
 # List executables and link each of them to the local and ROOT libraries
 set(EXELIST thresholdeffs bwdiv crop stackergen rangefinder sepper mergevars updatedatastore stacker varstocuts eff corr cuttester columnmaker multicolumnmaker tuplesampler tuplescrambler cutapplier)
