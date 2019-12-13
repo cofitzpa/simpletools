@@ -18,6 +18,7 @@
 #include <TTree.h>
 #include <TRandom3.h>
 #include <TStopwatch.h>
+#include <TMVA/Tools.h>
 #include <vector>
 #include <deque>
 #include <list>
