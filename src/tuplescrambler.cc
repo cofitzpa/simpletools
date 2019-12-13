@@ -29,8 +29,6 @@
 #include <functional>
 #include <numeric>
 
-TRandom3*  rndGen;
-
 	template <class T>
 inline void INSERT_ELEMENTS (T& coll, int first, int last)
 {
@@ -39,15 +37,6 @@ inline void INSERT_ELEMENTS (T& coll, int first, int last)
 	}
 }
 using namespace std;
-
-class MyRandom {
-	public:
-		ptrdiff_t operator() (ptrdiff_t max) {
-			double tmp;
-			tmp = static_cast<double>(rndGen->Rndm());
-			return static_cast<ptrdiff_t>(tmp * max);
-		}
-};
 
 int main(int argc, char *argv[]) {
 	if(argc != 5 ){
@@ -61,7 +50,7 @@ int main(int argc, char *argv[]) {
 	TString inname = argv[1];
 	TString tpath = argv[2];
 	TString name = tpath;
-	rndGen = new TRandom3(atoi(argv[3]));
+	TMVA::RandomGenerator<TRandom3> rd(atoi(argv[3]));
 	TFile *sout1(0);
 	TString soutname1 = argv[4];
 
@@ -99,8 +88,7 @@ int main(int argc, char *argv[]) {
 		sw.Start();
 	vector<int> entries;
 	INSERT_ELEMENTS(entries,0,total-1);
-	MyRandom rd;
-	random_shuffle (entries.begin(), entries.end(),rd);
+	std::shuffle(entries.begin(), entries.end(), rd);
 	std::vector<int>::iterator it = entries.begin();
 	UInt_t i = 0, pc =0, k=0;
 	while( it != entries.end() ) {
