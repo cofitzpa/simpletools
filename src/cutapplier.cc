@@ -21,10 +21,10 @@ using std::cout;
 using std::endl;
 
 int main(int argc, char *argv[]) {
-	if(argc != 5 ){
+	if(argc != 5 && argc != 6){
 		cout << "cutapplier:   	Applies a cut to an input ntuple"<< endl;
 		cout << "author:        Conor Fitzpatrick, 2008"<< endl;
-		cout << "Syntax: " << argv[0] << " <input.root> <path/to/ntuple> <cut string> <accepted_output.root>"<< endl;
+		cout << "Syntax: " << argv[0] << " <input.root> <path/to/ntuple> <cut string> <accepted_output.root> [<input_friend.root>]"<< endl;
 		return EXIT_FAILURE;
 	}
 
@@ -38,6 +38,10 @@ int main(int argc, char *argv[]) {
 	TString name = tpath;
 	TString cname = argv[3];
 	TString soutname = argv[4];
+	TString ffriend = "";
+	if(argc==6){
+	  ffriend = argv[5];
+	}
 	Bool_t clerrs = false;
 	Double_t accepted = 0, rejected = 0, total = 0;
 	Double_t acceptedm = 0, rejectedm = 0, totalm = 0;
@@ -65,6 +69,9 @@ int main(int argc, char *argv[]) {
 		cout << "Error opening the specified ntuple- is the path you specified correct?" << endl;
 		exit(1);
 	}
+	if(ffriend!=""){
+	  inTree->AddFriend(tpath,ffriend);
+	}
 	tpath.Resize(std::max(tpath.First(slash),0));
 	total = (Double_t)inTree->GetEntries();
 	if(total>10){
@@ -89,6 +96,9 @@ int main(int argc, char *argv[]) {
 		cout << "applying cut..." << endl; sw.Start();
 		TTree *soutTree = inTree->CopyTree(cname);
 		accepted = (Double_t)soutTree->GetEntries();
+		if(argc==6){
+		  soutTree->GetListOfFriends()->Clear("nodelete");
+		}
 		sout->Write();
 		sout->Close();
 	}else{
