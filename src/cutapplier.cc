@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 		cout << "cutapplier:          Applies a cut to an input ntuple"<< endl;
 		cout << "author:              Conor Fitzpatrick, 2008"<< endl;
 		cout << "Syntax:              " << argv[0] << " <input.root> [<input_friend.root>] <path/to/ntuple> <cut string> <accepted_output.root>"<< endl;
-		cout << "<input_friend.root>: Optional, friend added to <input.root>. Not merged into <accepted_output.root>" << endl;
+		cout << "<input_friend.root> is an optional file containing a friend tree with the same path as <input.root> to provide additional selection parameters. The contents of this tree is not propagated into <accepted_output.root>" << endl;
 		return EXIT_FAILURE;
 	}
 
