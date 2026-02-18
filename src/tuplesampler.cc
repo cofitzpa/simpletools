@@ -41,6 +41,7 @@ int main(int argc, char *argv[]) {
 	TString soutname1 = argv[5];
 	TString soutname2 = argv[6];
 	TRandom3*  rndGen = new TRandom3(atoi(argv[4]));
+	TNamed* seed = new TNamed("seed", argv[4]);
 	TStopwatch sw;
 	cout << "opening " << inname << endl;
 
@@ -58,6 +59,7 @@ int main(int argc, char *argv[]) {
 	ratio=1.0;
 	}
 	sout1 = TFile::Open(soutname1,"RECREATE",0);
+	seed->Write();
 	if(name!=tpath){
 	sout1->mkdir(tpath);
 	sout1->cd(tpath);
@@ -67,6 +69,7 @@ int main(int argc, char *argv[]) {
 	TTree *soutTree1 = inTree->CloneTree(0);
 
 	sout2 = TFile::Open(soutname2,"RECREATE");
+	seed->Write();
 	if(name!=tpath){
 	sout2->mkdir(tpath);
 	sout2->cd(tpath);
