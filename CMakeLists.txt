@@ -1,9 +1,5 @@
 # Check if cmake has the required version
-cmake_minimum_required(VERSION 2.6.4)
-
-if(CMAKE_VERSION VERSION_GREATER 2.8.3)
-  cmake_policy(VERSION 2.8.4)
-endif()
+cmake_minimum_required(VERSION 3.16...3.31)
 
 project(SMPT)
 
