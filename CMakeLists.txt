@@ -19,8 +19,8 @@ endforeach()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ROOT_CXX_FLAGS}")
 
-# Locate Boost
-find_package(Boost REQUIRED system)
+# Locate Boost (only header-only components are used, e.g. boost/lexical_cast.hpp)
+find_package(Boost REQUIRED CONFIG COMPONENTS headers)
 
 # Check the compiler and set the compile and link flags
 #set(CMAKE_BUILD_TYPE Debug)
@@ -37,7 +37,7 @@ ${SMPT_SOURCE_DIR}/src/cropoptimisationengine.cc
 ${SMPT_SOURCE_DIR}/src/cropcutensemble.cc
 ${SMPT_SOURCE_DIR}/src/cropdatastore.cc
 )
-target_link_libraries(cropsimpletools ${ROOT_LIBRARIES})
+target_link_libraries(cropsimpletools ${ROOT_LIBRARIES} Boost::headers)
 
 # List executables and link each of them to the local and ROOT libraries
 set(EXELIST thresholdeffs bwdiv crop stackergen rangefinder sepper mergevars updatedatastore stacker varstocuts eff corr cuttester columnmaker multicolumnmaker tuplesampler tuplescrambler cutapplier)
